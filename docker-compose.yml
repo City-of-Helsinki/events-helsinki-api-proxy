@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  events-helsinki-graphql-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - GRAPHQL_PROXY_DEBUG=${GRAPHQL_PROXY_DEBUG}
+        - GRAPHQL_PROXY_PORT=${GRAPHQL_PROXY_PORT}
+        - GRAPHQL_PROXY_ENGINE_API_KEY=${GRAPHQL_PROXY_ENGINE_API_KEY}
+        - GRAPHQL_PROXY_LINKED_EVENTS_API_BASE_URL=${GRAPHQL_PROXY_LINKED_EVENTS_API_BASE_URL}
+    image: events-helsinki-graphql-proxy
+    ports: 
+      - "${GRAPHQL_PROXY_PORT}:${GRAPHQL_PROXY_PORT}"
