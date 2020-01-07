@@ -10,6 +10,7 @@ const typeDefs = gql`
       pageSize: Int
       publisher: ID
       startDate: String
+      text: String
     ): EventListResponse!
   }
 

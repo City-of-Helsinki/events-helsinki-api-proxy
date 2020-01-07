@@ -11,7 +11,8 @@ const eventListQueryBuilder = (
   page: number,
   pageSize: number,
   publisher: string,
-  startDate: string
+  startDate: string,
+  text: string
 ) => {
   // Get details of all needed fields
   let query = "?include=keywords,location";
@@ -34,6 +35,9 @@ const eventListQueryBuilder = (
   if (startDate) {
     query = query.concat("&start=", startDate);
   }
+  if (text) {
+    query = query.concat("&text=", text);
+  }
 
   return query;
 };
@@ -48,7 +52,7 @@ const Query = {
 
   eventList: async (
     _,
-    { categories, endDate, page, pageSize, publisher, startDate },
+    { categories, endDate, page, pageSize, publisher, startDate, text },
     { dataSources }
   ) => {
     const query = eventListQueryBuilder(
@@ -57,7 +61,8 @@ const Query = {
       page,
       pageSize,
       publisher,
-      startDate
+      startDate,
+      text
     );
     const data = await dataSources.eventAPI.getEventList(query);
 
