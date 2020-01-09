@@ -119,26 +119,6 @@ const typeDefs = gql`
     coordinates: [Float!]!
   }
 
-  type Keyword {
-    id: String!
-    altLabels: [String!]!
-    createdTime: String
-    lastModifiedTime: String!
-    aggregate: Boolean
-    deprecated: Boolean
-    nEvents: Int!
-    image: Image
-    dataSource: String!
-    publisher: ID
-    name: LocalizedObject!
-    # @id is renamed as internalId so it's usable on GraphQl
-    internalId: String
-    # @context is renamed as internalContext so it's usable on GraphQl
-    internalContext: String
-    # @type is renamed as internalType so it's usable on GraphQl
-    internalType: String
-  }
-
   type Offer {
     isFree: Boolean
     description: LocalizedObject

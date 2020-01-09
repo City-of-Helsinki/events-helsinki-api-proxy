@@ -117,6 +117,12 @@ export type Keyword = {
   internalType?: Maybe<Scalars['String']>,
 };
 
+export type KeywordListResponse = {
+   __typename?: 'KeywordListResponse',
+  meta: Meta,
+  data: Array<Keyword>,
+};
+
 export type LocalizedObject = {
    __typename?: 'LocalizedObject',
   fi?: Maybe<Scalars['String']>,
