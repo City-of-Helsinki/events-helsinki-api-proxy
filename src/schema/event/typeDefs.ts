@@ -21,7 +21,7 @@ const typeDefs = gql`
 
   type EventDetails {
     id: ID!
-    location: Location
+    location: Place
     keywords: [Keyword!]!
     superEvent: InternalIdObject
     eventStatus: String
@@ -74,49 +74,6 @@ const typeDefs = gql`
     internalContext: String
     # @type is renamed as internalType so it's usable on GraphQl
     internalType: String
-  }
-
-  type Location {
-    id: ID!
-    divisions: [LocationDivision!]
-    createdTime: String
-    lastModifiedTime: String
-    customData: String
-    email: String
-    contactType: String
-    addressRegion: String
-    postalCode: String
-    postOfficeBoxNum: String
-    addressCountry: String
-    deleted: Boolean
-    nEvents: Int
-    image: Image
-    dataSource: String
-    publisher: ID
-    parent: ID
-    replacedBy: String
-    position: LocationPosition
-    name: LocalizedObject
-    description: String
-    telephone: LocalizedObject
-    addressLocality: LocalizedObject
-    streetAddress: LocalizedObject
-    infoUrl: LocalizedObject
-    internalId: String
-    internalContext: String
-    internalType: String
-  }
-
-  type LocationDivision {
-    type: String!
-    ocdId: String
-    municipality: String
-    name: LocalizedObject
-  }
-
-  type LocationPosition {
-    type: String!
-    coordinates: [Float!]!
   }
 
   type Offer {
