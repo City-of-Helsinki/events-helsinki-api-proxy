@@ -2,6 +2,7 @@ import { gql } from "apollo-server";
 
 const typeDefs = gql`
   extend type Query {
+    placeDetails(id: ID!): Place!
     placeList(
       dataSource: String
       divisions: [String]

@@ -4,8 +4,10 @@ const typeDefs = gql`
   extend type Query {
     eventDetails(id: ID): EventDetails!
     eventList(
-      categories: [String]
+      divisions: [String]
       endDate: String
+      keywords: [String]
+      locations: [String]
       page: Int
       pageSize: Int
       publisher: ID

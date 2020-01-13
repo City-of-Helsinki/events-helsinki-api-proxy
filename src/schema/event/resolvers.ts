@@ -6,8 +6,10 @@ const eventDetailsQueryBuilder = () => {
 };
 
 const eventListQueryBuilder = (
-  categories: string[],
+  divisions: string[],
   endDate: string,
+  keywords: string[],
+  locations: string[],
   page: number,
   pageSize: number,
   publisher: string,
@@ -17,11 +19,17 @@ const eventListQueryBuilder = (
   // Get details of all needed fields
   let query = "?include=keywords,location";
 
-  if (categories && categories.length) {
-    query = query.concat("&keyword=", categories.join(","));
+  if (divisions && divisions.length) {
+    query = query.concat("&dividion=", divisions.join(","));
   }
   if (endDate) {
     query = query.concat("&end=", endDate);
+  }
+  if (keywords && keywords.length) {
+    query = query.concat("&keyword=", keywords.join(","));
+  }
+  if (locations && locations.length) {
+    query = query.concat("&location=", locations.join(","));
   }
   if (page) {
     query = query.concat("&page=", page.toString());
@@ -52,12 +60,24 @@ const Query = {
 
   eventList: async (
     _,
-    { categories, endDate, page, pageSize, publisher, startDate, text },
+    {
+      divisions,
+      endDate,
+      keywords,
+      locations,
+      page,
+      pageSize,
+      publisher,
+      startDate,
+      text
+    },
     { dataSources }
   ) => {
     const query = eventListQueryBuilder(
-      categories,
+      divisions,
       endDate,
+      keywords,
+      locations,
       page,
       pageSize,
       publisher,

@@ -47,6 +47,9 @@ const placeListQueryBuilder = (
 };
 
 const Query = {
+  placeDetails: async (_, { id }, { dataSources }) => {
+    return dataSources.placeAPI.getPlaceDetails(id);
+  },
   placeList: async (
     _,
     { dataSource, divisions, page, pageSize, showAllPlaces, sort, text },
