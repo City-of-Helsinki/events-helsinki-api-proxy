@@ -20,7 +20,7 @@ const eventListQueryBuilder = (
   let query = "?include=keywords,location";
 
   if (divisions && divisions.length) {
-    query = query.concat("&dividion=", divisions.join(","));
+    query = query.concat("&division=", divisions.join(","));
   }
   if (endDate) {
     query = query.concat("&end=", endDate);
