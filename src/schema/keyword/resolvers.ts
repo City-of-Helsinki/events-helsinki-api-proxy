@@ -40,6 +40,9 @@ const keywordListQueryBuilder = (
 };
 
 const Query = {
+  keywordDetails: async (_, { id }, { dataSources }) => {
+    return dataSources.keywordAPI.getKeywordDetails(id);
+  },
   keywordList: async (
     _,
     { dataSource, page, pageSize, showAllKeywords, sort, text },

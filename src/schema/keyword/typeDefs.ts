@@ -2,6 +2,7 @@ import { gql } from "apollo-server";
 
 const typeDefs = gql`
   extend type Query {
+    keywordDetails(id: ID!): Keyword!
     keywordList(
       dataSource: String
       page: Int
