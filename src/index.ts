@@ -5,7 +5,9 @@ import express from "express";
 import depthLimit from "graphql-depth-limit";
 
 import EventAPI from "./datasources/event";
+import KeywordAPI from "./datasources/keyword";
 import OrganizationAPI from "./datasources/organization";
+import PlaceAPI from "./datasources/place";
 import schema from "./schema";
 
 const OK = "OK";
@@ -15,7 +17,9 @@ dotenv.config();
 
 const dataSources = () => ({
   eventAPI: new EventAPI(),
-  organizationAPI: new OrganizationAPI()
+  keywordAPI: new KeywordAPI(),
+  organizationAPI: new OrganizationAPI(),
+  placeAPI: new PlaceAPI()
 });
 
 (async () => {

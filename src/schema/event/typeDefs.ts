@@ -4,12 +4,15 @@ const typeDefs = gql`
   extend type Query {
     eventDetails(id: ID): EventDetails!
     eventList(
-      categories: [String]
+      divisions: [String]
       endDate: String
+      keywords: [String]
+      locations: [String]
       page: Int
       pageSize: Int
       publisher: ID
       startDate: String
+      text: String
     ): EventListResponse!
   }
 
@@ -20,7 +23,7 @@ const typeDefs = gql`
 
   type EventDetails {
     id: ID!
-    location: Location
+    location: Place
     keywords: [Keyword!]!
     superEvent: InternalIdObject
     eventStatus: String
@@ -67,69 +70,6 @@ const typeDefs = gql`
     id: ID!
     translationAvailable: Boolean
     name: LocalizedObject
-    # @id is renamed as internalId so it's usable on GraphQl
-    internalId: String
-    # @context is renamed as internalContext so it's usable on GraphQl
-    internalContext: String
-    # @type is renamed as internalType so it's usable on GraphQl
-    internalType: String
-  }
-
-  type Location {
-    id: ID!
-    divisions: [LocationDivision!]
-    createdTime: String
-    lastModifiedTime: String
-    customData: String
-    email: String
-    contactType: String
-    addressRegion: String
-    postalCode: String
-    postOfficeBoxNum: String
-    addressCountry: String
-    deleted: Boolean
-    nEvents: Int
-    image: Image
-    dataSource: String
-    publisher: ID
-    parent: ID
-    replacedBy: String
-    position: LocationPosition
-    name: LocalizedObject
-    description: String
-    telephone: LocalizedObject
-    addressLocality: LocalizedObject
-    streetAddress: LocalizedObject
-    infoUrl: LocalizedObject
-    internalId: String
-    internalContext: String
-    internalType: String
-  }
-
-  type LocationDivision {
-    type: String!
-    ocdId: String
-    municipality: String
-    name: LocalizedObject
-  }
-
-  type LocationPosition {
-    type: String!
-    coordinates: [Float!]!
-  }
-
-  type Keyword {
-    id: String!
-    altLabels: [String!]!
-    createdTime: String
-    lastModifiedTime: String!
-    aggregate: Boolean
-    deprecated: Boolean
-    nEvents: Int!
-    image: Image
-    dataSource: String!
-    publisher: ID
-    name: LocalizedObject!
     # @id is renamed as internalId so it's usable on GraphQl
     internalId: String
     # @context is renamed as internalContext so it's usable on GraphQl

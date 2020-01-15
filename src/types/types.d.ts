@@ -8,10 +8,18 @@ export type Scalars = {
   Float: number,
 };
 
+export type Division = {
+   __typename?: 'Division',
+  type: Scalars['String'],
+  ocdId?: Maybe<Scalars['String']>,
+  municipality?: Maybe<Scalars['String']>,
+  name?: Maybe<LocalizedObject>,
+};
+
 export type EventDetails = {
    __typename?: 'EventDetails',
   id: Scalars['ID'],
-  location?: Maybe<Location>,
+  location?: Maybe<Place>,
   keywords: Array<Keyword>,
   superEvent?: Maybe<InternalIdObject>,
   eventStatus?: Maybe<Scalars['String']>,
@@ -117,57 +125,17 @@ export type Keyword = {
   internalType?: Maybe<Scalars['String']>,
 };
 
+export type KeywordListResponse = {
+   __typename?: 'KeywordListResponse',
+  meta: Meta,
+  data: Array<Keyword>,
+};
+
 export type LocalizedObject = {
    __typename?: 'LocalizedObject',
   fi?: Maybe<Scalars['String']>,
   sv?: Maybe<Scalars['String']>,
   en?: Maybe<Scalars['String']>,
-};
-
-export type Location = {
-   __typename?: 'Location',
-  id: Scalars['ID'],
-  divisions?: Maybe<Array<LocationDivision>>,
-  createdTime?: Maybe<Scalars['String']>,
-  lastModifiedTime?: Maybe<Scalars['String']>,
-  customData?: Maybe<Scalars['String']>,
-  email?: Maybe<Scalars['String']>,
-  contactType?: Maybe<Scalars['String']>,
-  addressRegion?: Maybe<Scalars['String']>,
-  postalCode?: Maybe<Scalars['String']>,
-  postOfficeBoxNum?: Maybe<Scalars['String']>,
-  addressCountry?: Maybe<Scalars['String']>,
-  deleted?: Maybe<Scalars['Boolean']>,
-  nEvents?: Maybe<Scalars['Int']>,
-  image?: Maybe<Image>,
-  dataSource?: Maybe<Scalars['String']>,
-  publisher?: Maybe<Scalars['ID']>,
-  parent?: Maybe<Scalars['ID']>,
-  replacedBy?: Maybe<Scalars['String']>,
-  position?: Maybe<LocationPosition>,
-  name?: Maybe<LocalizedObject>,
-  description?: Maybe<Scalars['String']>,
-  telephone?: Maybe<LocalizedObject>,
-  addressLocality?: Maybe<LocalizedObject>,
-  streetAddress?: Maybe<LocalizedObject>,
-  infoUrl?: Maybe<LocalizedObject>,
-  internalId?: Maybe<Scalars['String']>,
-  internalContext?: Maybe<Scalars['String']>,
-  internalType?: Maybe<Scalars['String']>,
-};
-
-export type LocationDivision = {
-   __typename?: 'LocationDivision',
-  type: Scalars['String'],
-  ocdId?: Maybe<Scalars['String']>,
-  municipality?: Maybe<Scalars['String']>,
-  name?: Maybe<LocalizedObject>,
-};
-
-export type LocationPosition = {
-   __typename?: 'LocationPosition',
-  type: Scalars['String'],
-  coordinates: Array<Scalars['Float']>,
 };
 
 export type Meta = {
@@ -208,6 +176,50 @@ export type OrganizationDetails = {
   internalId?: Maybe<Scalars['String']>,
   internalContext?: Maybe<Scalars['String']>,
   internalType?: Maybe<Scalars['String']>,
+};
+
+export type Place = {
+   __typename?: 'Place',
+  id: Scalars['ID'],
+  divisions?: Maybe<Array<Division>>,
+  createdTime?: Maybe<Scalars['String']>,
+  lastModifiedTime?: Maybe<Scalars['String']>,
+  customData?: Maybe<Scalars['String']>,
+  email?: Maybe<Scalars['String']>,
+  contactType?: Maybe<Scalars['String']>,
+  addressRegion?: Maybe<Scalars['String']>,
+  postalCode?: Maybe<Scalars['String']>,
+  postOfficeBoxNum?: Maybe<Scalars['String']>,
+  addressCountry?: Maybe<Scalars['String']>,
+  deleted?: Maybe<Scalars['Boolean']>,
+  nEvents?: Maybe<Scalars['Int']>,
+  image?: Maybe<Image>,
+  dataSource?: Maybe<Scalars['String']>,
+  publisher?: Maybe<Scalars['ID']>,
+  parent?: Maybe<Scalars['ID']>,
+  replacedBy?: Maybe<Scalars['String']>,
+  position?: Maybe<PlacePosition>,
+  name?: Maybe<LocalizedObject>,
+  description?: Maybe<Scalars['String']>,
+  telephone?: Maybe<LocalizedObject>,
+  addressLocality?: Maybe<LocalizedObject>,
+  streetAddress?: Maybe<LocalizedObject>,
+  infoUrl?: Maybe<LocalizedObject>,
+  internalId?: Maybe<Scalars['String']>,
+  internalContext?: Maybe<Scalars['String']>,
+  internalType?: Maybe<Scalars['String']>,
+};
+
+export type PlaceListResponse = {
+   __typename?: 'PlaceListResponse',
+  meta: Meta,
+  data: Array<Place>,
+};
+
+export type PlacePosition = {
+   __typename?: 'PlacePosition',
+  type: Scalars['String'],
+  coordinates: Array<Scalars['Float']>,
 };
 
 export type Query = {
