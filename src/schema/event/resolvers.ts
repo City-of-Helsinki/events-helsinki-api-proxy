@@ -13,6 +13,7 @@ const eventListQueryBuilder = (
   page: number,
   pageSize: number,
   publisher: string,
+  sort: string,
   startDate: string,
   text: string
 ) => {
@@ -39,6 +40,9 @@ const eventListQueryBuilder = (
   }
   if (publisher) {
     query = query.concat("&publisher=", publisher);
+  }
+  if (sort) {
+    query = query.concat("&sort=", sort);
   }
   if (startDate) {
     query = query.concat("&start=", startDate);
@@ -68,6 +72,7 @@ const Query = {
       page,
       pageSize,
       publisher,
+      sort,
       startDate,
       text
     },
@@ -81,6 +86,7 @@ const Query = {
       page,
       pageSize,
       publisher,
+      sort,
       startDate,
       text
     );
