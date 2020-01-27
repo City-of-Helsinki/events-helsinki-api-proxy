@@ -8,6 +8,7 @@ const typeDefs = gql`
   type CollectionDetails {
     id: ID!
     curatedEvents: [String!]!
+    curatedEventsTitle: LocalizedObject!
     eventListQuery: String!
     eventListTitle: LocalizedObject!
   }

@@ -6,6 +6,11 @@ const mockCollection = {
     "http://localhost:3000/fi/event/helsinki:afxpj6bxbu",
     "http://localhost:3000/fi/event/helsinki:afx5msunhu"
   ],
+  curatedEventsTitle: {
+    en: "At least visit these",
+    fi: "Käy ainakin näissä",
+    sv: "Besök åtminstone dessa"
+  },
   eventListQuery:
     "http://localhost:3000/en/events?categories=music&districts=kaupunginosa%3Aetu-t%C3%B6%C3%B6l%C3%B6",
   eventListTitle: {

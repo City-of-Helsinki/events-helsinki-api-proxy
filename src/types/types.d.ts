@@ -12,6 +12,7 @@ export type CollectionDetails = {
    __typename?: 'CollectionDetails',
   id: Scalars['ID'],
   curatedEvents: Array<Scalars['String']>,
+  curatedEventsTitle: LocalizedObject,
   eventListQuery: Scalars['String'],
   eventListTitle: LocalizedObject,
 };
