@@ -8,6 +8,14 @@ export type Scalars = {
   Float: number,
 };
 
+export type CollectionDetails = {
+   __typename?: 'CollectionDetails',
+  id: Scalars['ID'],
+  curatedEvents: Array<Scalars['String']>,
+  eventListQuery: Scalars['String'],
+  eventListTitle: LocalizedObject,
+};
+
 export type Division = {
    __typename?: 'Division',
   type: Scalars['String'],
