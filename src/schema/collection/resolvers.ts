@@ -1,6 +1,6 @@
 const mockCollection = {
   curatedEvents: [
-    "http://localhost:3000/fi/event/helsinki:afxh3naida",
+    "http://localhost:3000/fi/event/helsinki:afxh3naida?id=123",
     "http://localhost:3000/fi/event/helsinki:afxrsql3xa",
     "http://localhost:3000/fi/event/helsinki:afxh3namhe",
     "http://localhost:3000/fi/event/helsinki:afxpj6bxbu",
