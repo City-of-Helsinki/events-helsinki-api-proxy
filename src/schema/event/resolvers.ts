@@ -8,14 +8,17 @@ const eventDetailsQueryBuilder = () => {
 const eventListQueryBuilder = (
   divisions: string[],
   endDate: string,
+  inLanguage: string,
   keywords: string[],
+  language: string,
   locations: string[],
   page: number,
   pageSize: number,
   publisher: string,
   sort: string,
   startDate: string,
-  text: string
+  text: string,
+  translation: string
 ) => {
   // Get details of all needed fields
   let query = "?include=keywords,location";
@@ -26,8 +29,14 @@ const eventListQueryBuilder = (
   if (endDate) {
     query = query.concat("&end=", endDate);
   }
+  if (inLanguage) {
+    query = query.concat("&in_language=", inLanguage);
+  }
   if (keywords && keywords.length) {
     query = query.concat("&keyword=", keywords.join(","));
+  }
+  if (language) {
+    query = query.concat("&language=", language);
   }
   if (locations && locations.length) {
     query = query.concat("&location=", locations.join(","));
@@ -50,6 +59,9 @@ const eventListQueryBuilder = (
   if (text) {
     query = query.concat("&text=", text);
   }
+  if (translation) {
+    query = query.concat("&translation=", translation);
+  }
 
   return query;
 };
@@ -67,28 +79,34 @@ const Query = {
     {
       divisions,
       endDate,
+      inLanguage,
       keywords,
+      language,
       locations,
       page,
       pageSize,
       publisher,
       sort,
       startDate,
-      text
+      text,
+      translation
     },
     { dataSources }
   ) => {
     const query = eventListQueryBuilder(
       divisions,
       endDate,
+      inLanguage,
       keywords,
+      language,
       locations,
       page,
       pageSize,
       publisher,
       sort,
       startDate,
-      text
+      text,
+      translation
     );
     const data = await dataSources.eventAPI.getEventList(query);
 

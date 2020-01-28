@@ -6,7 +6,9 @@ const typeDefs = gql`
     eventList(
       divisions: [String]
       endDate: String
+      inLanguage: String
       keywords: [String]
+      language: String
       locations: [String]
       page: Int
       pageSize: Int
@@ -14,6 +16,7 @@ const typeDefs = gql`
       sort: String
       startDate: String
       text: String
+      translation: String
     ): EventListResponse!
   }
 
