@@ -13,8 +13,18 @@ export type CollectionDetails = {
   id: Scalars['ID'],
   curatedEvents: Array<Scalars['String']>,
   curatedEventsTitle: LocalizedObject,
+  description: LocalizedObject,
   eventListQuery: Scalars['String'],
   eventListTitle: LocalizedObject,
+  link: CollectionLink,
+  shortDescription: LocalizedObject,
+  title: LocalizedObject,
+};
+
+export type CollectionLink = {
+   __typename?: 'CollectionLink',
+  text: LocalizedObject,
+  url: LocalizedObject,
 };
 
 export type Division = {
