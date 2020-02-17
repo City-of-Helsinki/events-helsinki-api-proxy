@@ -18,6 +18,7 @@ export type CollectionDetails = {
   eventListTitle: LocalizedObject,
   link: CollectionLink,
   shortDescription: LocalizedObject,
+  similarCollectionsTitle: LocalizedObject,
   title: LocalizedObject,
 };
 
