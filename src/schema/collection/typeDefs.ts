@@ -20,6 +20,7 @@ const typeDefs = gql`
     eventListTitle: LocalizedObject!
     link: CollectionLink!
     shortDescription: LocalizedObject!
+    similarCollectionsTitle: LocalizedObject!
     title: LocalizedObject!
   }
 
