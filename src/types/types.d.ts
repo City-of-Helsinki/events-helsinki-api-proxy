@@ -27,6 +27,12 @@ export type CollectionLink = {
   url: LocalizedObject,
 };
 
+export type CollectionListResponse = {
+   __typename?: 'CollectionListResponse',
+  meta: Meta,
+  data: Array<CollectionDetails>,
+};
+
 export type Division = {
    __typename?: 'Division',
   type: Scalars['String'],
