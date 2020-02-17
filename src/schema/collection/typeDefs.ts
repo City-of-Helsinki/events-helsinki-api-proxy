@@ -3,6 +3,12 @@ import { gql } from "apollo-server";
 const typeDefs = gql`
   extend type Query {
     collectionDetails(id: ID): CollectionDetails!
+    collectionList: CollectionListResponse!
+  }
+
+  type CollectionListResponse {
+    meta: Meta!
+    data: [CollectionDetails!]!
   }
 
   type CollectionDetails {
