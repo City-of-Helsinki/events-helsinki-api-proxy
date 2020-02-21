@@ -16,6 +16,7 @@ const typeDefs = gql`
       publisher: ID
       sort: String
       startDate: String
+      superEvent: ID
       text: String
       translation: String
     ): EventListResponse!

@@ -26,6 +26,7 @@ const eventListQueryBuilder = (
   publisher: string,
   sort: string,
   startDate: string,
+  superEvent: string,
   text: string,
   translation: string
 ) => {
@@ -68,6 +69,9 @@ const eventListQueryBuilder = (
   if (startDate) {
     query = composeQuery(query, "start", startDate);
   }
+  if (superEvent) {
+    query = composeQuery(query, "super_event", superEvent);
+  }
   if (text) {
     query = composeQuery(query, "text", text);
   }
@@ -101,6 +105,7 @@ const Query = {
       publisher,
       sort,
       startDate,
+      superEvent,
       text,
       translation
     },
@@ -119,6 +124,7 @@ const Query = {
       publisher,
       sort,
       startDate,
+      superEvent,
       text,
       translation
     );
