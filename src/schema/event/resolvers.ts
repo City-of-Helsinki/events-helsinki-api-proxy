@@ -1,12 +1,16 @@
 import normalizeKeys from "../../utils/normalizeKeys";
 
-const eventDetailsQueryBuilder = () => {
-  // Get details of all needed fields
-  return "?include=in_language,keywords,location";
-};
-
 const composeQuery = (query: string, key: string, value: string) => {
   return query.concat(`${query ? "&" : "?"}${key}=`, value);
+};
+
+const eventDetailsQueryBuilder = (include: string[]) => {
+  let query = "";
+
+  if (include && include.length) {
+    query = composeQuery(query, "include", include.join(","));
+  }
+  return query;
 };
 
 const eventListQueryBuilder = (
@@ -75,8 +79,8 @@ const eventListQueryBuilder = (
 };
 
 const Query = {
-  eventDetails: async (_, { id }, { dataSources }) => {
-    const query = eventDetailsQueryBuilder();
+  eventDetails: async (_, { id, include }, { dataSources }) => {
+    const query = eventDetailsQueryBuilder(include);
     const data = await dataSources.eventAPI.getEventDetails(id, query);
 
     return normalizeKeys(data);

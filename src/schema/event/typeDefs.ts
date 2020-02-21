@@ -2,7 +2,7 @@ import { gql } from "apollo-server";
 
 const typeDefs = gql`
   extend type Query {
-    eventDetails(id: ID): EventDetails!
+    eventDetails(id: ID, include: [String]): EventDetails!
     eventList(
       divisions: [String]
       endDate: String
@@ -72,7 +72,7 @@ const typeDefs = gql`
   }
 
   type InLanguage {
-    id: ID!
+    id: ID
     translationAvailable: Boolean
     name: LocalizedObject
     # @id is renamed as internalId so it's usable on GraphQl

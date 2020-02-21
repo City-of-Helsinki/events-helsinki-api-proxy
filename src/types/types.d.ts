@@ -120,7 +120,7 @@ export type Image = {
 
 export type InLanguage = {
    __typename?: 'InLanguage',
-  id: Scalars['ID'],
+  id?: Maybe<Scalars['ID']>,
   translationAvailable?: Maybe<Scalars['Boolean']>,
   name?: Maybe<LocalizedObject>,
   internalId?: Maybe<Scalars['String']>,
@@ -206,7 +206,7 @@ export type OrganizationDetails = {
 
 export type Place = {
    __typename?: 'Place',
-  id: Scalars['ID'],
+  id?: Maybe<Scalars['ID']>,
   divisions?: Maybe<Array<Division>>,
   createdTime?: Maybe<Scalars['String']>,
   lastModifiedTime?: Maybe<Scalars['String']>,

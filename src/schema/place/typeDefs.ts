@@ -20,7 +20,7 @@ const typeDefs = gql`
   }
 
   type Place {
-    id: ID!
+    id: ID
     divisions: [Division!]
     createdTime: String
     lastModifiedTime: String
