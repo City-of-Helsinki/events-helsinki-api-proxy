@@ -6,6 +6,7 @@ const typeDefs = gql`
     eventList(
       divisions: [String]
       endDate: String
+      include: [String]
       inLanguage: String
       keywords: [String]
       language: String
