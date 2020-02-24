@@ -17,6 +17,7 @@ const typeDefs = gql`
       sort: String
       startDate: String
       superEvent: ID
+      superEventType: [String]
       text: String
       translation: String
     ): EventListResponse!

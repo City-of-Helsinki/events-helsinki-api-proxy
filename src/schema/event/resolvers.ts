@@ -27,6 +27,7 @@ const eventListQueryBuilder = (
   sort: string,
   startDate: string,
   superEvent: string,
+  superEventType: string[],
   text: string,
   translation: string
 ) => {
@@ -72,6 +73,9 @@ const eventListQueryBuilder = (
   if (superEvent) {
     query = composeQuery(query, "super_event", superEvent);
   }
+  if (superEventType && superEventType.length) {
+    query = composeQuery(query, "super_event_type", superEventType.join(","));
+  }
   if (text) {
     query = composeQuery(query, "text", text);
   }
@@ -106,6 +110,7 @@ const Query = {
       sort,
       startDate,
       superEvent,
+      superEventType,
       text,
       translation
     },
@@ -125,6 +130,7 @@ const Query = {
       sort,
       startDate,
       superEvent,
+      superEventType,
       text,
       translation
     );
