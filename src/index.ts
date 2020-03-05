@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import express from "express";
 import depthLimit from "graphql-depth-limit";
 
+import CollectionAPI from "./datasources/collection";
 import EventAPI from "./datasources/event";
 import KeywordAPI from "./datasources/keyword";
 import OrganizationAPI from "./datasources/organization";
@@ -16,6 +17,7 @@ const SERVER_IS_NOT_READY = "SERVER_IS_NOT_READY";
 dotenv.config();
 
 const dataSources = () => ({
+  collectionAPI: new CollectionAPI(),
   eventAPI: new EventAPI(),
   keywordAPI: new KeywordAPI(),
   organizationAPI: new OrganizationAPI(),

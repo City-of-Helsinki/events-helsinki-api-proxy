@@ -7,26 +7,44 @@ const typeDefs = gql`
   }
 
   type CollectionListResponse {
-    meta: Meta!
     data: [CollectionDetails!]!
   }
 
   type CollectionDetails {
     id: ID!
+    contentType: Int
     curatedEvents: [String!]!
     curatedEventsTitle: LocalizedObject!
+    depth: Int
     description: LocalizedObject!
-    eventListQuery: String!
+    draftTitle: String
+    eventListQuery: String
     eventListTitle: LocalizedObject!
-    link: CollectionLink!
+    expireAt: String
+    expired: Boolean
+    firstPublishedAt: String
+    goLiveAt: String
+    hasUnpublishedChanges: Boolean
+    lastPublishedAt: String
+    latestRevisionCreatedAt: String
+    linkText: LocalizedObject!
+    linkUrl: LocalizedObject!
+    live: Boolean
+    liveRevision: Int
+    locked: Boolean
+    lockedAt: String
+    lockedBy: Int
+    numchild: Int
+    owner: Int
+    path: String
+    searchDescription: String
+    seoTitle: String
     shortDescription: LocalizedObject!
-    similarCollectionsTitle: LocalizedObject!
+    showInMenus: Boolean
+    similarCollectionsTitle: LocalizedObject
+    slug: String
     title: LocalizedObject!
-  }
-
-  type CollectionLink {
-    text: LocalizedObject!
-    url: LocalizedObject!
+    urlPath: String
   }
 `;
 

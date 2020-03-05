@@ -1,3 +1,5 @@
+import normalizeKeys from "../../utils/normalizeKeys";
+
 const mockCollection = {
   curatedEvents: [
     "http://localhost:3000/fi/event/helsinki:afxh3naida?id=123",
@@ -29,17 +31,15 @@ const mockCollection = {
     fi: "Kaikki syksyn parhaat tapahtumat",
     sv: "Höstens bästa händelser"
   },
-  link: {
-    text: {
-      en: "Read more on the project website",
-      fi: "Lue lisää hankkeen omilta sivuilta",
-      sv: "Läs mer på projektets webbplats"
-    },
-    url: {
-      en: "http://www.google.com",
-      fi: "http://www.google.com",
-      sv: "http://www.google.com"
-    }
+  linkText: {
+    en: "Read more on the project website",
+    fi: "Lue lisää hankkeen omilta sivuilta",
+    sv: "Läs mer på projektets webbplats"
+  },
+  linkUrl: {
+    en: "http://www.google.com",
+    fi: "http://www.google.com",
+    sv: "http://www.google.com"
   },
   shortDescription: {
     en: "We put together the best foliage for the fall",
@@ -58,22 +58,85 @@ const mockCollection = {
   }
 };
 
+const normalizeCollection = (collection: any) => {
+  const normalizedCollection = normalizeKeys(collection);
+
+  normalizedCollection.title = {
+    en: normalizedCollection.titleEn,
+    fi: normalizedCollection.titleFi,
+    sv: normalizedCollection.titleSv
+  };
+  delete normalizedCollection.titleEn;
+  delete normalizedCollection.titleFi;
+  delete normalizedCollection.titleSv;
+
+  normalizedCollection.description = {
+    en: normalizedCollection.descriptionEn,
+    fi: normalizedCollection.descriptionFi,
+    sv: normalizedCollection.descriptionSv
+  };
+  delete normalizedCollection.descriptionEn;
+  delete normalizedCollection.descriptionFi;
+  delete normalizedCollection.descriptionSv;
+
+  normalizedCollection.shortDescription = {
+    en: normalizedCollection.shortDescriptionEn,
+    fi: normalizedCollection.shortDescriptionFi,
+    sv: normalizedCollection.shortDescriptionSv
+  };
+  delete normalizedCollection.shortDescriptionEn;
+  delete normalizedCollection.shortDescriptionFi;
+  delete normalizedCollection.shortDescriptionSv;
+
+  normalizedCollection.linkText = {
+    en: normalizedCollection.linkTextEn,
+    fi: normalizedCollection.linkTextFi,
+    sv: normalizedCollection.linkTextSv
+  };
+  delete normalizedCollection.linkTextEn;
+  delete normalizedCollection.linkTextFi;
+  delete normalizedCollection.linkTextSv;
+
+  normalizedCollection.linkUrl = {
+    en: normalizedCollection.linkUrlEn,
+    fi: normalizedCollection.linkUrlFi,
+    sv: normalizedCollection.linkUrlSv
+  };
+  delete normalizedCollection.linkUrlEn;
+  delete normalizedCollection.linkUrlFi;
+  delete normalizedCollection.linkUrlSv;
+
+  normalizedCollection.curatedEventsTitle = {
+    en: normalizedCollection.curatedEventsTitleEn,
+    fi: normalizedCollection.curatedEventsTitleFi,
+    sv: normalizedCollection.curatedEventsTitleSv
+  };
+  delete normalizedCollection.curatedEventsTitleEn;
+  delete normalizedCollection.curatedEventsTitleFi;
+  delete normalizedCollection.curatedEventsTitleSv;
+
+  normalizedCollection.eventListTitle = {
+    en: normalizedCollection.eventListTitleEn,
+    fi: normalizedCollection.eventListTitleFi,
+    sv: normalizedCollection.eventListTitleSv
+  };
+  delete normalizedCollection.eventListTitleEn;
+  delete normalizedCollection.eventListTitleFi;
+  delete normalizedCollection.eventListTitleSv;
+
+  return normalizedCollection;
+};
+
 const Query = {
   collectionDetails: async (_, { id }, {}) => {
     // TODO: Get real collection data when API is ready
     return { ...mockCollection, id };
   },
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  collectionList: async (_, {}, {}) => {
-    // TODO: Get real collection data when API is ready
-    const collectionIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  collectionList: async (_, {}, { dataSources }) => {
+    const data = await dataSources.collectionAPI.getCollectionList();
+
     return {
-      data: collectionIds.map(id => ({ ...mockCollection, id })),
-      meta: {
-        count: collectionIds.length,
-        next: null,
-        previous: null
-      }
+      data: data.map(collection => normalizeCollection(collection))
     };
   }
 };

@@ -11,26 +11,43 @@ export type Scalars = {
 export type CollectionDetails = {
    __typename?: 'CollectionDetails',
   id: Scalars['ID'],
+  contentType?: Maybe<Scalars['Int']>,
   curatedEvents: Array<Scalars['String']>,
   curatedEventsTitle: LocalizedObject,
+  depth?: Maybe<Scalars['Int']>,
   description: LocalizedObject,
-  eventListQuery: Scalars['String'],
+  draftTitle?: Maybe<Scalars['String']>,
+  eventListQuery?: Maybe<Scalars['String']>,
   eventListTitle: LocalizedObject,
-  link: CollectionLink,
+  expireAt?: Maybe<Scalars['String']>,
+  expired?: Maybe<Scalars['Boolean']>,
+  firstPublishedAt?: Maybe<Scalars['String']>,
+  goLiveAt?: Maybe<Scalars['String']>,
+  hasUnpublishedChanges?: Maybe<Scalars['Boolean']>,
+  lastPublishedAt?: Maybe<Scalars['String']>,
+  latestRevisionCreatedAt?: Maybe<Scalars['String']>,
+  linkText: LocalizedObject,
+  linkUrl: LocalizedObject,
+  live?: Maybe<Scalars['Boolean']>,
+  liveRevision?: Maybe<Scalars['Int']>,
+  locked?: Maybe<Scalars['Boolean']>,
+  lockedAt?: Maybe<Scalars['String']>,
+  lockedBy?: Maybe<Scalars['Int']>,
+  numchild?: Maybe<Scalars['Int']>,
+  owner?: Maybe<Scalars['Int']>,
+  path?: Maybe<Scalars['String']>,
+  searchDescription?: Maybe<Scalars['String']>,
+  seoTitle?: Maybe<Scalars['String']>,
   shortDescription: LocalizedObject,
-  similarCollectionsTitle: LocalizedObject,
+  showInMenus?: Maybe<Scalars['Boolean']>,
+  similarCollectionsTitle?: Maybe<LocalizedObject>,
+  slug?: Maybe<Scalars['String']>,
   title: LocalizedObject,
-};
-
-export type CollectionLink = {
-   __typename?: 'CollectionLink',
-  text: LocalizedObject,
-  url: LocalizedObject,
+  urlPath?: Maybe<Scalars['String']>,
 };
 
 export type CollectionListResponse = {
    __typename?: 'CollectionListResponse',
-  meta: Meta,
   data: Array<CollectionDetails>,
 };
 
