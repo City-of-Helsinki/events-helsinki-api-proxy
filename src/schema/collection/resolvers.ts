@@ -128,9 +128,10 @@ const normalizeCollection = (collection: any) => {
 };
 
 const Query = {
-  collectionDetails: async (_, { id }, {}) => {
-    // TODO: Get real collection data when API is ready
-    return { ...mockCollection, id };
+  collectionDetails: async (_, { id }, { dataSources }) => {
+    const data = await dataSources.collectionAPI.getCollectionDetails(id);
+
+    return normalizeCollection(data);
   },
   collectionList: async (_, {}, { dataSources }) => {
     const data = await dataSources.collectionAPI.getCollectionList();
