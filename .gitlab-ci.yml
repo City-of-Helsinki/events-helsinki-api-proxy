@@ -37,21 +37,26 @@ build-production:
     DOCKER_IMAGE_NAME: "$CI_PROJECT_NAME-production"
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_PORT: 4000
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_ENGINE_API_KEY: "tapahtumat"
-    DOCKER_BUILD_ARG_GRAPHQL_PROXY_CMS_API_BASE_URL: "https://cms.test.kuva.hel.ninja/api/"
+    DOCKER_BUILD_ARG_GRAPHQL_PROXY_CMS_API_BASE_URL: "https://cms.prod.kuva.hel.ninja/api/"
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_LINKED_EVENTS_API_BASE_URL: "https://api.hel.fi/linkedevents/v1/"
   only:
     refs:
       - master
+      - /^release-.*$/
 
 review:
   variables:
     DOCKER_IMAGE_NAME: "$CI_PROJECT_NAME-review"
     POSTGRES_ENABLED: 0
 
-# This will enable staging ci-pipeline
+
 staging:
   variables:
     DOCKER_IMAGE_NAME: "$CI_PROJECT_NAME-staging"
   only:
     refs:
       - develop
+
+production:
+  variables:
+    DOCKER_IMAGE_NAME: '$CI_PROJECT_NAME-production'
