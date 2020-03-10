@@ -20,6 +20,9 @@ ARG GRAPHQL_PROXY_PORT
 # set graphql proxy engine api key
 ARG GRAPHQL_PROXY_ENGINE_API_KEY
 
+# set cms api base url
+ARG GRAPHQL_PROXY_CMS_API_BASE_URL
+
 # set linked events api base url
 ARG GRAPHQL_PROXY_LINKED_EVENTS_API_BASE_URL
 

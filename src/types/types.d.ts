@@ -8,6 +8,49 @@ export type Scalars = {
   Float: number,
 };
 
+export type CollectionDetails = {
+   __typename?: 'CollectionDetails',
+  id: Scalars['ID'],
+  contentType?: Maybe<Scalars['Int']>,
+  curatedEvents: Array<Scalars['String']>,
+  curatedEventsTitle: LocalizedObject,
+  depth?: Maybe<Scalars['Int']>,
+  description: LocalizedObject,
+  draftTitle?: Maybe<Scalars['String']>,
+  eventListQuery?: Maybe<Scalars['String']>,
+  eventListTitle: LocalizedObject,
+  expireAt?: Maybe<Scalars['String']>,
+  expired?: Maybe<Scalars['Boolean']>,
+  firstPublishedAt?: Maybe<Scalars['String']>,
+  goLiveAt?: Maybe<Scalars['String']>,
+  hasUnpublishedChanges?: Maybe<Scalars['Boolean']>,
+  lastPublishedAt?: Maybe<Scalars['String']>,
+  latestRevisionCreatedAt?: Maybe<Scalars['String']>,
+  linkText: LocalizedObject,
+  linkUrl: LocalizedObject,
+  live?: Maybe<Scalars['Boolean']>,
+  liveRevision?: Maybe<Scalars['Int']>,
+  locked?: Maybe<Scalars['Boolean']>,
+  lockedAt?: Maybe<Scalars['String']>,
+  lockedBy?: Maybe<Scalars['Int']>,
+  numchild?: Maybe<Scalars['Int']>,
+  owner?: Maybe<Scalars['Int']>,
+  path?: Maybe<Scalars['String']>,
+  searchDescription?: Maybe<Scalars['String']>,
+  seoTitle?: Maybe<Scalars['String']>,
+  shortDescription: LocalizedObject,
+  showInMenus?: Maybe<Scalars['Boolean']>,
+  similarCollectionsTitle?: Maybe<LocalizedObject>,
+  slug?: Maybe<Scalars['String']>,
+  title: LocalizedObject,
+  urlPath?: Maybe<Scalars['String']>,
+};
+
+export type CollectionListResponse = {
+   __typename?: 'CollectionListResponse',
+  data: Array<CollectionDetails>,
+};
+
 export type Division = {
    __typename?: 'Division',
   type: Scalars['String'],
@@ -94,7 +137,7 @@ export type Image = {
 
 export type InLanguage = {
    __typename?: 'InLanguage',
-  id: Scalars['ID'],
+  id?: Maybe<Scalars['ID']>,
   translationAvailable?: Maybe<Scalars['Boolean']>,
   name?: Maybe<LocalizedObject>,
   internalId?: Maybe<Scalars['String']>,
@@ -109,18 +152,18 @@ export type InternalIdObject = {
 
 export type Keyword = {
    __typename?: 'Keyword',
-  id: Scalars['String'],
-  altLabels: Array<Scalars['String']>,
+  id?: Maybe<Scalars['String']>,
+  altLabels?: Maybe<Array<Maybe<Scalars['String']>>>,
   createdTime?: Maybe<Scalars['String']>,
-  lastModifiedTime: Scalars['String'],
+  lastModifiedTime?: Maybe<Scalars['String']>,
   aggregate?: Maybe<Scalars['Boolean']>,
   deprecated?: Maybe<Scalars['Boolean']>,
-  nEvents: Scalars['Int'],
+  nEvents?: Maybe<Scalars['Int']>,
   image?: Maybe<Image>,
-  dataSource: Scalars['String'],
+  dataSource?: Maybe<Scalars['String']>,
   publisher?: Maybe<Scalars['ID']>,
-  name: LocalizedObject,
-  internalId?: Maybe<Scalars['String']>,
+  name?: Maybe<LocalizedObject>,
+  internalId: Scalars['String'],
   internalContext?: Maybe<Scalars['String']>,
   internalType?: Maybe<Scalars['String']>,
 };
@@ -180,7 +223,7 @@ export type OrganizationDetails = {
 
 export type Place = {
    __typename?: 'Place',
-  id: Scalars['ID'],
+  id?: Maybe<Scalars['ID']>,
   divisions?: Maybe<Array<Division>>,
   createdTime?: Maybe<Scalars['String']>,
   lastModifiedTime?: Maybe<Scalars['String']>,

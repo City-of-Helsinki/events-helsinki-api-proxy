@@ -19,19 +19,19 @@ const typeDefs = gql`
   }
 
   type Keyword {
-    id: String!
-    altLabels: [String!]!
+    id: String
+    altLabels: [String]
     createdTime: String
-    lastModifiedTime: String!
+    lastModifiedTime: String
     aggregate: Boolean
     deprecated: Boolean
-    nEvents: Int!
+    nEvents: Int
     image: Image
-    dataSource: String!
+    dataSource: String
     publisher: ID
-    name: LocalizedObject!
+    name: LocalizedObject
     # @id is renamed as internalId so it's usable on GraphQl
-    internalId: String
+    internalId: String!
     # @context is renamed as internalContext so it's usable on GraphQl
     internalContext: String
     # @type is renamed as internalType so it's usable on GraphQl
