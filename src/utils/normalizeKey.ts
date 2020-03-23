@@ -5,6 +5,7 @@
  * @event_type => internalEventType
  * event_end_date => eventEndDate
  */
+
 export default (snakecase: string) => {
   const str = snakecase.replace("@", "internal_");
   return (

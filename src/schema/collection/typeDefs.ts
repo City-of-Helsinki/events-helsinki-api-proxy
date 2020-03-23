@@ -39,10 +39,11 @@ const typeDefs = gql`
     path: String
     searchDescription: String
     seoTitle: String
-    shortDescription: LocalizedObject!
     showInMenus: Boolean
     similarCollectionsTitle: LocalizedObject
     slug: String
+    socialMediaDescription: LocalizedObject
+    subtitles: LocalizedObject!
     title: LocalizedObject!
     urlPath: String
   }

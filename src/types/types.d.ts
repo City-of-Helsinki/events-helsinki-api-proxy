@@ -38,10 +38,11 @@ export type CollectionDetails = {
   path?: Maybe<Scalars['String']>,
   searchDescription?: Maybe<Scalars['String']>,
   seoTitle?: Maybe<Scalars['String']>,
-  shortDescription: LocalizedObject,
   showInMenus?: Maybe<Scalars['Boolean']>,
   similarCollectionsTitle?: Maybe<LocalizedObject>,
   slug?: Maybe<Scalars['String']>,
+  socialMediaDescription?: Maybe<LocalizedObject>,
+  subtitles: LocalizedObject,
   title: LocalizedObject,
   urlPath?: Maybe<Scalars['String']>,
 };
