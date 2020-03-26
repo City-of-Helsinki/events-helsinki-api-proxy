@@ -1,8 +1,7 @@
 import normalizeKeys from "../../utils/normalizeKeys";
 import normalizeLocalizedObject from "../../utils/normalizeLocalizedObject";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const normalizeCollection = (collection: any) => {
+const normalizeCollection = collection => {
   let normalizedCollection = normalizeKeys(collection);
   const normalizedKeys = [
     { key: "title", normalizedKey: "title" },
