@@ -1,3 +1,5 @@
+import Promise from "promise";
+
 import normalizeKeys from "../../utils/normalizeKeys";
 
 const composeQuery = (query: string, key: string, value: string) => {
@@ -142,6 +144,25 @@ const Query = {
       }),
       meta: data.meta
     };
+  },
+
+  eventsByIds: async (_, { ids, include }, { dataSources }) => {
+    const events = await Promise.all(
+      ids.map(async id => {
+        try {
+          const query = eventDetailsQueryBuilder(include);
+          const event = await dataSources.eventAPI.getEventDetails(id, query);
+          return normalizeKeys(event);
+        } catch (e) {
+          // TODO: Send error message to Sentry when implemented
+          // eslint-disable-next-line no-console
+          console.error("error", e);
+          return null;
+        }
+      })
+    );
+
+    return events.filter(e => e);
   }
 };
 
