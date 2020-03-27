@@ -21,6 +21,7 @@ const typeDefs = gql`
       text: String
       translation: String
     ): EventListResponse!
+    eventsByIds(ids: [ID!]!, include: [String]): [EventDetails!]!
   }
 
   type EventListResponse {
