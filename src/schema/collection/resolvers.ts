@@ -32,7 +32,7 @@ const Query = {
     return normalizeCollection(data);
   },
   collectionList: async (_, {}, { dataSources }) => {
-    const data = await dataSources.collectionAPI.getCollectionList();
+    const data = await dataSources.collectionAPI.getCollectionLists();
 
     return {
       data: data.map(collection => normalizeCollection(collection))
