@@ -1,4 +1,7 @@
+import { RewriteFrames } from "@sentry/integrations";
+import * as Sentry from "@sentry/node";
 import { ApolloServer } from "apollo-server-express";
+import { ApolloServerPlugin } from "apollo-server-plugin-base";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
@@ -16,6 +19,47 @@ const OK = "OK";
 const SERVER_IS_NOT_READY = "SERVER_IS_NOT_READY";
 
 dotenv.config();
+
+Sentry.init({
+  dsn: process.env.GRAPHQL_PROXY_SENTRY_DSN,
+  environment: process.env.GRAPHQL_PROXY_SENTRY_ENVIRONMENT,
+  integrations: [
+    // used for rewriting SourceMaps from js to ts
+    // check that sourcemaps are enabled in tsconfig.js
+    // read the docs https://docs.sentry.io/platforms/node/typescript/
+    new RewriteFrames({
+      root: process.cwd()
+    })
+  ]
+});
+
+const apolloServerSentryPlugin = {
+  // For plugin definition see the docs: https://www.apollographql.com/docs/apollo-server/integrations/plugins/
+  requestDidStart() {
+    return {
+      didEncounterErrors(rc) {
+        Sentry.withScope(scope => {
+          scope.setTags({
+            graphql: rc.operation.operation || "parse_err",
+            graphqlName: rc.operationName || rc.request.operationName
+          });
+
+          rc.errors.forEach(error => {
+            if (error.path || error.name !== "GraphQLError") {
+              scope.setExtras({
+                path: error.path
+              });
+              Sentry.captureException(error);
+            } else {
+              scope.setExtras({});
+              Sentry.captureMessage(`GraphQLWrongQuery: ${error.message}`);
+            }
+          });
+        });
+      }
+    };
+  }
+} as ApolloServerPlugin;
 
 const dataSources = () => ({
   collectionAPI: new CollectionAPI(),
@@ -42,6 +86,7 @@ const dataSources = () => ({
     formatError: err => {
       return err;
     },
+    plugins: [apolloServerSentryPlugin],
     schema,
 
     validationRules: [depthLimit(10)]
