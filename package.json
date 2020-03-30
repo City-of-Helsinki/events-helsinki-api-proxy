@@ -26,6 +26,7 @@
     "graphql": "^14.5.8",
     "graphql-depth-limit": "^1.1.0",
     "lodash": "^4.17.15",
+    "promise": "^8.1.0",
     "typescript": "^3.6.4"
   },
   "devDependencies": {
