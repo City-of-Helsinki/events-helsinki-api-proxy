@@ -11,6 +11,7 @@ export type Scalars = {
 export type CollectionDetails = {
    __typename?: 'CollectionDetails',
   id: Scalars['ID'],
+  boxColor?: Maybe<Scalars['String']>,
   contentType?: Maybe<Scalars['Int']>,
   curatedEvents: Array<Scalars['String']>,
   curatedEventsTitle: LocalizedObject,
@@ -39,7 +40,6 @@ export type CollectionDetails = {
   searchDescription?: Maybe<Scalars['String']>,
   seoTitle?: Maybe<Scalars['String']>,
   showInMenus?: Maybe<Scalars['Boolean']>,
-  similarCollectionsTitle?: Maybe<LocalizedObject>,
   slug?: Maybe<Scalars['String']>,
   socialMediaDescription?: Maybe<LocalizedObject>,
   subtitles: LocalizedObject,
