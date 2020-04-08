@@ -8,6 +8,7 @@ const typeDefs = gql`
       endDate: String
       include: [String]
       inLanguage: String
+      isFree: Boolean
       keywords: [String]
       language: String
       locations: [String]
