@@ -1,3 +1,5 @@
+import Promise from "promise";
+
 import normalizeKeys from "../../utils/normalizeKeys";
 
 const composeQuery = (query: string, key: string, value: string) => {
@@ -18,6 +20,7 @@ const eventListQueryBuilder = (
   endDate: string,
   include: string[],
   inLanguage: string,
+  isFree: boolean,
   keywords: string[],
   language: string,
   locations: string[],
@@ -45,6 +48,9 @@ const eventListQueryBuilder = (
   }
   if (inLanguage) {
     query = composeQuery(query, "in_language", inLanguage);
+  }
+  if (isFree != null) {
+    query = composeQuery(query, "is_free", isFree ? "true" : "false");
   }
   if (keywords && keywords.length) {
     query = composeQuery(query, "keyword", keywords.join(","));
@@ -101,6 +107,7 @@ const Query = {
       endDate,
       include,
       inLanguage,
+      isFree,
       keywords,
       language,
       locations,
@@ -121,6 +128,7 @@ const Query = {
       endDate,
       include,
       inLanguage,
+      isFree,
       keywords,
       language,
       locations,
@@ -142,6 +150,25 @@ const Query = {
       }),
       meta: data.meta
     };
+  },
+
+  eventsByIds: async (_, { ids, include }, { dataSources }) => {
+    const events = await Promise.all(
+      ids.map(async id => {
+        try {
+          const query = eventDetailsQueryBuilder(include);
+          const event = await dataSources.eventAPI.getEventDetails(id, query);
+          return normalizeKeys(event);
+        } catch (e) {
+          // TODO: Send error message to Sentry when implemented
+          // eslint-disable-next-line no-console
+          console.error("error", e);
+          return null;
+        }
+      })
+    );
+
+    return events.filter(e => e);
   }
 };
 

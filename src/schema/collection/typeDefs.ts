@@ -12,6 +12,7 @@ const typeDefs = gql`
 
   type CollectionDetails {
     id: ID!
+    boxColor: String
     contentType: Int
     curatedEvents: [String!]!
     curatedEventsTitle: LocalizedObject!
@@ -39,10 +40,10 @@ const typeDefs = gql`
     path: String
     searchDescription: String
     seoTitle: String
-    shortDescription: LocalizedObject!
     showInMenus: Boolean
-    similarCollectionsTitle: LocalizedObject
     slug: String
+    socialMediaDescription: LocalizedObject
+    subtitles: LocalizedObject!
     title: LocalizedObject!
     urlPath: String
   }

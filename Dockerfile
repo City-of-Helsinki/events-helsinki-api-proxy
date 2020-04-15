@@ -26,6 +26,12 @@ ARG GRAPHQL_PROXY_CMS_API_BASE_URL
 # set linked events api base url
 ARG GRAPHQL_PROXY_LINKED_EVENTS_API_BASE_URL
 
+# Set Sentry DSN
+ARG GRAPHQL_PROXY_SENTRY_DSN
+
+#Set Sentry environment
+ARG GRAPHQL_PROXY_SENTRY_ENVIRONMENT
+
 # Build application
 RUN yarn build
 

@@ -8,6 +8,7 @@ const typeDefs = gql`
       endDate: String
       include: [String]
       inLanguage: String
+      isFree: Boolean
       keywords: [String]
       language: String
       locations: [String]
@@ -21,6 +22,7 @@ const typeDefs = gql`
       text: String
       translation: String
     ): EventListResponse!
+    eventsByIds(ids: [ID!]!, include: [String]): [EventDetails!]!
   }
 
   type EventListResponse {

@@ -11,6 +11,7 @@ export type Scalars = {
 export type CollectionDetails = {
    __typename?: 'CollectionDetails',
   id: Scalars['ID'],
+  boxColor?: Maybe<Scalars['String']>,
   contentType?: Maybe<Scalars['Int']>,
   curatedEvents: Array<Scalars['String']>,
   curatedEventsTitle: LocalizedObject,
@@ -38,10 +39,10 @@ export type CollectionDetails = {
   path?: Maybe<Scalars['String']>,
   searchDescription?: Maybe<Scalars['String']>,
   seoTitle?: Maybe<Scalars['String']>,
-  shortDescription: LocalizedObject,
   showInMenus?: Maybe<Scalars['Boolean']>,
-  similarCollectionsTitle?: Maybe<LocalizedObject>,
   slug?: Maybe<Scalars['String']>,
+  socialMediaDescription?: Maybe<LocalizedObject>,
+  subtitles: LocalizedObject,
   title: LocalizedObject,
   urlPath?: Maybe<Scalars['String']>,
 };
@@ -174,6 +175,40 @@ export type KeywordListResponse = {
   data: Array<Keyword>,
 };
 
+export type LandingPage = {
+   __typename?: 'LandingPage',
+  id: Scalars['ID'],
+  path?: Maybe<Scalars['String']>,
+  depth?: Maybe<Scalars['Int']>,
+  numchild?: Maybe<Scalars['Int']>,
+  draftTitle?: Maybe<Scalars['String']>,
+  slug?: Maybe<Scalars['String']>,
+  live?: Maybe<Scalars['Boolean']>,
+  hasUnpublishedChanges?: Maybe<Scalars['Boolean']>,
+  urlPath?: Maybe<Scalars['String']>,
+  seoTitle?: Maybe<Scalars['String']>,
+  showInMenus?: Maybe<Scalars['Boolean']>,
+  searchDescription?: Maybe<Scalars['String']>,
+  goLiveAt?: Maybe<Scalars['String']>,
+  expireAt?: Maybe<Scalars['String']>,
+  expired?: Maybe<Scalars['Boolean']>,
+  locked?: Maybe<Scalars['Boolean']>,
+  lockedAt?: Maybe<Scalars['String']>,
+  firstPublishedAt?: Maybe<Scalars['String']>,
+  lastPublishedAt?: Maybe<Scalars['String']>,
+  latestRevisionCreatedAt?: Maybe<Scalars['String']>,
+  title?: Maybe<LocalizedObject>,
+  description?: Maybe<LocalizedObject>,
+  buttonText?: Maybe<LocalizedObject>,
+  buttonUrl?: Maybe<LocalizedObject>,
+  metaInformation?: Maybe<LocalizedObject>,
+  pageTitle?: Maybe<LocalizedObject>,
+  contentType?: Maybe<Scalars['Int']>,
+  owner?: Maybe<Scalars['Int']>,
+  lockedBy?: Maybe<Scalars['Int']>,
+  liveRevision?: Maybe<Scalars['Int']>,
+};
+
 export type LocalizedObject = {
    __typename?: 'LocalizedObject',
   fi?: Maybe<Scalars['String']>,
@@ -191,6 +226,18 @@ export type Meta = {
 export type Mutation = {
    __typename?: 'Mutation',
   _empty?: Maybe<Scalars['String']>,
+};
+
+export type Neighborhood = {
+   __typename?: 'Neighborhood',
+  id: Scalars['ID'],
+  name: LocalizedObject,
+};
+
+export type NeighborhoodListResponse = {
+   __typename?: 'NeighborhoodListResponse',
+  meta: Meta,
+  data: Array<Neighborhood>,
 };
 
 export type Offer = {
