@@ -228,6 +228,18 @@ export type Mutation = {
   _empty?: Maybe<Scalars['String']>,
 };
 
+export type Neighborhood = {
+   __typename?: 'Neighborhood',
+  id: Scalars['ID'],
+  name: LocalizedObject,
+};
+
+export type NeighborhoodListResponse = {
+   __typename?: 'NeighborhoodListResponse',
+  meta: Meta,
+  data: Array<Neighborhood>,
+};
+
 export type Offer = {
    __typename?: 'Offer',
   isFree?: Maybe<Scalars['Boolean']>,

@@ -3,6 +3,7 @@ import event from "./event/typeDefs";
 import global from "./global/typeDefs";
 import keyword from "./keyword/typeDefs";
 import landingPage from "./landingPage/typeDefs";
+import neighborhood from "./neighborhood/typeDefs";
 import organization from "./organization/typeDefs";
 import place from "./place/typeDefs";
 
@@ -12,6 +13,7 @@ const typeDefs = [
   event,
   keyword,
   landingPage,
+  neighborhood,
   organization,
   place
 ];

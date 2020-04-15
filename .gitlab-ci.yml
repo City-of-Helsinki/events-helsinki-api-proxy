@@ -15,6 +15,7 @@ build-review:
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_ENGINE_API_KEY: "tapahtumat"
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_CMS_API_BASE_URL: "https://cms.test.kuva.hel.ninja/api/"
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_LINKED_EVENTS_API_BASE_URL: "https://api.hel.fi/linkedevents/v1/"
+    DOCKER_BUILD_ARG_GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL: "https://kartta.hel.fi/ws/geoserver/avoindata"
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_SENTRY_DSN: "$GL_SENTRY_DSN"
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_SENTRY_ENVIRONMENT: "development"
   only:
@@ -29,6 +30,7 @@ build-staging:
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_ENGINE_API_KEY: "tapahtumat"
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_CMS_API_BASE_URL: "https://cms.test.kuva.hel.ninja/api/"
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_LINKED_EVENTS_API_BASE_URL: "https://api.hel.fi/linkedevents/v1/"
+    DOCKER_BUILD_ARG_GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL: "https://kartta.hel.fi/ws/geoserver/avoindata"
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_SENTRY_DSN: "$GL_SENTRY_DSN"
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_SENTRY_ENVIRONMENT: "staging"
   only:
@@ -43,6 +45,7 @@ build-production:
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_ENGINE_API_KEY: "tapahtumat"
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_CMS_API_BASE_URL: "https://cms.prod.kuva.hel.ninja/api/"
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_LINKED_EVENTS_API_BASE_URL: "https://api.hel.fi/linkedevents/v1/"
+    DOCKER_BUILD_ARG_GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL: "https://kartta.hel.fi/ws/geoserver/avoindata"
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_SENTRY_DSN: "$GL_SENTRY_DSN"
     DOCKER_BUILD_ARG_GRAPHQL_PROXY_SENTRY_ENVIRONMENT: "production"
   only:

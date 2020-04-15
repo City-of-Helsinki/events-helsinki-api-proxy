@@ -11,6 +11,7 @@ import CollectionAPI from "./datasources/collection";
 import EventAPI from "./datasources/event";
 import KeywordAPI from "./datasources/keyword";
 import LandingPageAPI from "./datasources/landingPage";
+import NeighborhoodAPI from "./datasources/neighborhood";
 import OrganizationAPI from "./datasources/organization";
 import PlaceAPI from "./datasources/place";
 import schema from "./schema";
@@ -66,6 +67,7 @@ const dataSources = () => ({
   eventAPI: new EventAPI(),
   keywordAPI: new KeywordAPI(),
   landingPageAPI: new LandingPageAPI(),
+  neighborhoodAPI: new NeighborhoodAPI(),
   organizationAPI: new OrganizationAPI(),
   placeAPI: new PlaceAPI()
 });

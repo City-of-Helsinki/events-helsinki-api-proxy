@@ -4,6 +4,7 @@ import collection from "./collection/resolvers";
 import event from "./event/resolvers";
 import keyword from "./keyword/resolvers";
 import landingPage from "./landingPage/resolvers";
+import neighborhood from "./neighborhood/resolvers";
 import organization from "./organization/resolvers";
 import place from "./place/resolvers";
 
@@ -12,6 +13,7 @@ const resolvers = merge(
   event,
   keyword,
   landingPage,
+  neighborhood,
   organization,
   place
 );
