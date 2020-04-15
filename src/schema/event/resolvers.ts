@@ -22,6 +22,7 @@ const eventListQueryBuilder = (
   inLanguage: string,
   isFree: boolean,
   keywords: string[],
+  keywordNot: string[],
   language: string,
   locations: string[],
   page: number,
@@ -54,6 +55,9 @@ const eventListQueryBuilder = (
   }
   if (keywords && keywords.length) {
     query = composeQuery(query, "keyword", keywords.join(","));
+  }
+  if (keywordNot && keywordNot.length) {
+    query = composeQuery(query, "keyword!", keywordNot.join(","));
   }
   if (language) {
     query = composeQuery(query, "language", language);
@@ -109,6 +113,7 @@ const Query = {
       inLanguage,
       isFree,
       keywords,
+      keywordNot,
       language,
       locations,
       page,
@@ -130,6 +135,7 @@ const Query = {
       inLanguage,
       isFree,
       keywords,
+      keywordNot,
       language,
       locations,
       page,

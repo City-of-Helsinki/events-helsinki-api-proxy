@@ -10,6 +10,7 @@ const typeDefs = gql`
       inLanguage: String
       isFree: Boolean
       keywords: [String]
+      keywordNot: [String]
       language: String
       locations: [String]
       page: Int
