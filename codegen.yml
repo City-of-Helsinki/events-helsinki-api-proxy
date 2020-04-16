@@ -1,6 +1,7 @@
 schema: src/schema/index.ts
 overwrite: true
-watch: true
+watch: 
+  - src/schema/**/typeDefs.ts
 require:
   - ts-node/register
 generates:
