@@ -5,8 +5,8 @@ class CollectionAPI extends DataSource {
     return this.get(`collections/${id}`);
   }
 
-  public async getCollectionList() {
-    return this.get("collections");
+  public async getCollectionList(query: string) {
+    return this.get(`collections${query}`);
   }
 }
 

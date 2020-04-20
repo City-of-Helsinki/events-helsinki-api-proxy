@@ -1,10 +1,7 @@
 import Promise from "promise";
 
+import composeQuery from "../../utils/composeQuery";
 import normalizeKeys from "../../utils/normalizeKeys";
-
-const composeQuery = (query: string, key: string, value: string) => {
-  return query.concat(`${query ? "&" : "?"}${key}=`, value);
-};
 
 const eventDetailsQueryBuilder = (include: string[]) => {
   let query = "";

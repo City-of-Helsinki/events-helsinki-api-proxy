@@ -1,3 +1,4 @@
+import composeQuery from "../../utils/composeQuery";
 import normalizeKeys from "../../utils/normalizeKeys";
 import normalizeLocalizedObject from "../../utils/normalizeLocalizedObject";
 
@@ -25,14 +26,30 @@ const normalizeCollection = collection => {
   return normalizedCollection;
 };
 
+const collectionListQueryBuilder = (visibleOnFrontpage: boolean) => {
+  let query = "";
+
+  if (visibleOnFrontpage != null) {
+    query = composeQuery(
+      query,
+      "visible_on_frontpage",
+      visibleOnFrontpage ? "true" : "false"
+    );
+  }
+
+  return query;
+};
+
 const Query = {
   collectionDetails: async (_, { id }, { dataSources }) => {
     const data = await dataSources.collectionAPI.getCollectionDetails(id);
 
     return normalizeCollection(data);
   },
-  collectionList: async (_, {}, { dataSources }) => {
-    const data = await dataSources.collectionAPI.getCollectionList();
+  collectionList: async (_, { visibleOnFrontpage }, { dataSources }) => {
+    const data = await dataSources.collectionAPI.getCollectionList(
+      collectionListQueryBuilder(visibleOnFrontpage)
+    );
 
     return {
       data: data.map(collection => normalizeCollection(collection))
