@@ -1,3 +1,4 @@
+import composeQuery from "../../utils/composeQuery";
 import normalizeKeys from "../../utils/normalizeKeys";
 import normalizeLocalizedObject from "../../utils/normalizeLocalizedObject";
 
@@ -23,11 +24,27 @@ const normalizeLandingPage = collection => {
   return normalizedLandingPage;
 };
 
-const Query = {
-  landingPage: async (_, {}, { dataSources }) => {
-    const data = await dataSources.landingPageAPI.getLandingPage();
+const landingPageQueryBuilder = (visibleOnFrontpage: boolean) => {
+  let query = "";
 
-    return normalizeLandingPage(data[0]);
+  if (visibleOnFrontpage != null) {
+    query = composeQuery(
+      query,
+      "visible_on_frontpage",
+      visibleOnFrontpage ? "true" : "false"
+    );
+  }
+
+  return query;
+};
+
+const Query = {
+  landingPage: async (_, { visibleOnFrontpage }, { dataSources }) => {
+    const data = await dataSources.landingPageAPI.getLandingPage(
+      landingPageQueryBuilder(visibleOnFrontpage)
+    );
+
+    return { data: data.map(item => normalizeLandingPage(item)) };
   }
 };
 

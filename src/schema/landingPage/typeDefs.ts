@@ -2,7 +2,11 @@ import { gql } from "apollo-server";
 
 const typeDefs = gql`
   extend type Query {
-    landingPage: LandingPage!
+    landingPage(visibleOnFrontpage: Boolean): LandingPageResponse!
+  }
+
+  type LandingPageResponse {
+    data: [LandingPage!]!
   }
 
   type LandingPage {

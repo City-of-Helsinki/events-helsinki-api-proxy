@@ -209,6 +209,11 @@ export type LandingPage = {
   liveRevision?: Maybe<Scalars['Int']>,
 };
 
+export type LandingPageResponse = {
+   __typename?: 'LandingPageResponse',
+  data: Array<LandingPage>,
+};
+
 export type LocalizedObject = {
    __typename?: 'LocalizedObject',
   fi?: Maybe<Scalars['String']>,
