@@ -48,7 +48,8 @@ const placeListQueryBuilder = (
 
 const Query = {
   placeDetails: async (_, { id }, { dataSources }) => {
-    return dataSources.placeAPI.getPlaceDetails(id);
+    const data = await dataSources.placeAPI.getPlaceDetails(id);
+    return normalizeKeys(data);
   },
   placeList: async (
     _,

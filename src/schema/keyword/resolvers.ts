@@ -41,7 +41,8 @@ const keywordListQueryBuilder = (
 
 const Query = {
   keywordDetails: async (_, { id }, { dataSources }) => {
-    return dataSources.keywordAPI.getKeywordDetails(id);
+    const data = await dataSources.keywordAPI.getKeywordDetails(id);
+    return normalizeKeys(data);
   },
   keywordList: async (
     _,
