@@ -25,6 +25,7 @@ export type CollectionDetails = {
   firstPublishedAt?: Maybe<Scalars['String']>,
   goLiveAt?: Maybe<Scalars['String']>,
   hasUnpublishedChanges?: Maybe<Scalars['Boolean']>,
+  heroImage?: Maybe<Scalars['String']>,
   lastPublishedAt?: Maybe<Scalars['String']>,
   latestRevisionCreatedAt?: Maybe<Scalars['String']>,
   linkText: LocalizedObject,
@@ -275,7 +276,7 @@ export type OrganizationDetails = {
 
 export type Place = {
    __typename?: 'Place',
-  id?: Maybe<Scalars['ID']>,
+  id: Scalars['ID'],
   divisions?: Maybe<Array<Division>>,
   createdTime?: Maybe<Scalars['String']>,
   lastModifiedTime?: Maybe<Scalars['String']>,
