@@ -9,6 +9,8 @@ const normalizeLandingPage = collection => {
     { key: "description", normalizedKey: "description" },
     { key: "buttonText", normalizedKey: "buttonText" },
     { key: "buttonUrl", normalizedKey: "buttonUrl" },
+    { key: "heroBackgroundImage", normalizedKey: "heroBackgroundImage" },
+    { key: "heroTopLayerImage", normalizedKey: "heroTopLayerImage" },
     { key: "metaInformation", normalizedKey: "metaInformation" },
     { key: "pageTitle", normalizedKey: "pageTitle" }
   ];
