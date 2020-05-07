@@ -42,7 +42,7 @@ const landingPageQueryBuilder = (visibleOnFrontpage: boolean) => {
 
 const Query = {
   landingPage: async (_, { visibleOnFrontpage }, { dataSources }) => {
-    const data = await dataSources.landingPageAPI.getLandingPage(
+    const data = await dataSources.landingPageAPI.getLandingPages(
       landingPageQueryBuilder(visibleOnFrontpage)
     );
 
