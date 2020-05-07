@@ -2,7 +2,7 @@ import { gql } from "apollo-server";
 
 const typeDefs = gql`
   extend type Query {
-    collectionDetails(id: ID): CollectionDetails!
+    collectionDetails(id: ID, draft: Boolean): CollectionDetails!
     collectionList(visibleOnFrontpage: Boolean): CollectionListResponse!
   }
 

@@ -26,6 +26,16 @@ const normalizeCollection = collection => {
   return normalizedCollection;
 };
 
+const collectionQueryBuilder = (draft: boolean) => {
+  let query = "";
+
+  if (draft != null) {
+    query = composeQuery(query, "draft", draft ? "true" : "false");
+  }
+
+  return query;
+};
+
 const collectionListQueryBuilder = (visibleOnFrontpage: boolean) => {
   let query = "";
 
@@ -41,8 +51,11 @@ const collectionListQueryBuilder = (visibleOnFrontpage: boolean) => {
 };
 
 const Query = {
-  collectionDetails: async (_, { id }, { dataSources }) => {
-    const data = await dataSources.collectionAPI.getCollectionDetails(id);
+  collectionDetails: async (_, { draft, id }, { dataSources }) => {
+    const data = await dataSources.collectionAPI.getCollectionDetails(
+      id,
+      collectionQueryBuilder(draft)
+    );
 
     return normalizeCollection(data);
   },
