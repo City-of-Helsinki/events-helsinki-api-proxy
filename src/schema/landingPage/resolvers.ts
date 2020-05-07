@@ -26,7 +26,16 @@ const normalizeLandingPage = collection => {
   return normalizedLandingPage;
 };
 
-const landingPageQueryBuilder = (visibleOnFrontpage: boolean) => {
+const landingPageQueryBuilder = (draft: boolean) => {
+  let query = "";
+
+  if (draft != null) {
+    query = composeQuery(query, "draft", draft ? "true" : "false");
+  }
+
+  return query;
+};
+const landingPagesQueryBuilder = (visibleOnFrontpage: boolean) => {
   let query = "";
 
   if (visibleOnFrontpage != null) {
@@ -41,9 +50,17 @@ const landingPageQueryBuilder = (visibleOnFrontpage: boolean) => {
 };
 
 const Query = {
-  landingPage: async (_, { visibleOnFrontpage }, { dataSources }) => {
+  landingPage: async (_, { draft, id }, { dataSources }) => {
+    const data = await dataSources.landingPageAPI.getLandingPage(
+      id,
+      landingPageQueryBuilder(draft)
+    );
+
+    return normalizeLandingPage(data);
+  },
+  landingPages: async (_, { visibleOnFrontpage }, { dataSources }) => {
     const data = await dataSources.landingPageAPI.getLandingPages(
-      landingPageQueryBuilder(visibleOnFrontpage)
+      landingPagesQueryBuilder(visibleOnFrontpage)
     );
 
     return { data: data.map(item => normalizeLandingPage(item)) };
