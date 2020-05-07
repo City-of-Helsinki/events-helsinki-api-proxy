@@ -154,7 +154,7 @@ export type InternalIdObject = {
 
 export type Keyword = {
    __typename?: 'Keyword',
-  id?: Maybe<Scalars['String']>,
+  id: Scalars['ID'],
   altLabels?: Maybe<Array<Maybe<Scalars['String']>>>,
   createdTime?: Maybe<Scalars['String']>,
   lastModifiedTime?: Maybe<Scalars['String']>,
@@ -165,7 +165,7 @@ export type Keyword = {
   dataSource?: Maybe<Scalars['String']>,
   publisher?: Maybe<Scalars['ID']>,
   name?: Maybe<LocalizedObject>,
-  internalId: Scalars['String'],
+  internalId?: Maybe<Scalars['String']>,
   internalContext?: Maybe<Scalars['String']>,
   internalType?: Maybe<Scalars['String']>,
 };
