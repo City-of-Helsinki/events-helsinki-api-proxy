@@ -96,7 +96,7 @@ const typeDefs = gql`
   }
 
   type Image {
-    id: ID!
+    id: ID
     license: String
     createdTime: String
     lastModifiedTime: String
@@ -107,7 +107,7 @@ const typeDefs = gql`
     dataSource: String
     publisher: String
     # @id is renamed as internalId so it's usable on GraphQl
-    internalId: String
+    internalId: String!
     # @context is renamed as internalContext so it's usable on GraphQl
     internalContext: String
     # @type is renamed as internalType so it's usable on GraphQl

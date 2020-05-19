@@ -20,7 +20,7 @@ const typeDefs = gql`
   }
 
   type Place {
-    id: ID!
+    id: ID
     divisions: [Division!]
     createdTime: String
     lastModifiedTime: String
@@ -45,7 +45,7 @@ const typeDefs = gql`
     addressLocality: LocalizedObject
     streetAddress: LocalizedObject
     infoUrl: LocalizedObject
-    internalId: String
+    internalId: String!
     internalContext: String
     internalType: String
   }

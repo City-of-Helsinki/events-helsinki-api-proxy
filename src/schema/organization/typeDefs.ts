@@ -6,7 +6,7 @@ const typeDefs = gql`
   }
 
   type OrganizationDetails {
-    id: ID!
+    id: ID
     dataSource: String
     classification: String
     name: String
@@ -20,7 +20,7 @@ const typeDefs = gql`
     isAffiliated: Boolean!
     replacedBy: String
     # @id is renamed as internalId so it's usable on GraphQl
-    internalId: String
+    internalId: String!
     # @context is renamed as internalContext so it's usable on GraphQl
     internalContext: String
     # @type is renamed as internalType so it's usable on GraphQl
