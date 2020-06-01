@@ -12,46 +12,70 @@ const eventDetailsQueryBuilder = (include: string[]) => {
   return query;
 };
 
-const eventListQueryBuilder = (
-  divisions: string[],
-  endDate: string,
-  include: string[],
-  inLanguage: string,
-  isFree: boolean,
-  keywords: string[],
-  keywordNot: string[],
-  language: string,
-  locations: string[],
-  page: number,
-  pageSize: number,
-  publisher: string,
-  sort: string,
-  startDate: string,
-  superEvent: string,
-  superEventType: string[],
-  text: string,
-  translation: string
-) => {
+const eventListQueryBuilder = ({
+  division,
+  end,
+  inLanguage,
+  include,
+  isFree,
+  keywordAnd,
+  keywordNot,
+  keyword,
+  language,
+  location,
+  page,
+  pageSize,
+  publisher,
+  sort,
+  start,
+  superEvent,
+  superEventType,
+  text,
+  translation
+}: {
+  division: string[];
+  end: string;
+  inLanguage: string;
+  include: string[];
+  isFree: boolean;
+  keywordAnd: string[];
+  keywordNot: string[];
+  keyword: string[];
+  language: string;
+  location: string[];
+  page: number;
+  pageSize: number;
+  publisher: string;
+  sort: string;
+  start: string;
+  superEvent: string;
+  superEventType: string[];
+  text: string;
+  translation: string;
+}) => {
   // Get details of all needed fields
   let query = "";
 
-  if (include && include.length) {
-    query = composeQuery(query, "include", include.join(","));
+  if (division && division.length) {
+    query = composeQuery(query, "division", division.join(","));
   }
-  if (divisions && divisions.length) {
-    query = composeQuery(query, "division", divisions.join(","));
-  }
-  if (endDate) {
-    query = composeQuery(query, "end", endDate);
+  if (end) {
+    query = composeQuery(query, "end", end);
   }
   if (inLanguage) {
     query = composeQuery(query, "in_language", inLanguage);
   }
+  if (include && include.length) {
+    query = composeQuery(query, "include", include.join(","));
+  }
   if (isFree != null) {
     query = composeQuery(query, "is_free", isFree ? "true" : "false");
   }
-  if (keywords && keywords.length) {
-    query = composeQuery(query, "keyword", keywords.join(","));
+  if (keyword && keyword.length) {
+    query = composeQuery(query, "keyword", keyword.join(","));
+  }
+  if (keywordAnd && keywordAnd.length) {
+    query = composeQuery(query, "keyword_AND", keywordAnd.join(","));
   }
   if (keywordNot && keywordNot.length) {
     query = composeQuery(query, "keyword!", keywordNot.join(","));
@@ -59,8 +83,8 @@ const eventListQueryBuilder = (
   if (language) {
     query = composeQuery(query, "language", language);
   }
-  if (locations && locations.length) {
-    query = composeQuery(query, "location", locations.join(","));
+  if (location && location.length) {
+    query = composeQuery(query, "location", location.join(","));
   }
   if (page) {
     query = composeQuery(query, "page", page.toString());
@@ -74,8 +98,8 @@ const eventListQueryBuilder = (
   if (sort) {
     query = composeQuery(query, "sort", sort);
   }
-  if (startDate) {
-    query = composeQuery(query, "start", startDate);
+  if (start) {
+    query = composeQuery(query, "start", start);
   }
   if (superEvent) {
     query = composeQuery(query, "super_event", superEvent);
@@ -104,20 +128,21 @@ const Query = {
   eventList: async (
     _,
     {
-      divisions,
-      endDate,
+      division,
+      end,
       include,
       inLanguage,
       isFree,
-      keywords,
+      keyword,
+      keywordAnd,
       keywordNot,
       language,
-      locations,
+      location,
       page,
       pageSize,
       publisher,
       sort,
-      startDate,
+      start,
       superEvent,
       superEventType,
       text,
@@ -125,26 +150,27 @@ const Query = {
     },
     { dataSources }
   ) => {
-    const query = eventListQueryBuilder(
-      divisions,
-      endDate,
-      include,
+    const query = eventListQueryBuilder({
+      division,
+      end,
       inLanguage,
+      include,
       isFree,
-      keywords,
+      keyword,
+      keywordAnd,
       keywordNot,
       language,
-      locations,
+      location,
       page,
       pageSize,
       publisher,
       sort,
-      startDate,
+      start,
       superEvent,
       superEventType,
       text,
       translation
-    );
+    });
     const data = await dataSources.eventAPI.getEventList(query);
 
     return {
