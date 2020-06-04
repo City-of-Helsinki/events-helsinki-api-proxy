@@ -44,7 +44,6 @@ const typeDefs = gql`
     showInMenus: Boolean
     slug: String
     socialMediaDescription: LocalizedObject
-    subtitles: LocalizedObject!
     title: LocalizedObject!
     urlPath: String
   }

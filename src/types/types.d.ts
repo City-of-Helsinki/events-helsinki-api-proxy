@@ -43,7 +43,6 @@ export type CollectionDetails = {
   showInMenus?: Maybe<Scalars['Boolean']>,
   slug?: Maybe<Scalars['String']>,
   socialMediaDescription?: Maybe<LocalizedObject>,
-  subtitles: LocalizedObject,
   title: LocalizedObject,
   urlPath?: Maybe<Scalars['String']>,
 };

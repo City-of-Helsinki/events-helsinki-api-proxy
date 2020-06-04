@@ -6,7 +6,6 @@ const normalizeCollection = collection => {
   let normalizedCollection = normalizeKeys(collection);
   const normalizedKeys = [
     { key: "title", normalizedKey: "title" },
-    { key: "subtitles", normalizedKey: "subtitles" },
     { key: "description", normalizedKey: "description" },
     { key: "linkText", normalizedKey: "linkText" },
     { key: "linkUrl", normalizedKey: "linkUrl" },
