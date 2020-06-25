@@ -13,13 +13,12 @@ describe("normalizeLocalizedObject function", () => {
           nameFi: "title fi",
           nameSv: "title sv"
         },
-        "name",
-        "normalizedName"
+        "name"
       )
     ).toEqual({
       eventPrice: { isFree: false },
       eventType: "foo",
-      normalizedName: {
+      name: {
         en: "title en",
         fi: "title fi",
         sv: "title sv"

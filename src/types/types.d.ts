@@ -203,6 +203,7 @@ export type LandingPage = {
   buttonUrl?: Maybe<LocalizedObject>,
   heroBackgroundImage?: Maybe<LocalizedObject>,
   heroTopLayerImage?: Maybe<LocalizedObject>,
+  socialMediaImage?: Maybe<LocalizedObject>,
   metaInformation?: Maybe<LocalizedObject>,
   pageTitle?: Maybe<LocalizedObject>,
   contentType?: Maybe<Scalars['Int']>,

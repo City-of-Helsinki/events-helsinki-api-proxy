@@ -37,6 +37,7 @@ const typeDefs = gql`
     buttonUrl: LocalizedObject
     heroBackgroundImage: LocalizedObject
     heroTopLayerImage: LocalizedObject
+    socialMediaImage: LocalizedObject
     metaInformation: LocalizedObject
     pageTitle: LocalizedObject
     contentType: Int

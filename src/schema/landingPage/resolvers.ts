@@ -5,21 +5,22 @@ import normalizeLocalizedObject from "../../utils/normalizeLocalizedObject";
 const normalizeLandingPage = collection => {
   let normalizedLandingPage = normalizeKeys(collection);
   const normalizedKeys = [
-    { key: "title", normalizedKey: "title" },
-    { key: "description", normalizedKey: "description" },
-    { key: "buttonText", normalizedKey: "buttonText" },
-    { key: "buttonUrl", normalizedKey: "buttonUrl" },
-    { key: "heroBackgroundImage", normalizedKey: "heroBackgroundImage" },
-    { key: "heroTopLayerImage", normalizedKey: "heroTopLayerImage" },
-    { key: "metaInformation", normalizedKey: "metaInformation" },
-    { key: "pageTitle", normalizedKey: "pageTitle" }
+    "title",
+    "description",
+    "buttonText",
+    "buttonUrl",
+    "heroBackgroundImage",
+    "heroBackgroundImage",
+    "heroTopLayerImage",
+    "socialMediaImage",
+    "metaInformation",
+    "pageTitle"
   ];
 
   normalizedKeys.forEach(item => {
     normalizedLandingPage = normalizeLocalizedObject(
       normalizedLandingPage,
-      item.key,
-      item.normalizedKey
+      item
     );
   });
 

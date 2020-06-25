@@ -5,21 +5,17 @@ import normalizeLocalizedObject from "../../utils/normalizeLocalizedObject";
 const normalizeCollection = collection => {
   let normalizedCollection = normalizeKeys(collection);
   const normalizedKeys = [
-    { key: "title", normalizedKey: "title" },
-    { key: "description", normalizedKey: "description" },
-    { key: "linkText", normalizedKey: "linkText" },
-    { key: "linkUrl", normalizedKey: "linkUrl" },
-    { key: "socialMediaDescription", normalizedKey: "socialMediaDescription" },
-    { key: "curatedEventsTitle", normalizedKey: "curatedEventsTitle" },
-    { key: "eventListTitle", normalizedKey: "eventListTitle" }
+    "title",
+    "description",
+    "linkText",
+    "linkUrl",
+    "socialMediaDescription",
+    "curatedEventsTitle",
+    "eventListTitle"
   ];
 
   normalizedKeys.forEach(item => {
-    normalizedCollection = normalizeLocalizedObject(
-      normalizedCollection,
-      item.key,
-      item.normalizedKey
-    );
+    normalizedCollection = normalizeLocalizedObject(normalizedCollection, item);
   });
 
   return normalizedCollection;
