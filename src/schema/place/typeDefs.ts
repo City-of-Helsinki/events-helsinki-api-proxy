@@ -6,6 +6,7 @@ const typeDefs = gql`
     placeList(
       dataSource: String
       divisions: [String]
+      hasUpcomingEvents: Boolean
       page: Int
       pageSize: Int
       showAllPlaces: Boolean
@@ -22,6 +23,7 @@ const typeDefs = gql`
   type Place {
     id: ID
     divisions: [Division!]
+    hasUpcomingEvents: Boolean
     createdTime: String
     lastModifiedTime: String
     customData: String
