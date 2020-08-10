@@ -5,6 +5,7 @@ const typeDefs = gql`
     keywordDetails(id: ID!): Keyword!
     keywordList(
       dataSource: String
+      hasUpcomingEvents: Boolean
       page: Int
       pageSize: Int
       showAllKeywords: Boolean
@@ -22,6 +23,7 @@ const typeDefs = gql`
     id: ID
     altLabels: [String]
     createdTime: String
+    hasUpcomingEvents: Boolean
     lastModifiedTime: String
     aggregate: Boolean
     deprecated: Boolean
