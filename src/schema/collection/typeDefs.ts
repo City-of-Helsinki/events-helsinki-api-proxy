@@ -15,12 +15,12 @@ const typeDefs = gql`
     boxColor: String
     contentType: Int
     curatedEvents: [String!]!
-    curatedEventsTitle: LocalizedObject!
+    curatedEventsTitle: LocalizedObject
     depth: Int
-    description: LocalizedObject!
+    description: LocalizedObject
     draftTitle: String
-    eventListQuery: String
-    eventListTitle: LocalizedObject!
+    eventListQuery: LocalizedObject
+    eventListTitle: LocalizedObject
     expireAt: String
     expired: Boolean
     firstPublishedAt: String
@@ -29,8 +29,8 @@ const typeDefs = gql`
     heroImage: String
     lastPublishedAt: String
     latestRevisionCreatedAt: String
-    linkText: LocalizedObject!
-    linkUrl: LocalizedObject!
+    linkText: LocalizedObject
+    linkUrl: LocalizedObject
     live: Boolean
     liveRevision: Int
     locked: Boolean

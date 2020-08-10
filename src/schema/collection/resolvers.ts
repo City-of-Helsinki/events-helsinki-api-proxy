@@ -11,6 +11,7 @@ const normalizeCollection = collection => {
     'linkUrl',
     'socialMediaDescription',
     'curatedEventsTitle',
+    'eventListQuery',
     'eventListTitle',
   ];
 
