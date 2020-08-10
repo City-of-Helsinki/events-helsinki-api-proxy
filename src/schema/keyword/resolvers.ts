@@ -25,8 +25,12 @@ const keywordListQueryBuilder = ({
     query = composeQuery(query, 'data_source', dataSource);
   }
 
-  if (hasUpcomingEvents) {
-    query = composeQuery(query, 'has_upcoming_events', 'true');
+  if (hasUpcomingEvents != null) {
+    query = composeQuery(
+      query,
+      'has_upcoming_events',
+      hasUpcomingEvents ? 'true' : 'false'
+    );
   }
 
   if (page) {
@@ -37,8 +41,12 @@ const keywordListQueryBuilder = ({
     query = composeQuery(query, 'page_size', pageSize.toString());
   }
 
-  if (showAllKeywords) {
-    query = composeQuery(query, 'show_all_keywords', 'true');
+  if (showAllKeywords != null) {
+    query = composeQuery(
+      query,
+      'show_all_keywords',
+      showAllKeywords ? 'true' : 'false'
+    );
   }
 
   if (sort) {

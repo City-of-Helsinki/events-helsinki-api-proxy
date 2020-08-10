@@ -27,8 +27,12 @@ const placeListQueryBuilder = ({
     query = composeQuery(query, 'data_source', dataSource);
   }
 
-  if (hasUpcomingEvents) {
-    query = composeQuery(query, 'has_upcoming_events', 'true');
+  if (hasUpcomingEvents != null) {
+    query = composeQuery(
+      query,
+      'has_upcoming_events',
+      hasUpcomingEvents ? 'true' : 'false'
+    );
   }
 
   if (divisions && divisions.length) {
@@ -43,8 +47,12 @@ const placeListQueryBuilder = ({
     query = composeQuery(query, 'page_size', pageSize.toString());
   }
 
-  if (showAllPlaces) {
-    query = composeQuery(query, 'show_all_places', 'true');
+  if (showAllPlaces != null) {
+    query = composeQuery(
+      query,
+      'show_all_places',
+      showAllPlaces ? 'true' : 'false'
+    );
   }
 
   if (sort) {
