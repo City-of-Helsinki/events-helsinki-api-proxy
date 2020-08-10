@@ -6,5 +6,5 @@
  * @return {string}
  */
 export default (query: string, key: string, value: string) => {
-  return query.concat(`${query ? "&" : "?"}${key}=`, value);
+  return query.concat(`${query ? '&' : '?'}${key}=`, value);
 };

@@ -1,4 +1,4 @@
-import DataSource from "./LinkedEventsDataSource";
+import DataSource from './LinkedEventsDataSource';
 
 class KeywordAPI extends DataSource {
   public async getKeywordDetails(id: string) {

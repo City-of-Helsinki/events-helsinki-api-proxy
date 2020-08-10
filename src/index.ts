@@ -1,23 +1,23 @@
-import { RewriteFrames } from "@sentry/integrations";
-import * as Sentry from "@sentry/node";
-import { ApolloServer } from "apollo-server-express";
-import { ApolloServerPlugin } from "apollo-server-plugin-base";
-import cors from "cors";
-import dotenv from "dotenv";
-import express from "express";
-import depthLimit from "graphql-depth-limit";
+import { RewriteFrames } from '@sentry/integrations';
+import * as Sentry from '@sentry/node';
+import { ApolloServer } from 'apollo-server-express';
+import { ApolloServerPlugin } from 'apollo-server-plugin-base';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import express from 'express';
+import depthLimit from 'graphql-depth-limit';
 
-import CollectionAPI from "./datasources/collection";
-import EventAPI from "./datasources/event";
-import KeywordAPI from "./datasources/keyword";
-import LandingPageAPI from "./datasources/landingPage";
-import NeighborhoodAPI from "./datasources/neighborhood";
-import OrganizationAPI from "./datasources/organization";
-import PlaceAPI from "./datasources/place";
-import schema from "./schema";
+import CollectionAPI from './datasources/collection';
+import EventAPI from './datasources/event';
+import KeywordAPI from './datasources/keyword';
+import LandingPageAPI from './datasources/landingPage';
+import NeighborhoodAPI from './datasources/neighborhood';
+import OrganizationAPI from './datasources/organization';
+import PlaceAPI from './datasources/place';
+import schema from './schema';
 
-const OK = "OK";
-const SERVER_IS_NOT_READY = "SERVER_IS_NOT_READY";
+const OK = 'OK';
+const SERVER_IS_NOT_READY = 'SERVER_IS_NOT_READY';
 
 dotenv.config();
 
@@ -29,9 +29,9 @@ Sentry.init({
     // check that sourcemaps are enabled in tsconfig.js
     // read the docs https://docs.sentry.io/platforms/node/typescript/
     new RewriteFrames({
-      root: process.cwd()
-    })
-  ]
+      root: process.cwd(),
+    }),
+  ],
 });
 
 const apolloServerSentryPlugin = {
@@ -41,14 +41,14 @@ const apolloServerSentryPlugin = {
       didEncounterErrors(rc) {
         Sentry.withScope(scope => {
           scope.setTags({
-            graphql: rc.operation.operation || "parse_err",
-            graphqlName: rc.operationName || rc.request.operationName
+            graphql: rc.operation.operation || 'parse_err',
+            graphqlName: rc.operationName || rc.request.operationName,
           });
 
           rc.errors.forEach(error => {
-            if (error.path || error.name !== "GraphQLError") {
+            if (error.path || error.name !== 'GraphQLError') {
               scope.setExtras({
-                path: error.path
+                path: error.path,
               });
               Sentry.captureException(error);
             } else {
@@ -57,9 +57,9 @@ const apolloServerSentryPlugin = {
             }
           });
         });
-      }
+      },
     };
-  }
+  },
 } as ApolloServerPlugin;
 
 const dataSources = () => ({
@@ -69,21 +69,21 @@ const dataSources = () => ({
   landingPageAPI: new LandingPageAPI(),
   neighborhoodAPI: new NeighborhoodAPI(),
   organizationAPI: new OrganizationAPI(),
-  placeAPI: new PlaceAPI()
+  placeAPI: new PlaceAPI(),
 });
 
 (async () => {
   const server = new ApolloServer({
     context: ({ req }) => {
-      const token = req.headers.authorization || "";
+      const token = req.headers.authorization || '';
       return { token };
     },
     dataSources,
     debug:
-      process.env.GRAPHQL_PROXY_DEBUG === "debug" ||
-      process.env.GRAPHQL_PROXY_ENV !== "production",
+      process.env.GRAPHQL_PROXY_DEBUG === 'debug' ||
+      process.env.GRAPHQL_PROXY_ENV !== 'production',
     engine: {
-      apiKey: process.env.GRAPHQL_PROXY_ENGINE_API_KEY
+      apiKey: process.env.GRAPHQL_PROXY_ENGINE_API_KEY,
     },
     formatError: err => {
       return err;
@@ -91,7 +91,7 @@ const dataSources = () => ({
     plugins: [apolloServerSentryPlugin],
     schema,
 
-    validationRules: [depthLimit(10)]
+    validationRules: [depthLimit(10)],
   });
 
   let serverIsReady = false;
@@ -112,15 +112,15 @@ const dataSources = () => ({
 
   app.use(cors());
 
-  app.get("/healthz", (request, response) => {
+  app.get('/healthz', (request, response) => {
     checkIsServerReady(response);
   });
 
-  app.get("/readiness", (request, response) => {
+  app.get('/readiness', (request, response) => {
     checkIsServerReady(response);
   });
 
-  server.applyMiddleware({ app, path: "/proxy/graphql" });
+  server.applyMiddleware({ app, path: '/proxy/graphql' });
 
   const port = process.env.GRAPHQL_PROXY_PORT || 4000;
 

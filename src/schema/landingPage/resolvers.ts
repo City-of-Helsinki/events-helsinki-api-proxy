@@ -1,20 +1,20 @@
-import composeQuery from "../../utils/composeQuery";
-import normalizeKeys from "../../utils/normalizeKeys";
-import normalizeLocalizedObject from "../../utils/normalizeLocalizedObject";
+import composeQuery from '../../utils/composeQuery';
+import normalizeKeys from '../../utils/normalizeKeys';
+import normalizeLocalizedObject from '../../utils/normalizeLocalizedObject';
 
 const normalizeLandingPage = collection => {
   let normalizedLandingPage = normalizeKeys(collection);
   const normalizedKeys = [
-    "title",
-    "description",
-    "buttonText",
-    "buttonUrl",
-    "heroBackgroundImage",
-    "heroBackgroundImageMobile",
-    "heroTopLayerImage",
-    "socialMediaImage",
-    "metaInformation",
-    "pageTitle"
+    'title',
+    'description',
+    'buttonText',
+    'buttonUrl',
+    'heroBackgroundImage',
+    'heroBackgroundImageMobile',
+    'heroTopLayerImage',
+    'socialMediaImage',
+    'metaInformation',
+    'pageTitle',
   ];
 
   normalizedKeys.forEach(item => {
@@ -28,22 +28,22 @@ const normalizeLandingPage = collection => {
 };
 
 const landingPageQueryBuilder = (draft: boolean) => {
-  let query = "";
+  let query = '';
 
   if (draft != null) {
-    query = composeQuery(query, "draft", draft ? "true" : "false");
+    query = composeQuery(query, 'draft', draft ? 'true' : 'false');
   }
 
   return query;
 };
 const landingPagesQueryBuilder = (visibleOnFrontpage: boolean) => {
-  let query = "";
+  let query = '';
 
   if (visibleOnFrontpage != null) {
     query = composeQuery(
       query,
-      "visible_on_frontpage",
-      visibleOnFrontpage ? "true" : "false"
+      'visible_on_frontpage',
+      visibleOnFrontpage ? 'true' : 'false'
     );
   }
 
@@ -65,7 +65,7 @@ const Query = {
     );
 
     return { data: data.map(item => normalizeLandingPage(item)) };
-  }
+  },
 };
 
 export default { Query };

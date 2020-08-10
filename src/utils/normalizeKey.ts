@@ -7,12 +7,12 @@
  */
 
 export default (snakecase: string) => {
-  const str = snakecase.replace("@", "internal_");
+  const str = snakecase.replace('@', 'internal_');
   return (
     str[0].toLowerCase() +
     str
       .substr(1)
       .toLowerCase()
-      .replace(/(_[a-z])/g, $1 => $1.toUpperCase().replace("_", ""))
+      .replace(/(_[a-z])/g, $1 => $1.toUpperCase().replace('_', ''))
   );
 };

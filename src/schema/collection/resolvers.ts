@@ -1,17 +1,17 @@
-import composeQuery from "../../utils/composeQuery";
-import normalizeKeys from "../../utils/normalizeKeys";
-import normalizeLocalizedObject from "../../utils/normalizeLocalizedObject";
+import composeQuery from '../../utils/composeQuery';
+import normalizeKeys from '../../utils/normalizeKeys';
+import normalizeLocalizedObject from '../../utils/normalizeLocalizedObject';
 
 const normalizeCollection = collection => {
   let normalizedCollection = normalizeKeys(collection);
   const normalizedKeys = [
-    "title",
-    "description",
-    "linkText",
-    "linkUrl",
-    "socialMediaDescription",
-    "curatedEventsTitle",
-    "eventListTitle"
+    'title',
+    'description',
+    'linkText',
+    'linkUrl',
+    'socialMediaDescription',
+    'curatedEventsTitle',
+    'eventListTitle',
   ];
 
   normalizedKeys.forEach(item => {
@@ -22,23 +22,23 @@ const normalizeCollection = collection => {
 };
 
 const collectionQueryBuilder = (draft: boolean) => {
-  let query = "";
+  let query = '';
 
   if (draft != null) {
-    query = composeQuery(query, "draft", draft ? "true" : "false");
+    query = composeQuery(query, 'draft', draft ? 'true' : 'false');
   }
 
   return query;
 };
 
 const collectionListQueryBuilder = (visibleOnFrontpage: boolean) => {
-  let query = "";
+  let query = '';
 
   if (visibleOnFrontpage != null) {
     query = composeQuery(
       query,
-      "visible_on_frontpage",
-      visibleOnFrontpage ? "true" : "false"
+      'visible_on_frontpage',
+      visibleOnFrontpage ? 'true' : 'false'
     );
   }
 
@@ -60,9 +60,9 @@ const Query = {
     );
 
     return {
-      data: data.map(collection => normalizeCollection(collection))
+      data: data.map(collection => normalizeCollection(collection)),
     };
-  }
+  },
 };
 
 export default { Query };

@@ -1,4 +1,4 @@
-import { gql } from "apollo-server";
+import { gql } from 'apollo-server';
 
 export const Query = gql`
   type Query {
@@ -45,7 +45,7 @@ const global = [
   Meta,
   Mutation,
   Query,
-  Subscription
+  Subscription,
 ];
 
 export default global;

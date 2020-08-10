@@ -1,4 +1,4 @@
-import DataSource from "./LinkedEventsDataSource";
+import DataSource from './LinkedEventsDataSource';
 
 class PlaceAPI extends DataSource {
   public async getPlaceDetails(id: string) {

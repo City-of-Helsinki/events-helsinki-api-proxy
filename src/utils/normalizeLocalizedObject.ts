@@ -20,7 +20,7 @@ export default (data, key: string) => {
   normalizedData[key] = {
     en: normalizedData[`${key}En`],
     fi: normalizedData[`${key}Fi`],
-    sv: normalizedData[`${key}Sv`]
+    sv: normalizedData[`${key}Sv`],
   };
   delete normalizedData[`${key}En`];
   delete normalizedData[`${key}Fi`];

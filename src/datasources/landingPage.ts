@@ -1,4 +1,4 @@
-import DataSource from "./CmsDataSource";
+import DataSource from './CmsDataSource';
 
 class LandingPageAPI extends DataSource {
   public async getLandingPage(id: string, query?: string) {

@@ -1,28 +1,28 @@
-import normalizeLocalizedObject from "../normalizeLocalizedObject";
+import normalizeLocalizedObject from '../normalizeLocalizedObject';
 
-describe("normalizeLocalizedObject function", () => {
-  it("should normalize certain localized object", () => {
+describe('normalizeLocalizedObject function', () => {
+  it('should normalize certain localized object', () => {
     expect(
       normalizeLocalizedObject(
         {
           eventPrice: {
-            isFree: false
+            isFree: false,
           },
-          eventType: "foo",
-          nameEn: "title en",
-          nameFi: "title fi",
-          nameSv: "title sv"
+          eventType: 'foo',
+          nameEn: 'title en',
+          nameFi: 'title fi',
+          nameSv: 'title sv',
         },
-        "name"
+        'name'
       )
     ).toEqual({
       eventPrice: { isFree: false },
-      eventType: "foo",
+      eventType: 'foo',
       name: {
-        en: "title en",
-        fi: "title fi",
-        sv: "title sv"
-      }
+        en: 'title en',
+        fi: 'title fi',
+        sv: 'title sv',
+      },
     });
   });
 });

@@ -1,4 +1,4 @@
-import DataSource from "./CmsDataSource";
+import DataSource from './CmsDataSource';
 
 class CollectionAPI extends DataSource {
   public async getCollectionDetails(id: string, query?: string) {
