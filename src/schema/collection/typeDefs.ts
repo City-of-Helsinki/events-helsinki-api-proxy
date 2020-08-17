@@ -2,7 +2,7 @@ import { gql } from 'apollo-server';
 
 const typeDefs = gql`
   extend type Query {
-    collectionDetails(id: ID, draft: Boolean): CollectionDetails!
+    collectionDetails(slug: ID, draft: Boolean): CollectionDetails!
     collectionList(visibleOnFrontpage: Boolean): CollectionListResponse!
   }
 
@@ -42,7 +42,7 @@ const typeDefs = gql`
     searchDescription: String
     seoTitle: String
     showInMenus: Boolean
-    slug: String
+    slug: ID!
     socialMediaDescription: LocalizedObject
     title: LocalizedObject!
     urlPath: String

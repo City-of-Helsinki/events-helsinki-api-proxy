@@ -41,7 +41,7 @@ export type CollectionDetails = {
   searchDescription?: Maybe<Scalars['String']>,
   seoTitle?: Maybe<Scalars['String']>,
   showInMenus?: Maybe<Scalars['Boolean']>,
-  slug?: Maybe<Scalars['String']>,
+  slug: Scalars['ID'],
   socialMediaDescription?: Maybe<LocalizedObject>,
   title: LocalizedObject,
   urlPath?: Maybe<Scalars['String']>,

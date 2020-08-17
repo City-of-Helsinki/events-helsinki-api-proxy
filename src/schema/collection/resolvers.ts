@@ -47,9 +47,9 @@ const collectionListQueryBuilder = (visibleOnFrontpage: boolean) => {
 };
 
 const Query = {
-  collectionDetails: async (_, { draft, id }, { dataSources }) => {
+  collectionDetails: async (_, { draft, slug }, { dataSources }) => {
     const data = await dataSources.collectionAPI.getCollectionDetails(
-      id,
+      slug,
       collectionQueryBuilder(draft)
     );
 
