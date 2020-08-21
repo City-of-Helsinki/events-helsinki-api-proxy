@@ -15,6 +15,8 @@ const eventDetailsQueryBuilder = (include: string[]) => {
 const eventListQueryBuilder = ({
   division,
   end,
+  endsAfter,
+  endsBefore,
   inLanguage,
   include,
   isFree,
@@ -28,6 +30,8 @@ const eventListQueryBuilder = ({
   publisher,
   sort,
   start,
+  startsAfter,
+  startsBefore,
   superEvent,
   superEventType,
   text,
@@ -35,6 +39,8 @@ const eventListQueryBuilder = ({
 }: {
   division: string[];
   end: string;
+  endsAfter: string;
+  endsBefore: string;
   inLanguage: string;
   include: string[];
   isFree: boolean;
@@ -48,6 +54,8 @@ const eventListQueryBuilder = ({
   publisher: string;
   sort: string;
   start: string;
+  startsAfter: string;
+  startsBefore: string;
   superEvent: string;
   superEventType: string[];
   text: string;
@@ -61,6 +69,12 @@ const eventListQueryBuilder = ({
   }
   if (end) {
     query = composeQuery(query, 'end', end);
+  }
+  if (endsAfter) {
+    query = composeQuery(query, 'ends_after', endsAfter);
+  }
+  if (endsBefore) {
+    query = composeQuery(query, 'ends_before', endsBefore);
   }
   if (inLanguage) {
     query = composeQuery(query, 'in_language', inLanguage);
@@ -101,6 +115,12 @@ const eventListQueryBuilder = ({
   if (start) {
     query = composeQuery(query, 'start', start);
   }
+  if (startsAfter) {
+    query = composeQuery(query, 'starts_after', startsAfter);
+  }
+  if (startsBefore) {
+    query = composeQuery(query, 'starts_before', startsBefore);
+  }
   if (superEvent) {
     query = composeQuery(query, 'super_event', superEvent);
   }
@@ -130,6 +150,8 @@ const Query = {
     {
       division,
       end,
+      endsAfter,
+      endsBefore,
       include,
       inLanguage,
       isFree,
@@ -143,6 +165,8 @@ const Query = {
       publisher,
       sort,
       start,
+      startsAfter,
+      startsBefore,
       superEvent,
       superEventType,
       text,
@@ -153,6 +177,8 @@ const Query = {
     const query = eventListQueryBuilder({
       division,
       end,
+      endsAfter,
+      endsBefore,
       inLanguage,
       include,
       isFree,
@@ -166,6 +192,8 @@ const Query = {
       publisher,
       sort,
       start,
+      startsAfter,
+      startsBefore,
       superEvent,
       superEventType,
       text,

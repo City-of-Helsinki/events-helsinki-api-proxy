@@ -6,6 +6,8 @@ const typeDefs = gql`
     eventList(
       division: [String]
       end: String
+      endsAfter: String
+      endsBefore: String
       inLanguage: String
       include: [String]
       isFree: Boolean
@@ -19,6 +21,8 @@ const typeDefs = gql`
       publisher: ID
       sort: String
       start: String
+      startsAfter: String
+      startsBefore: String
       superEvent: ID
       superEventType: [String]
       text: String
