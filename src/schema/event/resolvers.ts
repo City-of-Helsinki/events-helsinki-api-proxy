@@ -13,6 +13,7 @@ const eventDetailsQueryBuilder = (include: string[]) => {
 };
 
 const eventListQueryBuilder = ({
+  combinedText,
   division,
   end,
   endsAfter,
@@ -37,6 +38,7 @@ const eventListQueryBuilder = ({
   text,
   translation,
 }: {
+  combinedText: string[];
   division: string[];
   end: string;
   endsAfter: string;
@@ -64,6 +66,9 @@ const eventListQueryBuilder = ({
   // Get details of all needed fields
   let query = '';
 
+  if (combinedText && combinedText.length) {
+    query = composeQuery(query, 'combined_text', combinedText.join(','));
+  }
   if (division && division.length) {
     query = composeQuery(query, 'division', division.join(','));
   }
@@ -148,6 +153,7 @@ const Query = {
   eventList: async (
     _,
     {
+      combinedText,
       division,
       end,
       endsAfter,
@@ -175,6 +181,7 @@ const Query = {
     { dataSources }
   ) => {
     const query = eventListQueryBuilder({
+      combinedText,
       division,
       end,
       endsAfter,
