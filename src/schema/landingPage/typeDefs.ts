@@ -37,11 +37,11 @@ const typeDefs = gql`
     descriptionColor: LocalizedObject
     buttonText: LocalizedObject
     buttonUrl: LocalizedObject
-    heroBackgroundImage: LocalizedObject
-    heroBackgroundImageMobile: LocalizedObject
+    heroBackgroundImage: LocalizedCmsImage
+    heroBackgroundImageMobile: LocalizedCmsImage
     heroBackgroundImageColor: LocalizedObject
-    heroTopLayerImage: LocalizedObject
-    socialMediaImage: LocalizedObject
+    heroTopLayerImage: LocalizedCmsImage
+    socialMediaImage: LocalizedCmsImage
     metaInformation: LocalizedObject
     pageTitle: LocalizedObject
     contentType: Int

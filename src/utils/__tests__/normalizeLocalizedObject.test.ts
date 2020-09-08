@@ -24,5 +24,45 @@ describe('normalizeLocalizedObject function', () => {
         sv: 'title sv',
       },
     });
+    expect(
+      normalizeLocalizedObject(
+        {
+          eventPrice: {
+            isFree: false,
+          },
+          eventType: 'foo',
+          imageEn: {
+            name: 'title en',
+            url: 'www.test.en',
+          },
+          imageFi: {
+            name: 'title fi',
+            url: 'www.test.fi',
+          },
+          imageSv: {
+            name: 'title sv',
+            url: 'www.test.sv',
+          },
+        },
+        'image'
+      )
+    ).toEqual({
+      eventPrice: { isFree: false },
+      eventType: 'foo',
+      image: {
+        en: {
+          name: 'title en',
+          url: 'www.test.en',
+        },
+        fi: {
+          name: 'title fi',
+          url: 'www.test.fi',
+        },
+        sv: {
+          name: 'title sv',
+          url: 'www.test.sv',
+        },
+      },
+    });
   });
 });

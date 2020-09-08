@@ -31,6 +31,21 @@ export const LocalizedObject = gql`
   }
 `;
 
+export const CmsImage = gql`
+  type CmsImage {
+    photographerCredit: String
+    url: String
+  }
+`;
+
+export const LocalizedCmsImage = gql`
+  type LocalizedCmsImage {
+    url: CmsImage
+    sv: CmsImage
+    en: CmsImage
+  }
+`;
+
 export const Meta = gql`
   type Meta {
     count: Int!
@@ -40,7 +55,9 @@ export const Meta = gql`
 `;
 
 const global = [
+  CmsImage,
   InternalIdObject,
+  LocalizedCmsImage,
   LocalizedObject,
   Meta,
   Mutation,
