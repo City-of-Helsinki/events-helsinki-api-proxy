@@ -230,9 +230,9 @@ export type LandingPageResponse = {
 
 export type LocalizedCmsImage = {
    __typename?: 'LocalizedCmsImage',
-  url?: Maybe<CmsImage>,
-  sv?: Maybe<CmsImage>,
   en?: Maybe<CmsImage>,
+  fi?: Maybe<CmsImage>,
+  sv?: Maybe<CmsImage>,
 };
 
 export type LocalizedObject = {

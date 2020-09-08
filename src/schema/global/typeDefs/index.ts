@@ -40,9 +40,9 @@ export const CmsImage = gql`
 
 export const LocalizedCmsImage = gql`
   type LocalizedCmsImage {
-    url: CmsImage
-    sv: CmsImage
     en: CmsImage
+    fi: CmsImage
+    sv: CmsImage
   }
 `;
 
