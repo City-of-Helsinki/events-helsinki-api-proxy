@@ -8,6 +8,12 @@ export type Scalars = {
   Float: number,
 };
 
+export type CmsImage = {
+   __typename?: 'CmsImage',
+  photographerCredit?: Maybe<Scalars['String']>,
+  url?: Maybe<Scalars['String']>,
+};
+
 export type CollectionDetails = {
    __typename?: 'CollectionDetails',
   id: Scalars['ID'],
@@ -25,7 +31,7 @@ export type CollectionDetails = {
   firstPublishedAt?: Maybe<Scalars['String']>,
   goLiveAt?: Maybe<Scalars['String']>,
   hasUnpublishedChanges?: Maybe<Scalars['Boolean']>,
-  heroImage?: Maybe<Scalars['String']>,
+  heroImage?: Maybe<CmsImage>,
   lastPublishedAt?: Maybe<Scalars['String']>,
   latestRevisionCreatedAt?: Maybe<Scalars['String']>,
   linkText?: Maybe<LocalizedObject>,
@@ -204,11 +210,11 @@ export type LandingPage = {
   descriptionColor?: Maybe<LocalizedObject>,
   buttonText?: Maybe<LocalizedObject>,
   buttonUrl?: Maybe<LocalizedObject>,
-  heroBackgroundImage?: Maybe<LocalizedObject>,
-  heroBackgroundImageMobile?: Maybe<LocalizedObject>,
+  heroBackgroundImage?: Maybe<LocalizedCmsImage>,
+  heroBackgroundImageMobile?: Maybe<LocalizedCmsImage>,
   heroBackgroundImageColor?: Maybe<LocalizedObject>,
-  heroTopLayerImage?: Maybe<LocalizedObject>,
-  socialMediaImage?: Maybe<LocalizedObject>,
+  heroTopLayerImage?: Maybe<LocalizedCmsImage>,
+  socialMediaImage?: Maybe<LocalizedCmsImage>,
   metaInformation?: Maybe<LocalizedObject>,
   pageTitle?: Maybe<LocalizedObject>,
   contentType?: Maybe<Scalars['Int']>,
@@ -220,6 +226,13 @@ export type LandingPage = {
 export type LandingPageResponse = {
    __typename?: 'LandingPageResponse',
   data: Array<LandingPage>,
+};
+
+export type LocalizedCmsImage = {
+   __typename?: 'LocalizedCmsImage',
+  en?: Maybe<CmsImage>,
+  fi?: Maybe<CmsImage>,
+  sv?: Maybe<CmsImage>,
 };
 
 export type LocalizedObject = {
