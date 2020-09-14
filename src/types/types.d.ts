@@ -8,6 +8,11 @@ export type Scalars = {
   Float: number,
 };
 
+export type AccessibilityPageResponse = {
+   __typename?: 'AccessibilityPageResponse',
+  data: Array<StaticPage>,
+};
+
 export type CmsImage = {
    __typename?: 'CmsImage',
   photographerCredit?: Maybe<Scalars['String']>,
@@ -342,6 +347,37 @@ export type PlacePosition = {
 export type Query = {
    __typename?: 'Query',
   _empty?: Maybe<Scalars['String']>,
+};
+
+export type StaticPage = {
+   __typename?: 'StaticPage',
+  id: Scalars['ID'],
+  path?: Maybe<Scalars['String']>,
+  depth?: Maybe<Scalars['Int']>,
+  numchild?: Maybe<Scalars['Int']>,
+  title?: Maybe<Scalars['String']>,
+  draftTitle?: Maybe<Scalars['String']>,
+  slug?: Maybe<Scalars['String']>,
+  live?: Maybe<Scalars['Boolean']>,
+  hasUnpublishedChanges?: Maybe<Scalars['Boolean']>,
+  urlPath?: Maybe<Scalars['String']>,
+  seoTitle?: Maybe<Scalars['String']>,
+  showInMenus?: Maybe<Scalars['Boolean']>,
+  searchDescription?: Maybe<Scalars['String']>,
+  goLiveAt?: Maybe<Scalars['String']>,
+  expireAt?: Maybe<Scalars['String']>,
+  expired?: Maybe<Scalars['Boolean']>,
+  locked?: Maybe<Scalars['Boolean']>,
+  lockedAt?: Maybe<Scalars['String']>,
+  firstPublishedAt?: Maybe<Scalars['String']>,
+  lastPublishedAt?: Maybe<Scalars['String']>,
+  latestRevisionCreatedAt?: Maybe<Scalars['String']>,
+  headingSection?: Maybe<LocalizedObject>,
+  contentSection?: Maybe<LocalizedObject>,
+  contentYype?: Maybe<Scalars['Int']>,
+  owner?: Maybe<Scalars['Int']>,
+  lockedBy?: Maybe<Scalars['String']>,
+  liveRevision?: Maybe<Scalars['Int']>,
 };
 
 export type Subscription = {

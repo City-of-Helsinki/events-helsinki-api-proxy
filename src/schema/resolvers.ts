@@ -1,5 +1,6 @@
 import merge from 'lodash/merge';
 
+import accessibilityPage from './accessibilityPage/resolvers';
 import collection from './collection/resolvers';
 import event from './event/resolvers';
 import keyword from './keyword/resolvers';
@@ -9,6 +10,7 @@ import organization from './organization/resolvers';
 import place from './place/resolvers';
 
 const resolvers = merge(
+  accessibilityPage,
   collection,
   event,
   keyword,

@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import depthLimit from 'graphql-depth-limit';
 
+import AccessibilityPageAPI from './datasources/accessibilityPage';
 import CollectionAPI from './datasources/collection';
 import EventAPI from './datasources/event';
 import KeywordAPI from './datasources/keyword';
@@ -63,6 +64,7 @@ const apolloServerSentryPlugin = {
 } as ApolloServerPlugin;
 
 const dataSources = () => ({
+  accessibilityPageAPI: new AccessibilityPageAPI(),
   collectionAPI: new CollectionAPI(),
   eventAPI: new EventAPI(),
   keywordAPI: new KeywordAPI(),

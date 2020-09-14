@@ -1,3 +1,4 @@
+import accessibilityPage from './accessibilityPage/typeDefs';
 import collection from './collection/typeDefs';
 import event from './event/typeDefs';
 import global from './global/typeDefs';
@@ -9,6 +10,7 @@ import place from './place/typeDefs';
 
 const typeDefs = [
   ...global,
+  accessibilityPage,
   collection,
   event,
   keyword,

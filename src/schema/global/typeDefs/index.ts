@@ -54,6 +54,38 @@ export const Meta = gql`
   }
 `;
 
+export const StaticPage = gql`
+  type StaticPage {
+    id: ID!
+    path: String
+    depth: Int
+    numchild: Int
+    title: String
+    draftTitle: String
+    slug: String
+    live: Boolean
+    hasUnpublishedChanges: Boolean
+    urlPath: String
+    seoTitle: String
+    showInMenus: Boolean
+    searchDescription: String
+    goLiveAt: String
+    expireAt: String
+    expired: Boolean
+    locked: Boolean
+    lockedAt: String
+    firstPublishedAt: String
+    lastPublishedAt: String
+    latestRevisionCreatedAt: String
+    headingSection: LocalizedObject
+    contentSection: LocalizedObject
+    contentYype: Int
+    owner: Int
+    lockedBy: String
+    liveRevision: Int
+  }
+`;
+
 const global = [
   CmsImage,
   InternalIdObject,
@@ -62,6 +94,7 @@ const global = [
   Meta,
   Mutation,
   Query,
+  StaticPage,
   Subscription,
 ];
 
