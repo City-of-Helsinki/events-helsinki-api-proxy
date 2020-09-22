@@ -1,15 +1,18 @@
 import normalizeKeys from '../../utils/normalizeKeys';
 import normalizeLocalizedObject from '../../utils/normalizeLocalizedObject';
 
-const normalizeAccessibilityPage = collection => {
-  let normalizedCollection = normalizeKeys(collection);
+const normalizeAccessibilityPage = accessibilityPage => {
+  let normalizedAccessibilityPage = normalizeKeys(accessibilityPage);
   const normalizedKeys = ['headingSection', 'contentSection'];
 
   normalizedKeys.forEach(item => {
-    normalizedCollection = normalizeLocalizedObject(normalizedCollection, item);
+    normalizedAccessibilityPage = normalizeLocalizedObject(
+      normalizedAccessibilityPage,
+      item
+    );
   });
 
-  return normalizedCollection;
+  return normalizedAccessibilityPage;
 };
 
 const Query = {

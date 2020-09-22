@@ -8,8 +8,13 @@ export type Scalars = {
   Float: number,
 };
 
-export type AccessibilityPageResponse = {
-   __typename?: 'AccessibilityPageResponse',
+export type AboutPagesResponse = {
+   __typename?: 'AboutPagesResponse',
+  data: Array<StaticPage>,
+};
+
+export type AccessibilityPagesResponse = {
+   __typename?: 'AccessibilityPagesResponse',
   data: Array<StaticPage>,
 };
 

@@ -2,10 +2,10 @@ import { gql } from 'apollo-server';
 
 const typeDefs = gql`
   extend type Query {
-    accessibilityPages: AccessibilityPagesResponse!
+    aboutPages: AboutPagesResponse!
   }
 
-  type AccessibilityPagesResponse {
+  type AboutPagesResponse {
     data: [StaticPage!]!
   }
 `;
