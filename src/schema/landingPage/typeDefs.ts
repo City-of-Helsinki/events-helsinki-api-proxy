@@ -32,9 +32,8 @@ const typeDefs = gql`
     lastPublishedAt: String
     latestRevisionCreatedAt: String
     title: LocalizedObject
-    titleColor: LocalizedObject
     description: LocalizedObject
-    descriptionColor: LocalizedObject
+    titleAndDescriptionColor: LocalizedObject
     buttonText: LocalizedObject
     buttonUrl: LocalizedObject
     heroBackgroundImage: LocalizedCmsImage

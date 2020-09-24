@@ -6,9 +6,8 @@ const normalizeLandingPage = collection => {
   let normalizedLandingPage = normalizeKeys(collection);
   const normalizedKeys = [
     'title',
-    'titleColor',
     'description',
-    'descriptionColor',
+    'titleAndDescriptionColor',
     'buttonText',
     'buttonUrl',
     'heroBackgroundImage',
