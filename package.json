@@ -8,7 +8,7 @@
     "build": "NODE_ENV=production webpack --progress --mode production --config config/webpack.config.js",
     "start": "nodemon",
     "start:prod": "node build",
-    "test": "NODE_ENV=test PORT=0 jest",
+    "test": "jest --watchAll",
     "codegen": "gql-gen",
     "lint": "eslint --ext js,ts,tsx src",
     "format-code": "eslint --ext js,ts,tsx src --fix"
@@ -27,13 +27,13 @@
     "graphql-depth-limit": "^1.1.0",
     "lodash": "^4.17.15",
     "promise": "^8.1.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.8.3"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.8.1",
     "@graphql-codegen/typescript": "^1.8.1",
     "@graphql-codegen/typescript-operations": "^1.8.1",
-    "@types/jest": "^24.0.19",
+    "@types/jest": "^25.2.1",
     "@types/lodash": "^4.14.144",
     "@typescript-eslint/eslint-plugin": "^2.5.0",
     "@typescript-eslint/parser": "^2.5.0",
@@ -49,19 +49,15 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^1.7",
     "eslint-plugin-simple-import-sort": "^4.0.0",
-    "jest": "24.9.0",
+    "jest": "^25.3.0",
     "nodemon": "^1.19.4",
     "path": "^0.12.7",
     "prettier": "^1.18.2",
+    "ts-jest": "^25.3.1",
     "ts-loader": "^6.2.1",
     "ts-node": "^8.4.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
     "webpack-node-externals": "^1.7.2"
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "./test/jest.setup.js"
-    ]
   }
 }

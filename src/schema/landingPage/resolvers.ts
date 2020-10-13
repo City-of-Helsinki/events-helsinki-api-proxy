@@ -1,34 +1,73 @@
-import normalizeKeys from "../../utils/normalizeKeys";
-import normalizeLocalizedObject from "../../utils/normalizeLocalizedObject";
+import composeQuery from '../../utils/composeQuery';
+import normalizeKeys from '../../utils/normalizeKeys';
+import normalizeLocalizedObject from '../../utils/normalizeLocalizedObject';
 
 const normalizeLandingPage = collection => {
   let normalizedLandingPage = normalizeKeys(collection);
   const normalizedKeys = [
-    { key: "title", normalizedKey: "title" },
-    { key: "description", normalizedKey: "description" },
-    { key: "buttonText", normalizedKey: "buttonText" },
-    { key: "buttonUrl", normalizedKey: "buttonUrl" },
-    { key: "metaInformation", normalizedKey: "metaInformation" },
-    { key: "pageTitle", normalizedKey: "pageTitle" }
+    'title',
+    'description',
+    'titleAndDescriptionColor',
+    'buttonText',
+    'buttonUrl',
+    'heroBackgroundImage',
+    'heroBackgroundImageMobile',
+    'heroBackgroundImageColor',
+    'heroTopLayerImage',
+    'socialMediaImage',
+    'metaInformation',
+    'pageTitle',
   ];
 
   normalizedKeys.forEach(item => {
     normalizedLandingPage = normalizeLocalizedObject(
       normalizedLandingPage,
-      item.key,
-      item.normalizedKey
+      item
     );
   });
 
   return normalizedLandingPage;
 };
 
-const Query = {
-  landingPage: async (_, {}, { dataSources }) => {
-    const data = await dataSources.landingPageAPI.getLandingPage();
+const landingPageQueryBuilder = (draft: boolean) => {
+  let query = '';
 
-    return normalizeLandingPage(data[0]);
+  if (draft != null) {
+    query = composeQuery(query, 'draft', draft ? 'true' : 'false');
   }
+
+  return query;
+};
+const landingPagesQueryBuilder = (visibleOnFrontpage: boolean) => {
+  let query = '';
+
+  if (visibleOnFrontpage != null) {
+    query = composeQuery(
+      query,
+      'visible_on_frontpage',
+      visibleOnFrontpage ? 'true' : 'false'
+    );
+  }
+
+  return query;
+};
+
+const Query = {
+  landingPage: async (_, { draft, id }, { dataSources }) => {
+    const data = await dataSources.landingPageAPI.getLandingPage(
+      id,
+      landingPageQueryBuilder(draft)
+    );
+
+    return normalizeLandingPage(data);
+  },
+  landingPages: async (_, { visibleOnFrontpage }, { dataSources }) => {
+    const data = await dataSources.landingPageAPI.getLandingPages(
+      landingPagesQueryBuilder(visibleOnFrontpage)
+    );
+
+    return { data: data.map(item => normalizeLandingPage(item)) };
+  },
 };
 
 export default { Query };

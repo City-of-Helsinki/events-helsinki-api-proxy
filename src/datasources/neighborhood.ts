@@ -1,4 +1,4 @@
-import DataSource from "./MapOpenDataDataSource";
+import DataSource from './MapOpenDataDataSource';
 
 class NeighborhoodAPI extends DataSource {
   public async getNeighborhoodList() {

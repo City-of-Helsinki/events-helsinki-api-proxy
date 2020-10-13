@@ -1,6 +1,6 @@
-import memoize from "lodash/memoize";
+import memoize from 'lodash/memoize';
 
-import normalizeKey from "./normalizeKey";
+import normalizeKey from './normalizeKey';
 
 const memoizedNormalizeKey = memoize(normalizeKey);
 
@@ -29,7 +29,7 @@ const normalizeKeys = value => {
     return value.map(normalizeKeys);
   }
 
-  if (value && typeof value === "object" && value.constructor === Object) {
+  if (value && typeof value === 'object' && value.constructor === Object) {
     const obj = {};
     const keys = Object.keys(value);
     const len = keys.length;

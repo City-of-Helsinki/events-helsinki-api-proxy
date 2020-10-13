@@ -1,8 +1,13 @@
-import { gql } from "apollo-server";
+import { gql } from 'apollo-server';
 
 const typeDefs = gql`
   extend type Query {
-    landingPage: LandingPage!
+    landingPage(draft: Boolean, id: ID!): LandingPage!
+    landingPages(visibleOnFrontpage: Boolean): LandingPagesResponse!
+  }
+
+  type LandingPagesResponse {
+    data: [LandingPage!]!
   }
 
   type LandingPage {
@@ -28,8 +33,14 @@ const typeDefs = gql`
     latestRevisionCreatedAt: String
     title: LocalizedObject
     description: LocalizedObject
+    titleAndDescriptionColor: LocalizedObject
     buttonText: LocalizedObject
     buttonUrl: LocalizedObject
+    heroBackgroundImage: LocalizedCmsImage
+    heroBackgroundImageMobile: LocalizedCmsImage
+    heroBackgroundImageColor: LocalizedObject
+    heroTopLayerImage: LocalizedCmsImage
+    socialMediaImage: LocalizedCmsImage
     metaInformation: LocalizedObject
     pageTitle: LocalizedObject
     contentType: Int

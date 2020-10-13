@@ -8,27 +8,44 @@ export type Scalars = {
   Float: number,
 };
 
+export type AboutPagesResponse = {
+   __typename?: 'AboutPagesResponse',
+  data: Array<StaticPage>,
+};
+
+export type AccessibilityPagesResponse = {
+   __typename?: 'AccessibilityPagesResponse',
+  data: Array<StaticPage>,
+};
+
+export type CmsImage = {
+   __typename?: 'CmsImage',
+  photographerCredit?: Maybe<Scalars['String']>,
+  url?: Maybe<Scalars['String']>,
+};
+
 export type CollectionDetails = {
    __typename?: 'CollectionDetails',
   id: Scalars['ID'],
   boxColor?: Maybe<Scalars['String']>,
   contentType?: Maybe<Scalars['Int']>,
   curatedEvents: Array<Scalars['String']>,
-  curatedEventsTitle: LocalizedObject,
+  curatedEventsTitle?: Maybe<LocalizedObject>,
   depth?: Maybe<Scalars['Int']>,
-  description: LocalizedObject,
+  description?: Maybe<LocalizedObject>,
   draftTitle?: Maybe<Scalars['String']>,
-  eventListQuery?: Maybe<Scalars['String']>,
-  eventListTitle: LocalizedObject,
+  eventListQuery?: Maybe<LocalizedObject>,
+  eventListTitle?: Maybe<LocalizedObject>,
   expireAt?: Maybe<Scalars['String']>,
   expired?: Maybe<Scalars['Boolean']>,
   firstPublishedAt?: Maybe<Scalars['String']>,
   goLiveAt?: Maybe<Scalars['String']>,
   hasUnpublishedChanges?: Maybe<Scalars['Boolean']>,
+  heroImage?: Maybe<CmsImage>,
   lastPublishedAt?: Maybe<Scalars['String']>,
   latestRevisionCreatedAt?: Maybe<Scalars['String']>,
-  linkText: LocalizedObject,
-  linkUrl: LocalizedObject,
+  linkText?: Maybe<LocalizedObject>,
+  linkUrl?: Maybe<LocalizedObject>,
   live?: Maybe<Scalars['Boolean']>,
   liveRevision?: Maybe<Scalars['Int']>,
   locked?: Maybe<Scalars['Boolean']>,
@@ -40,9 +57,8 @@ export type CollectionDetails = {
   searchDescription?: Maybe<Scalars['String']>,
   seoTitle?: Maybe<Scalars['String']>,
   showInMenus?: Maybe<Scalars['Boolean']>,
-  slug?: Maybe<Scalars['String']>,
+  slug: Scalars['ID'],
   socialMediaDescription?: Maybe<LocalizedObject>,
-  subtitles: LocalizedObject,
   title: LocalizedObject,
   urlPath?: Maybe<Scalars['String']>,
 };
@@ -121,7 +137,7 @@ export type ExternalLink = {
 
 export type Image = {
    __typename?: 'Image',
-  id: Scalars['ID'],
+  id?: Maybe<Scalars['ID']>,
   license?: Maybe<Scalars['String']>,
   createdTime?: Maybe<Scalars['String']>,
   lastModifiedTime?: Maybe<Scalars['String']>,
@@ -131,7 +147,7 @@ export type Image = {
   photographerName?: Maybe<Scalars['String']>,
   dataSource?: Maybe<Scalars['String']>,
   publisher?: Maybe<Scalars['String']>,
-  internalId?: Maybe<Scalars['String']>,
+  internalId: Scalars['String'],
   internalContext?: Maybe<Scalars['String']>,
   internalType?: Maybe<Scalars['String']>,
 };
@@ -153,9 +169,10 @@ export type InternalIdObject = {
 
 export type Keyword = {
    __typename?: 'Keyword',
-  id?: Maybe<Scalars['String']>,
+  id?: Maybe<Scalars['ID']>,
   altLabels?: Maybe<Array<Maybe<Scalars['String']>>>,
   createdTime?: Maybe<Scalars['String']>,
+  hasUpcomingEvents?: Maybe<Scalars['Boolean']>,
   lastModifiedTime?: Maybe<Scalars['String']>,
   aggregate?: Maybe<Scalars['Boolean']>,
   deprecated?: Maybe<Scalars['Boolean']>,
@@ -199,14 +216,32 @@ export type LandingPage = {
   latestRevisionCreatedAt?: Maybe<Scalars['String']>,
   title?: Maybe<LocalizedObject>,
   description?: Maybe<LocalizedObject>,
+  titleAndDescriptionColor?: Maybe<LocalizedObject>,
   buttonText?: Maybe<LocalizedObject>,
   buttonUrl?: Maybe<LocalizedObject>,
+  heroBackgroundImage?: Maybe<LocalizedCmsImage>,
+  heroBackgroundImageMobile?: Maybe<LocalizedCmsImage>,
+  heroBackgroundImageColor?: Maybe<LocalizedObject>,
+  heroTopLayerImage?: Maybe<LocalizedCmsImage>,
+  socialMediaImage?: Maybe<LocalizedCmsImage>,
   metaInformation?: Maybe<LocalizedObject>,
   pageTitle?: Maybe<LocalizedObject>,
   contentType?: Maybe<Scalars['Int']>,
   owner?: Maybe<Scalars['Int']>,
   lockedBy?: Maybe<Scalars['Int']>,
   liveRevision?: Maybe<Scalars['Int']>,
+};
+
+export type LandingPagesResponse = {
+   __typename?: 'LandingPagesResponse',
+  data: Array<LandingPage>,
+};
+
+export type LocalizedCmsImage = {
+   __typename?: 'LocalizedCmsImage',
+  en?: Maybe<CmsImage>,
+  fi?: Maybe<CmsImage>,
+  sv?: Maybe<CmsImage>,
 };
 
 export type LocalizedObject = {
@@ -250,7 +285,7 @@ export type Offer = {
 
 export type OrganizationDetails = {
    __typename?: 'OrganizationDetails',
-  id: Scalars['ID'],
+  id?: Maybe<Scalars['ID']>,
   dataSource?: Maybe<Scalars['String']>,
   classification?: Maybe<Scalars['String']>,
   name?: Maybe<Scalars['String']>,
@@ -263,7 +298,7 @@ export type OrganizationDetails = {
   lastModifiedTime?: Maybe<Scalars['String']>,
   isAffiliated: Scalars['Boolean'],
   replacedBy?: Maybe<Scalars['String']>,
-  internalId?: Maybe<Scalars['String']>,
+  internalId: Scalars['String'],
   internalContext?: Maybe<Scalars['String']>,
   internalType?: Maybe<Scalars['String']>,
 };
@@ -272,6 +307,7 @@ export type Place = {
    __typename?: 'Place',
   id?: Maybe<Scalars['ID']>,
   divisions?: Maybe<Array<Division>>,
+  hasUpcomingEvents?: Maybe<Scalars['Boolean']>,
   createdTime?: Maybe<Scalars['String']>,
   lastModifiedTime?: Maybe<Scalars['String']>,
   customData?: Maybe<Scalars['String']>,
@@ -295,7 +331,7 @@ export type Place = {
   addressLocality?: Maybe<LocalizedObject>,
   streetAddress?: Maybe<LocalizedObject>,
   infoUrl?: Maybe<LocalizedObject>,
-  internalId?: Maybe<Scalars['String']>,
+  internalId: Scalars['String'],
   internalContext?: Maybe<Scalars['String']>,
   internalType?: Maybe<Scalars['String']>,
 };
@@ -315,6 +351,37 @@ export type PlacePosition = {
 export type Query = {
    __typename?: 'Query',
   _empty?: Maybe<Scalars['String']>,
+};
+
+export type StaticPage = {
+   __typename?: 'StaticPage',
+  id: Scalars['ID'],
+  path?: Maybe<Scalars['String']>,
+  depth?: Maybe<Scalars['Int']>,
+  numchild?: Maybe<Scalars['Int']>,
+  title?: Maybe<Scalars['String']>,
+  draftTitle?: Maybe<Scalars['String']>,
+  slug?: Maybe<Scalars['String']>,
+  live?: Maybe<Scalars['Boolean']>,
+  hasUnpublishedChanges?: Maybe<Scalars['Boolean']>,
+  urlPath?: Maybe<Scalars['String']>,
+  seoTitle?: Maybe<Scalars['String']>,
+  showInMenus?: Maybe<Scalars['Boolean']>,
+  searchDescription?: Maybe<Scalars['String']>,
+  goLiveAt?: Maybe<Scalars['String']>,
+  expireAt?: Maybe<Scalars['String']>,
+  expired?: Maybe<Scalars['Boolean']>,
+  locked?: Maybe<Scalars['Boolean']>,
+  lockedAt?: Maybe<Scalars['String']>,
+  firstPublishedAt?: Maybe<Scalars['String']>,
+  lastPublishedAt?: Maybe<Scalars['String']>,
+  latestRevisionCreatedAt?: Maybe<Scalars['String']>,
+  headingSection?: Maybe<LocalizedObject>,
+  contentSection?: Maybe<LocalizedObject>,
+  contentYype?: Maybe<Scalars['Int']>,
+  owner?: Maybe<Scalars['Int']>,
+  lockedBy?: Maybe<Scalars['String']>,
+  liveRevision?: Maybe<Scalars['Int']>,
 };
 
 export type Subscription = {

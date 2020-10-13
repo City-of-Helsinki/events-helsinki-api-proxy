@@ -1,12 +1,12 @@
-import DataSource from "./CmsDataSource";
+import DataSource from './CmsDataSource';
 
 class CollectionAPI extends DataSource {
-  public async getCollectionDetails(id: string) {
-    return this.get(`collections/${id}`);
+  public async getCollectionDetails(slug: string, query?: string) {
+    return this.get(`collections/${slug}${query}`);
   }
 
-  public async getCollectionList() {
-    return this.get("collections");
+  public async getCollectionList(query: string) {
+    return this.get(`collections${query}`);
   }
 }
 

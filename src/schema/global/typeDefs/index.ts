@@ -1,4 +1,4 @@
-import { gql } from "apollo-server";
+import { gql } from 'apollo-server';
 
 export const Query = gql`
   type Query {
@@ -31,6 +31,21 @@ export const LocalizedObject = gql`
   }
 `;
 
+export const CmsImage = gql`
+  type CmsImage {
+    photographerCredit: String
+    url: String
+  }
+`;
+
+export const LocalizedCmsImage = gql`
+  type LocalizedCmsImage {
+    en: CmsImage
+    fi: CmsImage
+    sv: CmsImage
+  }
+`;
+
 export const Meta = gql`
   type Meta {
     count: Int!
@@ -39,13 +54,48 @@ export const Meta = gql`
   }
 `;
 
+export const StaticPage = gql`
+  type StaticPage {
+    id: ID!
+    path: String
+    depth: Int
+    numchild: Int
+    title: String
+    draftTitle: String
+    slug: String
+    live: Boolean
+    hasUnpublishedChanges: Boolean
+    urlPath: String
+    seoTitle: String
+    showInMenus: Boolean
+    searchDescription: String
+    goLiveAt: String
+    expireAt: String
+    expired: Boolean
+    locked: Boolean
+    lockedAt: String
+    firstPublishedAt: String
+    lastPublishedAt: String
+    latestRevisionCreatedAt: String
+    headingSection: LocalizedObject
+    contentSection: LocalizedObject
+    contentYype: Int
+    owner: Int
+    lockedBy: String
+    liveRevision: Int
+  }
+`;
+
 const global = [
+  CmsImage,
   InternalIdObject,
+  LocalizedCmsImage,
   LocalizedObject,
   Meta,
   Mutation,
   Query,
-  Subscription
+  StaticPage,
+  Subscription,
 ];
 
 export default global;

@@ -1,46 +1,66 @@
-import normalizeKeys from "../../utils/normalizeKeys";
+import composeQuery from '../../utils/composeQuery';
+import normalizeKeys from '../../utils/normalizeKeys';
 
-const placeListQueryBuilder = (
-  dataSource: string,
-  divisions: string[],
-  page: number,
-  pageSize: number,
-  showAllPlaces: boolean,
-  sort: string,
-  text: string
-) => {
+const placeListQueryBuilder = ({
+  dataSource,
+  divisions,
+  hasUpcomingEvents,
+  page,
+  pageSize,
+  showAllPlaces,
+  sort,
+  text,
+}: {
+  dataSource: string;
+  divisions: string[];
+  hasUpcomingEvents: boolean;
+  page: number;
+  pageSize: number;
+  showAllPlaces: boolean;
+  sort: string;
+  text: string;
+}) => {
   // Get details of all needed fields
-  let query = "";
+  let query = '';
 
   if (dataSource) {
-    query = query.concat(query ? "&data_source=" : "?data_source=", dataSource);
+    query = composeQuery(query, 'data_source', dataSource);
   }
+
+  if (hasUpcomingEvents != null) {
+    query = composeQuery(
+      query,
+      'has_upcoming_events',
+      hasUpcomingEvents ? 'true' : 'false'
+    );
+  }
+
   if (divisions && divisions.length) {
-    query = query.concat(
-      query ? "&division=" : "?division=",
-      divisions.join(",")
-    );
+    query = composeQuery(query, 'division', divisions.join(','));
   }
+
   if (page) {
-    query = query.concat(query ? "&page=" : "?page=", page.toString());
+    query = composeQuery(query, 'page', page.toString());
   }
+
   if (pageSize) {
-    query = query.concat(
-      query ? "&page_size=" : "?page_size=",
-      pageSize.toString()
+    query = composeQuery(query, 'page_size', pageSize.toString());
+  }
+
+  if (showAllPlaces != null) {
+    query = composeQuery(
+      query,
+      'show_all_places',
+      showAllPlaces ? 'true' : 'false'
     );
   }
-  if (showAllPlaces) {
-    query = query.concat(
-      query ? "&show_all_places=" : "?show_all_places=",
-      "true"
-    );
-  }
+
   if (sort) {
-    query = query.concat(query ? "&sort=" : "?sort=", sort);
+    query = composeQuery(query, 'sort', sort);
   }
+
   if (text) {
-    query = query.concat(query ? "&text=" : "?text=", text);
+    query = composeQuery(query, 'text', text);
   }
 
   return query;
@@ -48,31 +68,42 @@ const placeListQueryBuilder = (
 
 const Query = {
   placeDetails: async (_, { id }, { dataSources }) => {
-    return dataSources.placeAPI.getPlaceDetails(id);
+    const data = await dataSources.placeAPI.getPlaceDetails(id);
+    return normalizeKeys(data);
   },
   placeList: async (
     _,
-    { dataSource, divisions, page, pageSize, showAllPlaces, sort, text },
-    { dataSources }
-  ) => {
-    const query = placeListQueryBuilder(
+    {
       dataSource,
       divisions,
+      hasUpcomingEvents,
       page,
       pageSize,
       showAllPlaces,
       sort,
-      text
-    );
+      text,
+    },
+    { dataSources }
+  ) => {
+    const query = placeListQueryBuilder({
+      dataSource,
+      divisions,
+      hasUpcomingEvents,
+      page,
+      pageSize,
+      showAllPlaces,
+      sort,
+      text,
+    });
     const data = await dataSources.placeAPI.getPlaceList(query);
 
     return {
       data: data.data.map(place => {
         return normalizeKeys(place);
       }),
-      meta: data.meta
+      meta: data.meta,
     };
-  }
+  },
 };
 
 export default { Query };

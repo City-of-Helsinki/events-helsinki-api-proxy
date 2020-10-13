@@ -15,12 +15,12 @@
  *    }
  * }
  */
-export default (data, key: string, normalizedKey: string) => {
+export default (data, key: string) => {
   const normalizedData = { ...data };
-  normalizedData[normalizedKey] = {
+  normalizedData[key] = {
     en: normalizedData[`${key}En`],
     fi: normalizedData[`${key}Fi`],
-    sv: normalizedData[`${key}Sv`]
+    sv: normalizedData[`${key}Sv`],
   };
   delete normalizedData[`${key}En`];
   delete normalizedData[`${key}Fi`];

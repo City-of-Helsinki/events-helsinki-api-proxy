@@ -1,39 +1,60 @@
-import normalizeKeys from "../../utils/normalizeKeys";
+import composeQuery from '../../utils/composeQuery';
+import normalizeKeys from '../../utils/normalizeKeys';
 
-const keywordListQueryBuilder = (
-  dataSource: string,
-  page: number,
-  pageSize: number,
-  showAllKeywords: boolean,
-  sort: string,
-  text: string
-) => {
+const keywordListQueryBuilder = ({
+  dataSource,
+  hasUpcomingEvents,
+  page,
+  pageSize,
+  showAllKeywords,
+  sort,
+  text,
+}: {
+  dataSource: string;
+  hasUpcomingEvents: boolean;
+  page: number;
+  pageSize: number;
+  showAllKeywords: boolean;
+  sort: string;
+  text: string;
+}) => {
   // Get details of all needed fields
-  let query = "";
+  let query = '';
 
   if (dataSource) {
-    query = query.concat(query ? "&data_source=" : "?data_source=", dataSource);
+    query = composeQuery(query, 'data_source', dataSource);
   }
+
+  if (hasUpcomingEvents != null) {
+    query = composeQuery(
+      query,
+      'has_upcoming_events',
+      hasUpcomingEvents ? 'true' : 'false'
+    );
+  }
+
   if (page) {
-    query = query.concat(query ? "&page=" : "?page=", page.toString());
+    query = composeQuery(query, 'page', page.toString());
   }
+
   if (pageSize) {
-    query = query.concat(
-      query ? "&page_size=" : "?page_size=",
-      pageSize.toString()
+    query = composeQuery(query, 'page_size', pageSize.toString());
+  }
+
+  if (showAllKeywords != null) {
+    query = composeQuery(
+      query,
+      'show_all_keywords',
+      showAllKeywords ? 'true' : 'false'
     );
   }
-  if (showAllKeywords) {
-    query = query.concat(
-      query ? "&show_all_keywords=" : "?show_all_keywords=",
-      "true"
-    );
-  }
+
   if (sort) {
-    query = query.concat(query ? "&sort=" : "?sort=", sort);
+    query = composeQuery(query, 'sort', sort);
   }
+
   if (text) {
-    query = query.concat(query ? "&text=" : "?text=", text);
+    query = composeQuery(query, 'text', text);
   }
 
   return query;
@@ -41,30 +62,40 @@ const keywordListQueryBuilder = (
 
 const Query = {
   keywordDetails: async (_, { id }, { dataSources }) => {
-    return dataSources.keywordAPI.getKeywordDetails(id);
+    const data = await dataSources.keywordAPI.getKeywordDetails(id);
+    return normalizeKeys(data);
   },
   keywordList: async (
     _,
-    { dataSource, page, pageSize, showAllKeywords, sort, text },
-    { dataSources }
-  ) => {
-    const query = keywordListQueryBuilder(
+    {
       dataSource,
+      hasUpcomingEvents,
       page,
       pageSize,
       showAllKeywords,
       sort,
-      text
-    );
+      text,
+    },
+    { dataSources }
+  ) => {
+    const query = keywordListQueryBuilder({
+      dataSource,
+      hasUpcomingEvents,
+      page,
+      pageSize,
+      showAllKeywords,
+      sort,
+      text,
+    });
     const data = await dataSources.keywordAPI.getKeywordList(query);
 
     return {
       data: data.data.map(keyword => {
         return normalizeKeys(keyword);
       }),
-      meta: data.meta
+      meta: data.meta,
     };
-  }
+  },
 };
 
 export default { Query };

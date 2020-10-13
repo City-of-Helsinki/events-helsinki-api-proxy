@@ -1,92 +1,142 @@
-import Promise from "promise";
+import Promise from 'promise';
 
-import normalizeKeys from "../../utils/normalizeKeys";
-
-const composeQuery = (query: string, key: string, value: string) => {
-  return query.concat(`${query ? "&" : "?"}${key}=`, value);
-};
+import composeQuery from '../../utils/composeQuery';
+import normalizeKeys from '../../utils/normalizeKeys';
 
 const eventDetailsQueryBuilder = (include: string[]) => {
-  let query = "";
+  let query = '';
 
   if (include && include.length) {
-    query = composeQuery(query, "include", include.join(","));
+    query = composeQuery(query, 'include', include.join(','));
   }
   return query;
 };
 
-const eventListQueryBuilder = (
-  divisions: string[],
-  endDate: string,
-  include: string[],
-  inLanguage: string,
-  isFree: boolean,
-  keywords: string[],
-  language: string,
-  locations: string[],
-  page: number,
-  pageSize: number,
-  publisher: string,
-  sort: string,
-  startDate: string,
-  superEvent: string,
-  superEventType: string[],
-  text: string,
-  translation: string
-) => {
+const eventListQueryBuilder = ({
+  combinedText,
+  division,
+  end,
+  endsAfter,
+  endsBefore,
+  inLanguage,
+  include,
+  isFree,
+  keywordAnd,
+  keywordNot,
+  keyword,
+  language,
+  location,
+  page,
+  pageSize,
+  publisher,
+  sort,
+  start,
+  startsAfter,
+  startsBefore,
+  superEvent,
+  superEventType,
+  text,
+  translation,
+}: {
+  combinedText: string[];
+  division: string[];
+  end: string;
+  endsAfter: string;
+  endsBefore: string;
+  inLanguage: string;
+  include: string[];
+  isFree: boolean;
+  keywordAnd: string[];
+  keywordNot: string[];
+  keyword: string[];
+  language: string;
+  location: string[];
+  page: number;
+  pageSize: number;
+  publisher: string;
+  sort: string;
+  start: string;
+  startsAfter: string;
+  startsBefore: string;
+  superEvent: string;
+  superEventType: string[];
+  text: string;
+  translation: string;
+}) => {
   // Get details of all needed fields
-  let query = "";
+  let query = '';
 
-  if (include && include.length) {
-    query = composeQuery(query, "include", include.join(","));
+  if (combinedText && combinedText.length) {
+    query = composeQuery(query, 'combined_text', combinedText.join(','));
   }
-  if (divisions && divisions.length) {
-    query = composeQuery(query, "division", divisions.join(","));
+  if (division && division.length) {
+    query = composeQuery(query, 'division', division.join(','));
   }
-  if (endDate) {
-    query = composeQuery(query, "end", endDate);
+  if (end) {
+    query = composeQuery(query, 'end', end);
+  }
+  if (endsAfter) {
+    query = composeQuery(query, 'ends_after', endsAfter);
+  }
+  if (endsBefore) {
+    query = composeQuery(query, 'ends_before', endsBefore);
   }
   if (inLanguage) {
-    query = composeQuery(query, "in_language", inLanguage);
+    query = composeQuery(query, 'in_language', inLanguage);
+  }
+  if (include && include.length) {
+    query = composeQuery(query, 'include', include.join(','));
   }
   if (isFree != null) {
-    query = composeQuery(query, "is_free", isFree ? "true" : "false");
+    query = composeQuery(query, 'is_free', isFree ? 'true' : 'false');
   }
-  if (keywords && keywords.length) {
-    query = composeQuery(query, "keyword", keywords.join(","));
+  if (keyword && keyword.length) {
+    query = composeQuery(query, 'keyword', keyword.join(','));
+  }
+  if (keywordAnd && keywordAnd.length) {
+    query = composeQuery(query, 'keyword_AND', keywordAnd.join(','));
+  }
+  if (keywordNot && keywordNot.length) {
+    query = composeQuery(query, 'keyword!', keywordNot.join(','));
   }
   if (language) {
-    query = composeQuery(query, "language", language);
+    query = composeQuery(query, 'language', language);
   }
-  if (locations && locations.length) {
-    query = composeQuery(query, "location", locations.join(","));
+  if (location && location.length) {
+    query = composeQuery(query, 'location', location.join(','));
   }
   if (page) {
-    query = composeQuery(query, "page", page.toString());
+    query = composeQuery(query, 'page', page.toString());
   }
   if (pageSize) {
-    query = composeQuery(query, "page_size", pageSize.toString());
+    query = composeQuery(query, 'page_size', pageSize.toString());
   }
   if (publisher) {
-    query = composeQuery(query, "publisher", publisher);
+    query = composeQuery(query, 'publisher', publisher);
   }
   if (sort) {
-    query = composeQuery(query, "sort", sort);
+    query = composeQuery(query, 'sort', sort);
   }
-  if (startDate) {
-    query = composeQuery(query, "start", startDate);
+  if (start) {
+    query = composeQuery(query, 'start', start);
+  }
+  if (startsAfter) {
+    query = composeQuery(query, 'starts_after', startsAfter);
+  }
+  if (startsBefore) {
+    query = composeQuery(query, 'starts_before', startsBefore);
   }
   if (superEvent) {
-    query = composeQuery(query, "super_event", superEvent);
+    query = composeQuery(query, 'super_event', superEvent);
   }
   if (superEventType && superEventType.length) {
-    query = composeQuery(query, "super_event_type", superEventType.join(","));
+    query = composeQuery(query, 'super_event_type', superEventType.join(','));
   }
   if (text) {
-    query = composeQuery(query, "text", text);
+    query = composeQuery(query, 'text', text);
   }
   if (translation) {
-    query = composeQuery(query, "translation", translation);
+    query = composeQuery(query, 'translation', translation);
   }
 
   return query;
@@ -103,52 +153,66 @@ const Query = {
   eventList: async (
     _,
     {
-      divisions,
-      endDate,
+      combinedText,
+      division,
+      end,
+      endsAfter,
+      endsBefore,
       include,
       inLanguage,
       isFree,
-      keywords,
+      keyword,
+      keywordAnd,
+      keywordNot,
       language,
-      locations,
+      location,
       page,
       pageSize,
       publisher,
       sort,
-      startDate,
+      start,
+      startsAfter,
+      startsBefore,
       superEvent,
       superEventType,
       text,
-      translation
+      translation,
     },
     { dataSources }
   ) => {
-    const query = eventListQueryBuilder(
-      divisions,
-      endDate,
-      include,
+    const query = eventListQueryBuilder({
+      combinedText,
+      division,
+      end,
+      endsAfter,
+      endsBefore,
       inLanguage,
+      include,
       isFree,
-      keywords,
+      keyword,
+      keywordAnd,
+      keywordNot,
       language,
-      locations,
+      location,
       page,
       pageSize,
       publisher,
       sort,
-      startDate,
+      start,
+      startsAfter,
+      startsBefore,
       superEvent,
       superEventType,
       text,
-      translation
-    );
+      translation,
+    });
     const data = await dataSources.eventAPI.getEventList(query);
 
     return {
       data: data.data.map(event => {
         return normalizeKeys(event);
       }),
-      meta: data.meta
+      meta: data.meta,
     };
   },
 
@@ -162,14 +226,14 @@ const Query = {
         } catch (e) {
           // TODO: Send error message to Sentry when implemented
           // eslint-disable-next-line no-console
-          console.error("error", e);
+          console.error('error', e);
           return null;
         }
       })
     );
 
     return events.filter(e => e);
-  }
+  },
 };
 
 export default { Query };

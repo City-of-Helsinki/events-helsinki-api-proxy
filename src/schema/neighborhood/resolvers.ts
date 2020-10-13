@@ -1,4 +1,4 @@
-import capitalize from "lodash/capitalize";
+import capitalize from 'lodash/capitalize';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const normalizeNeighborhood = (features: any[]) => {
@@ -7,8 +7,8 @@ const normalizeNeighborhood = (features: any[]) => {
     name: {
       en: capitalize(feature.properties.nimi_fi),
       fi: capitalize(feature.properties.nimi_fi),
-      sv: capitalize(feature.properties.nimi_se)
-    }
+      sv: capitalize(feature.properties.nimi_se),
+    },
   }));
 };
 
@@ -21,10 +21,10 @@ const Query = {
       meta: {
         count: data.numberReturned,
         next: null,
-        previous: null
-      }
+        previous: null,
+      },
     };
-  }
+  },
 };
 
 export default { Query };

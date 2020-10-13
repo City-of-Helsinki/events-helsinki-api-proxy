@@ -1,10 +1,11 @@
-import { gql } from "apollo-server";
+import { gql } from 'apollo-server';
 
 const typeDefs = gql`
   extend type Query {
     keywordDetails(id: ID!): Keyword!
     keywordList(
       dataSource: String
+      hasUpcomingEvents: Boolean
       page: Int
       pageSize: Int
       showAllKeywords: Boolean
@@ -19,9 +20,10 @@ const typeDefs = gql`
   }
 
   type Keyword {
-    id: String
+    id: ID
     altLabels: [String]
     createdTime: String
+    hasUpcomingEvents: Boolean
     lastModifiedTime: String
     aggregate: Boolean
     deprecated: Boolean
