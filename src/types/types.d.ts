@@ -232,8 +232,8 @@ export type LandingPage = {
   liveRevision?: Maybe<Scalars['Int']>,
 };
 
-export type LandingPageResponse = {
-   __typename?: 'LandingPageResponse',
+export type LandingPagesResponse = {
+   __typename?: 'LandingPagesResponse',
   data: Array<LandingPage>,
 };
 
