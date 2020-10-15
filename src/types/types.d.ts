@@ -42,6 +42,7 @@ export type CollectionDetails = {
   goLiveAt?: Maybe<Scalars['String']>,
   hasUnpublishedChanges?: Maybe<Scalars['Boolean']>,
   heroImage?: Maybe<CmsImage>,
+  keywords?: Maybe<LocalizedCmsKeywords>,
   lastPublishedAt?: Maybe<Scalars['String']>,
   latestRevisionCreatedAt?: Maybe<Scalars['String']>,
   linkText?: Maybe<LocalizedObject>,
@@ -216,6 +217,7 @@ export type LandingPage = {
   latestRevisionCreatedAt?: Maybe<Scalars['String']>,
   title?: Maybe<LocalizedObject>,
   description?: Maybe<LocalizedObject>,
+  keywords?: Maybe<LocalizedCmsKeywords>,
   titleAndDescriptionColor?: Maybe<LocalizedObject>,
   buttonText?: Maybe<LocalizedObject>,
   buttonUrl?: Maybe<LocalizedObject>,
@@ -242,6 +244,13 @@ export type LocalizedCmsImage = {
   en?: Maybe<CmsImage>,
   fi?: Maybe<CmsImage>,
   sv?: Maybe<CmsImage>,
+};
+
+export type LocalizedCmsKeywords = {
+   __typename?: 'LocalizedCmsKeywords',
+  en?: Maybe<Array<Maybe<Scalars['String']>>>,
+  fi?: Maybe<Array<Maybe<Scalars['String']>>>,
+  sv?: Maybe<Array<Maybe<Scalars['String']>>>,
 };
 
 export type LocalizedObject = {
@@ -374,6 +383,7 @@ export type StaticPage = {
   locked?: Maybe<Scalars['Boolean']>,
   lockedAt?: Maybe<Scalars['String']>,
   firstPublishedAt?: Maybe<Scalars['String']>,
+  keywords?: Maybe<LocalizedCmsKeywords>,
   lastPublishedAt?: Maybe<Scalars['String']>,
   latestRevisionCreatedAt?: Maybe<Scalars['String']>,
   headingSection?: Maybe<LocalizedObject>,

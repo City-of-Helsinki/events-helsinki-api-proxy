@@ -3,7 +3,7 @@ import normalizeLocalizedObject from '../../utils/normalizeLocalizedObject';
 
 const normalizeAccessibilityPage = accessibilityPage => {
   let normalizedAccessibilityPage = normalizeKeys(accessibilityPage);
-  const normalizedKeys = ['headingSection', 'contentSection'];
+  const normalizedKeys = ['headingSection', 'contentSection', 'keywords'];
 
   normalizedKeys.forEach(item => {
     normalizedAccessibilityPage = normalizeLocalizedObject(
