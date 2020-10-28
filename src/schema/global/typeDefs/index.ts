@@ -46,6 +46,14 @@ export const LocalizedCmsImage = gql`
   }
 `;
 
+export const LocalizedCmsKeywords = gql`
+  type LocalizedCmsKeywords {
+    en: [String]
+    fi: [String]
+    sv: [String]
+  }
+`;
+
 export const Meta = gql`
   type Meta {
     count: Int!
@@ -75,6 +83,7 @@ export const StaticPage = gql`
     locked: Boolean
     lockedAt: String
     firstPublishedAt: String
+    keywords: LocalizedCmsKeywords
     lastPublishedAt: String
     latestRevisionCreatedAt: String
     headingSection: LocalizedObject
@@ -90,6 +99,7 @@ const global = [
   CmsImage,
   InternalIdObject,
   LocalizedCmsImage,
+  LocalizedCmsKeywords,
   LocalizedObject,
   Meta,
   Mutation,

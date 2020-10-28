@@ -14,6 +14,7 @@ const normalizeLandingPage = collection => {
     'heroBackgroundImageMobile',
     'heroBackgroundImageColor',
     'heroTopLayerImage',
+    'keywords',
     'socialMediaImage',
     'metaInformation',
     'pageTitle',

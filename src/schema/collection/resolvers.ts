@@ -7,6 +7,7 @@ const normalizeCollection = collection => {
   const normalizedKeys = [
     'title',
     'description',
+    'keywords',
     'linkText',
     'linkUrl',
     'socialMediaDescription',

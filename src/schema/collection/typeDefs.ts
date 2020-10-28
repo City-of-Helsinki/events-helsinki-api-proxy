@@ -27,6 +27,7 @@ const typeDefs = gql`
     goLiveAt: String
     hasUnpublishedChanges: Boolean
     heroImage: CmsImage
+    keywords: LocalizedCmsKeywords
     lastPublishedAt: String
     latestRevisionCreatedAt: String
     linkText: LocalizedObject
