@@ -2,6 +2,7 @@ import Promise from 'promise';
 
 import composeQuery from '../../utils/composeQuery';
 import normalizeKeys from '../../utils/normalizeKeys';
+import { EventParams } from './types';
 
 const eventDetailsQueryBuilder = (include: string[]) => {
   let query = '';
@@ -37,32 +38,7 @@ const eventListQueryBuilder = ({
   superEventType,
   text,
   translation,
-}: {
-  combinedText: string[];
-  division: string[];
-  end: string;
-  endsAfter: string;
-  endsBefore: string;
-  inLanguage: string;
-  include: string[];
-  isFree: boolean;
-  keywordAnd: string[];
-  keywordNot: string[];
-  keyword: string[];
-  language: string;
-  location: string[];
-  page: number;
-  pageSize: number;
-  publisher: string;
-  sort: string;
-  start: string;
-  startsAfter: string;
-  startsBefore: string;
-  superEvent: string;
-  superEventType: string[];
-  text: string;
-  translation: string;
-}) => {
+}: EventParams) => {
   // Get details of all needed fields
   let query = '';
 
@@ -150,62 +126,8 @@ const Query = {
     return normalizeKeys(data);
   },
 
-  eventList: async (
-    _,
-    {
-      combinedText,
-      division,
-      end,
-      endsAfter,
-      endsBefore,
-      include,
-      inLanguage,
-      isFree,
-      keyword,
-      keywordAnd,
-      keywordNot,
-      language,
-      location,
-      page,
-      pageSize,
-      publisher,
-      sort,
-      start,
-      startsAfter,
-      startsBefore,
-      superEvent,
-      superEventType,
-      text,
-      translation,
-    },
-    { dataSources }
-  ) => {
-    const query = eventListQueryBuilder({
-      combinedText,
-      division,
-      end,
-      endsAfter,
-      endsBefore,
-      inLanguage,
-      include,
-      isFree,
-      keyword,
-      keywordAnd,
-      keywordNot,
-      language,
-      location,
-      page,
-      pageSize,
-      publisher,
-      sort,
-      start,
-      startsAfter,
-      startsBefore,
-      superEvent,
-      superEventType,
-      text,
-      translation,
-    });
+  eventList: async (_, params: EventParams, { dataSources }) => {
+    const query = eventListQueryBuilder(params);
     const data = await dataSources.eventAPI.getEventList(query);
 
     return {
