@@ -60,7 +60,6 @@ const typeDefs = gql`
     audienceMinAge: String
     audienceMaxAge: String
     superEventType: String
-    extensionCourse: ExtensionCourse
     name: LocalizedObject!
     locationExtraInfo: LocalizedObject
     shortDescription: LocalizedObject
@@ -118,14 +117,6 @@ const typeDefs = gql`
     internalContext: String
     # @type is renamed as internalType so it's usable on GraphQl
     internalType: String
-  }
-
-  type ExtensionCourse {
-    enrolmentStartTime: String
-    enrolmentEndTime: String
-    maximumAttendeeCapacity: Int
-    minimumAttendeeCapacity: Int
-    remainingAttendeeCapacity: Int
   }
 `;
 

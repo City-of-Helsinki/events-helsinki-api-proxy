@@ -29,11 +29,7 @@
     "no-plusplus": "error",
     "no-undef": "warn",
     "object-curly-spacing": ["warn", "always"],
-    "sort-keys": [
-      "warn",
-      "asc",
-      { "caseSensitive": true, "natural": true, "minKeys": 2 }
-    ],
+    "sort-keys": "off",
     "sort-imports": "off",
     "import/order": "off",
     "simple-import-sort/sort": "error"

@@ -1,6 +1,7 @@
 import aboutPage from './aboutPage/typeDefs';
 import accessibilityPage from './accessibilityPage/typeDefs';
 import collection from './collection/typeDefs';
+import course from './course/typeDefs';
 import event from './event/typeDefs';
 import global from './global/typeDefs';
 import keyword from './keyword/typeDefs';
@@ -15,6 +16,7 @@ const typeDefs = [
   accessibilityPage,
   collection,
   event,
+  course,
   keyword,
   landingPage,
   neighborhood,

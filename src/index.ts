@@ -10,6 +10,7 @@ import depthLimit from 'graphql-depth-limit';
 import AboutPageAPI from './datasources/aboutPage';
 import AccessibilityPageAPI from './datasources/accessibilityPage';
 import CollectionAPI from './datasources/collection';
+import CourseAPI from './datasources/course';
 import EventAPI from './datasources/event';
 import KeywordAPI from './datasources/keyword';
 import LandingPageAPI from './datasources/landingPage';
@@ -69,6 +70,7 @@ const dataSources = () => ({
   accessibilityPageAPI: new AccessibilityPageAPI(),
   collectionAPI: new CollectionAPI(),
   eventAPI: new EventAPI(),
+  courseAPI: new CourseAPI(),
   keywordAPI: new KeywordAPI(),
   landingPageAPI: new LandingPageAPI(),
   neighborhoodAPI: new NeighborhoodAPI(),
