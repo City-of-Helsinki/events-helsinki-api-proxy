@@ -1,3 +1,4 @@
+import { QueryKeywordListArgs, QueryResolvers } from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import normalizeKeys from '../../utils/normalizeKeys';
 
@@ -9,15 +10,7 @@ const keywordListQueryBuilder = ({
   showAllKeywords,
   sort,
   text,
-}: {
-  dataSource: string;
-  hasUpcomingEvents: boolean;
-  page: number;
-  pageSize: number;
-  showAllKeywords: boolean;
-  sort: string;
-  text: string;
-}) => {
+}: QueryKeywordListArgs) => {
   // Get details of all needed fields
   let query = '';
 
@@ -60,37 +53,20 @@ const keywordListQueryBuilder = ({
   return query;
 };
 
-const Query = {
-  keywordDetails: async (_, { id }, { dataSources }) => {
-    const data = await dataSources.keywordAPI.getKeywordDetails(id);
+const Query: QueryResolvers = {
+  keywordDetails: async (_, { id, source }, { dataSources }) => {
+    const data = await dataSources.keywordAPI.getKeywordDetails(id, source);
     return normalizeKeys(data);
   },
-  keywordList: async (
-    _,
-    {
-      dataSource,
-      hasUpcomingEvents,
-      page,
-      pageSize,
-      showAllKeywords,
-      sort,
-      text,
-    },
-    { dataSources }
-  ) => {
-    const query = keywordListQueryBuilder({
-      dataSource,
-      hasUpcomingEvents,
-      page,
-      pageSize,
-      showAllKeywords,
-      sort,
-      text,
-    });
-    const data = await dataSources.keywordAPI.getKeywordList(query);
+  keywordList: async (_, params, { dataSources }) => {
+    const query = keywordListQueryBuilder(params);
+    const data = await dataSources.keywordAPI.getKeywordList(
+      query,
+      params.source
+    );
 
     return {
-      data: data.data.map(keyword => {
+      data: data.data.map((keyword) => {
         return normalizeKeys(keyword);
       }),
       meta: data.meta,

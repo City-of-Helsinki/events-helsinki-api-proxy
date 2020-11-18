@@ -1,3 +1,4 @@
+import { QueryResolvers } from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import normalizeKeys from '../../utils/normalizeKeys';
 import { EventParams } from './types';
@@ -12,7 +13,7 @@ const eventDetailsQueryBuilder = (include: string[]) => {
   return query;
 };
 
-const Query = {
+const Query: QueryResolvers = {
   eventDetails: async (_, { id, include }, { dataSources }) => {
     const query = eventDetailsQueryBuilder(include);
     const data = await dataSources.eventAPI.getEventDetails(id, query);

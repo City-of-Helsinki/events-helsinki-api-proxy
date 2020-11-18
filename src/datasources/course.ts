@@ -1,6 +1,13 @@
-import DataSource from './LinkedCoursesDataSource';
+import { basePaths } from './constants';
+import DataSource from './LinkedEventsDataSource';
 
-class EventAPI extends DataSource {
+class CourseAPI extends DataSource {
+  public basePath = basePaths.LINKEDCOURSES;
+
+  public get(path: string) {
+    return super.get(`${this.basePath}${path}`);
+  }
+
   public async getCourseDetails(id: string, query: string) {
     return this.get(`event/${id}${query}`);
   }
@@ -10,4 +17,4 @@ class EventAPI extends DataSource {
   }
 }
 
-export default EventAPI;
+export default CourseAPI;

@@ -1,11 +1,12 @@
+import { QueryResolvers } from '../../types/types';
 import normalizeKeys from '../../utils/normalizeKeys';
 import { CourseParams } from './types';
 import { buildCourseQuery } from './utils';
 
-const Query = {
+const Query: QueryResolvers = {
   courseDetails: async (_, { id, include }, { dataSources }) => {
     const query = buildCourseQuery({ include });
-    const data = await dataSources.courseAPI.getEventDetails(id, query);
+    const data = await dataSources.courseAPI.getCourseDetails(id, query);
 
     return normalizeKeys(data);
   },
