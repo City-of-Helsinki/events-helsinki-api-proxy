@@ -1,27 +1,17 @@
-import composeQuery from '../../utils/composeQuery';
 import normalizeKeys from '../../utils/normalizeKeys';
 import { EventParams } from './types';
-import { buildEventQuery } from './utils';
-
-const eventDetailsQueryBuilder = (include: string[]) => {
-  let query = '';
-
-  if (include && include.length) {
-    query = composeQuery(query, 'include', include.join(','));
-  }
-  return query;
-};
+import { buildEventListQuery } from './utils';
 
 const Query = {
   eventDetails: async (_, { id, include }, { dataSources }) => {
-    const query = eventDetailsQueryBuilder(include);
+    const query = buildEventListQuery(include);
     const data = await dataSources.eventAPI.getEventDetails(id, query);
 
     return normalizeKeys(data);
   },
 
   eventList: async (_, params: EventParams, { dataSources }) => {
-    const query = buildEventQuery(params);
+    const query = buildEventListQuery(params);
     const data = await dataSources.eventAPI.getEventList(query);
 
     return {
