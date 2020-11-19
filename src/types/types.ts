@@ -1088,7 +1088,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   courseDetails?: Resolver<ResolversTypes['EventDetails'], ParentType, ContextType, RequireFields<QueryCourseDetailsArgs, never>>;
   courseList?: Resolver<ResolversTypes['EventListResponse'], ParentType, ContextType, RequireFields<QueryCourseListArgs, never>>;
   coursesByIds?: Resolver<Array<ResolversTypes['EventDetails']>, ParentType, ContextType, RequireFields<QueryCoursesByIdsArgs, 'ids'>>;
-  keywordDetails?: Resolver<ResolversTypes['Keyword'], ParentType, ContextType, RequireFields<QueryKeywordDetailsArgs, 'id'>>;
+  keywordDetails?: Resolver<ResolversTypes['Keyword'], ParentType, ContextType, RequireFields<QueryKeywordDetailsArgs, 'id' | 'source'>>;
   keywordList?: Resolver<ResolversTypes['KeywordListResponse'], ParentType, ContextType, RequireFields<QueryKeywordListArgs, never>>;
   landingPage?: Resolver<ResolversTypes['LandingPage'], ParentType, ContextType, RequireFields<QueryLandingPageArgs, 'id'>>;
   landingPages?: Resolver<ResolversTypes['LandingPagesResponse'], ParentType, ContextType, RequireFields<QueryLandingPagesArgs, never>>;

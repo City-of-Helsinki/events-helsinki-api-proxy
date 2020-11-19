@@ -1,11 +1,11 @@
 import { gql } from 'apollo-server';
 
-import { linkedEventsBaseParams } from '../common';
+import { linkedEventsBaseArgs } from '../common';
 
 const typeDefs = gql`
   extend type Query {
     eventDetails(id: ID, include: [String]): EventDetails!
-    eventList(${linkedEventsBaseParams}): EventListResponse!
+    eventList(${linkedEventsBaseArgs}): EventListResponse!
     eventsByIds(ids: [ID!]!, include: [String]): [EventDetails!]!
   }
 

@@ -1,7 +1,7 @@
+import { QueryCourseListArgs } from '../../types/types';
 import queryBuilder from '../../utils/queryBuilder';
-import { CourseParams } from './types';
 
-export const buildCourseQuery = (params: Partial<CourseParams>) => {
+export const buildCourseQuery = (params: QueryCourseListArgs) => {
   return queryBuilder([
     { key: 'combined_text', value: params.combinedText },
     { key: 'division', value: params.division },

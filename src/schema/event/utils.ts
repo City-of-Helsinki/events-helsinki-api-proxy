@@ -1,8 +1,8 @@
+import { QueryEventListArgs } from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import queryBuilder from '../../utils/queryBuilder';
-import { EventParams } from './types';
 
-export const buildEventListQuery = (params: EventParams) => {
+export const buildEventListQuery = (params: QueryEventListArgs) => {
   return queryBuilder([
     { key: 'combined_text', value: params.combinedText },
     { key: 'division', value: params.division },
