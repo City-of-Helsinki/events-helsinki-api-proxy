@@ -1094,7 +1094,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   landingPages?: Resolver<ResolversTypes['LandingPagesResponse'], ParentType, ContextType, RequireFields<QueryLandingPagesArgs, never>>;
   neighborhoodList?: Resolver<ResolversTypes['NeighborhoodListResponse'], ParentType, ContextType>;
   organizationDetails?: Resolver<ResolversTypes['OrganizationDetails'], ParentType, ContextType, RequireFields<QueryOrganizationDetailsArgs, 'id'>>;
-  placeDetails?: Resolver<ResolversTypes['Place'], ParentType, ContextType, RequireFields<QueryPlaceDetailsArgs, 'id'>>;
+  placeDetails?: Resolver<ResolversTypes['Place'], ParentType, ContextType, RequireFields<QueryPlaceDetailsArgs, 'id' | 'source'>>;
   placeList?: Resolver<ResolversTypes['PlaceListResponse'], ParentType, ContextType, RequireFields<QueryPlaceListArgs, never>>;
 };
 
