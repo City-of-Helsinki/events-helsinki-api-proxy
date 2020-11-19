@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-require-imports */
+require('dotenv').config();
 import { RewriteFrames } from '@sentry/integrations';
 import * as Sentry from '@sentry/node';
 import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPlugin } from 'apollo-server-plugin-base';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import express from 'express';
 import depthLimit from 'graphql-depth-limit';
 
@@ -21,8 +23,6 @@ import schema from './schema';
 
 const OK = 'OK';
 const SERVER_IS_NOT_READY = 'SERVER_IS_NOT_READY';
-
-dotenv.config();
 
 Sentry.init({
   dsn: process.env.GRAPHQL_PROXY_SENTRY_DSN,

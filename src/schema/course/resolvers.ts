@@ -1,6 +1,7 @@
+import Sentry from '@sentry/node';
+
 import { QueryResolvers } from '../../types/types';
 import normalizeKeys from '../../utils/normalizeKeys';
-import { CourseParams } from './types';
 import { buildCourseQuery } from './utils';
 
 const Query: QueryResolvers = {
@@ -11,7 +12,7 @@ const Query: QueryResolvers = {
     return normalizeKeys(data);
   },
 
-  courseList: async (_, params: CourseParams, { dataSources }) => {
+  courseList: async (_, params, { dataSources }) => {
     const query = buildCourseQuery(params);
     const data = await dataSources.courseAPI.getCourseList(query);
 
@@ -34,7 +35,7 @@ const Query: QueryResolvers = {
           );
           return normalizeKeys(course);
         } catch (e) {
-          // TODO: Send error message to Sentry when implemented
+          Sentry.captureException(e);
           // eslint-disable-next-line no-console
           console.error('error', e);
           return null;

@@ -2,7 +2,7 @@ import { gql } from 'apollo-server';
 
 export const typeDefs = gql`
   extend type Query {
-    keywordDetails(id: ID!, source: LinkedEventsSource): Keyword!
+    keywordDetails(id: ID!, source: LinkedEventsSource = LINKEDEVENTS): Keyword!
     keywordList(
       dataSource: String
       hasUpcomingEvents: Boolean

@@ -1,4 +1,4 @@
-export const linkedEventsBaseParams = `
+export const linkedEventsBaseArgs = `
   combinedText: [String]
   division: [String]
   end: String
