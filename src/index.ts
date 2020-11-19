@@ -41,13 +41,13 @@ const apolloServerSentryPlugin = {
   requestDidStart() {
     return {
       didEncounterErrors(rc) {
-        Sentry.withScope(scope => {
+        Sentry.withScope((scope) => {
           scope.setTags({
-            graphql: rc.operation.operation || 'parse_err',
+            graphql: rc.operation?.operation || 'parse_err',
             graphqlName: rc.operationName || rc.request.operationName,
           });
 
-          rc.errors.forEach(error => {
+          rc.errors.forEach((error) => {
             if (error.path || error.name !== 'GraphQLError') {
               scope.setExtras({
                 path: error.path,
@@ -89,7 +89,7 @@ const dataSources = () => ({
     engine: {
       apiKey: process.env.GRAPHQL_PROXY_ENGINE_API_KEY,
     },
-    formatError: err => {
+    formatError: (err) => {
       return err;
     },
     plugins: [apolloServerSentryPlugin],
@@ -104,7 +104,7 @@ const dataSources = () => ({
     serverIsReady = true;
   };
 
-  const checkIsServerReady = response => {
+  const checkIsServerReady = (response) => {
     if (serverIsReady) {
       response.send(OK);
     } else {
