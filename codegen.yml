@@ -1,11 +1,11 @@
-schema: src/schema/index.ts
+schema: src/schema/schema.ts
 overwrite: true
-watch: 
+watch:
   - src/schema/**/typeDefs.ts
 require:
   - ts-node/register
 generates:
-  ./src/types/types.d.ts:
+  ./src/types/types.ts:
     plugins:
       - typescript
-      - typescript-operations
+      - typescript-resolvers

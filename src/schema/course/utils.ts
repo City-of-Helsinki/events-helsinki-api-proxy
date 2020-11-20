@@ -1,8 +1,7 @@
-import { QueryEventListArgs } from '../../types/types';
-import composeQuery from '../../utils/composeQuery';
+import { QueryCourseListArgs } from '../../types/types';
 import queryBuilder from '../../utils/queryBuilder';
 
-export const buildEventListQuery = (params: QueryEventListArgs) => {
+export const buildCourseQuery = (params: QueryCourseListArgs) => {
   return queryBuilder([
     { key: 'combined_text', value: params.combinedText },
     { key: 'division', value: params.division },
@@ -29,13 +28,4 @@ export const buildEventListQuery = (params: QueryEventListArgs) => {
     { key: 'text', value: params.text },
     { key: 'translation', value: params.translation },
   ]);
-};
-
-export const buildEventDetailsQuery = (include: string[]) => {
-  let query = '';
-
-  if (include && include.length) {
-    query = composeQuery(query, 'include', include.join(','));
-  }
-  return query;
 };

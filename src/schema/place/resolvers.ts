@@ -1,3 +1,4 @@
+import { QueryResolvers } from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import normalizeKeys from '../../utils/normalizeKeys';
 
@@ -66,9 +67,9 @@ const placeListQueryBuilder = ({
   return query;
 };
 
-const Query = {
-  placeDetails: async (_, { id }, { dataSources }) => {
-    const data = await dataSources.placeAPI.getPlaceDetails(id);
+const Query: QueryResolvers = {
+  placeDetails: async (_, { id, source }, { dataSources }) => {
+    const data = await dataSources.placeAPI.getPlaceDetails(id, source);
     return normalizeKeys(data);
   },
   placeList: async (
@@ -82,6 +83,7 @@ const Query = {
       showAllPlaces,
       sort,
       text,
+      source,
     },
     { dataSources }
   ) => {
@@ -95,10 +97,10 @@ const Query = {
       sort,
       text,
     });
-    const data = await dataSources.placeAPI.getPlaceList(query);
+    const data = await dataSources.placeAPI.getPlaceList(query, source);
 
     return {
-      data: data.data.map(place => {
+      data: data.data.map((place) => {
         return normalizeKeys(place);
       }),
       meta: data.meta,

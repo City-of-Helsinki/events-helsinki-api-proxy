@@ -2,7 +2,10 @@ import { gql } from 'apollo-server';
 
 const typeDefs = gql`
   extend type Query {
-    organizationDetails(id: ID): OrganizationDetails!
+    organizationDetails(
+      id: ID!
+      source: LinkedEventsSource
+    ): OrganizationDetails!
   }
 
   type OrganizationDetails {

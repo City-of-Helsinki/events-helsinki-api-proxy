@@ -1,8 +1,10 @@
 import capitalize from 'lodash/capitalize';
 
+import { QueryResolvers } from '../../types/types';
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const normalizeNeighborhood = (features: any[]) => {
-  return features.map(feature => ({
+  return features.map((feature) => ({
     id: `${feature.properties.aluejako.toLowerCase()}:${feature.properties.nimi_fi.toLowerCase()}`,
     name: {
       en: capitalize(feature.properties.nimi_fi),
@@ -12,7 +14,7 @@ const normalizeNeighborhood = (features: any[]) => {
   }));
 };
 
-const Query = {
+const Query: QueryResolvers = {
   neighborhoodList: async (_, {}, { dataSources }) => {
     const data = await dataSources.neighborhoodAPI.getNeighborhoodList();
 

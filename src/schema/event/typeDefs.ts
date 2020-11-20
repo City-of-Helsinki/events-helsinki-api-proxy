@@ -1,34 +1,11 @@
 import { gql } from 'apollo-server';
 
+import { linkedEventsBaseArgs } from '../common';
+
 const typeDefs = gql`
   extend type Query {
     eventDetails(id: ID, include: [String]): EventDetails!
-    eventList(
-      combinedText: [String]
-      division: [String]
-      end: String
-      endsAfter: String
-      endsBefore: String
-      inLanguage: String
-      include: [String]
-      isFree: Boolean
-      keywordAnd: [String]
-      keywordNot: [String]
-      keyword: [String]
-      language: String
-      location: [String]
-      page: Int
-      pageSize: Int
-      publisher: ID
-      sort: String
-      start: String
-      startsAfter: String
-      startsBefore: String
-      superEvent: ID
-      superEventType: [String]
-      text: String
-      translation: String
-    ): EventListResponse!
+    eventList(${linkedEventsBaseArgs}): EventListResponse!
     eventsByIds(ids: [ID!]!, include: [String]): [EventDetails!]!
   }
 
@@ -60,7 +37,6 @@ const typeDefs = gql`
     audienceMinAge: String
     audienceMaxAge: String
     superEventType: String
-    extensionCourse: ExtensionCourse
     name: LocalizedObject!
     locationExtraInfo: LocalizedObject
     shortDescription: LocalizedObject
@@ -118,14 +94,6 @@ const typeDefs = gql`
     internalContext: String
     # @type is renamed as internalType so it's usable on GraphQl
     internalType: String
-  }
-
-  type ExtensionCourse {
-    enrolmentStartTime: String
-    enrolmentEndTime: String
-    maximumAttendeeCapacity: Int
-    minimumAttendeeCapacity: Int
-    remainingAttendeeCapacity: Int
   }
 `;
 

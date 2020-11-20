@@ -1,15 +1,18 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-require-imports */
+require('dotenv').config();
 import { RewriteFrames } from '@sentry/integrations';
 import * as Sentry from '@sentry/node';
 import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPlugin } from 'apollo-server-plugin-base';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import express from 'express';
 import depthLimit from 'graphql-depth-limit';
 
 import AboutPageAPI from './datasources/aboutPage';
 import AccessibilityPageAPI from './datasources/accessibilityPage';
 import CollectionAPI from './datasources/collection';
+import CourseAPI from './datasources/course';
 import EventAPI from './datasources/event';
 import KeywordAPI from './datasources/keyword';
 import LandingPageAPI from './datasources/landingPage';
@@ -20,8 +23,6 @@ import schema from './schema';
 
 const OK = 'OK';
 const SERVER_IS_NOT_READY = 'SERVER_IS_NOT_READY';
-
-dotenv.config();
 
 Sentry.init({
   dsn: process.env.GRAPHQL_PROXY_SENTRY_DSN,
@@ -69,6 +70,7 @@ const dataSources = () => ({
   accessibilityPageAPI: new AccessibilityPageAPI(),
   collectionAPI: new CollectionAPI(),
   eventAPI: new EventAPI(),
+  courseAPI: new CourseAPI(),
   keywordAPI: new KeywordAPI(),
   landingPageAPI: new LandingPageAPI(),
   neighborhoodAPI: new NeighborhoodAPI(),
@@ -86,9 +88,6 @@ const dataSources = () => ({
     debug:
       process.env.GRAPHQL_PROXY_DEBUG === 'debug' ||
       process.env.GRAPHQL_PROXY_ENV !== 'production',
-    engine: {
-      apiKey: process.env.GRAPHQL_PROXY_ENGINE_API_KEY,
-    },
     formatError: (err) => {
       return err;
     },

@@ -1,16 +1,18 @@
-import normalizeKeys from '../../utils/normalizeKeys';
-import { EventParams } from './types';
-import { buildEventListQuery } from './utils';
+import Sentry from '@sentry/node';
 
-const Query = {
+import { QueryResolvers } from '../../types/types';
+import normalizeKeys from '../../utils/normalizeKeys';
+import { buildEventDetailsQuery, buildEventListQuery } from './utils';
+
+const Query: QueryResolvers = {
   eventDetails: async (_, { id, include }, { dataSources }) => {
-    const query = buildEventListQuery(include);
+    const query = buildEventDetailsQuery(include);
     const data = await dataSources.eventAPI.getEventDetails(id, query);
 
     return normalizeKeys(data);
   },
 
-  eventList: async (_, params: EventParams, { dataSources }) => {
+  eventList: async (_, params, { dataSources }) => {
     const query = buildEventListQuery(params);
     const data = await dataSources.eventAPI.getEventList(query);
 
@@ -26,11 +28,11 @@ const Query = {
     const events = await Promise.all(
       ids.map(async (id) => {
         try {
-          const query = eventDetailsQueryBuilder(include);
+          const query = buildEventDetailsQuery(include);
           const event = await dataSources.eventAPI.getEventDetails(id, query);
           return normalizeKeys(event);
         } catch (e) {
-          // TODO: Send error message to Sentry when implemented
+          Sentry.captureException(e);
           // eslint-disable-next-line no-console
           console.error('error', e);
           return null;

@@ -1,8 +1,9 @@
+import { QueryResolvers } from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import normalizeKeys from '../../utils/normalizeKeys';
 import normalizeLocalizedObject from '../../utils/normalizeLocalizedObject';
 
-const normalizeCollection = collection => {
+const normalizeCollection = (collection) => {
   let normalizedCollection = normalizeKeys(collection);
   const normalizedKeys = [
     'title',
@@ -16,7 +17,7 @@ const normalizeCollection = collection => {
     'eventListTitle',
   ];
 
-  normalizedKeys.forEach(item => {
+  normalizedKeys.forEach((item) => {
     normalizedCollection = normalizeLocalizedObject(normalizedCollection, item);
   });
 
@@ -47,7 +48,7 @@ const collectionListQueryBuilder = (visibleOnFrontpage: boolean) => {
   return query;
 };
 
-const Query = {
+const Query: QueryResolvers = {
   collectionDetails: async (_, { draft, slug }, { dataSources }) => {
     const data = await dataSources.collectionAPI.getCollectionDetails(
       slug,
@@ -62,7 +63,7 @@ const Query = {
     );
 
     return {
-      data: data.map(collection => normalizeCollection(collection)),
+      data: data.map((collection) => normalizeCollection(collection)),
     };
   },
 };
