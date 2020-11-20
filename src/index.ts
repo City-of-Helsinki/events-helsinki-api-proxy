@@ -88,9 +88,6 @@ const dataSources = () => ({
     debug:
       process.env.GRAPHQL_PROXY_DEBUG === 'debug' ||
       process.env.GRAPHQL_PROXY_ENV !== 'production',
-    engine: {
-      apiKey: process.env.GRAPHQL_PROXY_ENGINE_API_KEY,
-    },
     formatError: (err) => {
       return err;
     },
