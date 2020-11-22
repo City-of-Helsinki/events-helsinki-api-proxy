@@ -102,7 +102,7 @@ export const Enums = gql`
   }
 `;
 
-const global = [
+const globalDefs = [
   CmsImage,
   InternalIdObject,
   LocalizedCmsImage,
@@ -116,4 +116,4 @@ const global = [
   Enums,
 ];
 
-export default global;
+export default globalDefs;

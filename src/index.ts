@@ -80,7 +80,8 @@ const dataSources = () => ({
 
 (async () => {
   const server = new ApolloServer({
-    context: ({ req }) => {
+    // for some reason typing not working here automatically after package updates
+    context: ({ req }: { req: { headers: { authorization: string } } }) => {
       const token = req.headers.authorization || '';
       return { token };
     },
@@ -93,7 +94,6 @@ const dataSources = () => ({
     },
     plugins: [apolloServerSentryPlugin],
     schema,
-
     validationRules: [depthLimit(10)],
   });
 
