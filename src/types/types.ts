@@ -429,7 +429,11 @@ export type QueryEventListArgs = {
   superEvent?: Maybe<Scalars['ID']>,
   superEventType?: Maybe<Array<Maybe<Scalars['String']>>>,
   text?: Maybe<Scalars['String']>,
-  translation?: Maybe<Scalars['String']>
+  translation?: Maybe<Scalars['String']>,
+  audienceMinAgeLt?: Maybe<Scalars['String']>,
+  audienceMinAgeGt?: Maybe<Scalars['String']>,
+  audienceMaxAgeLt?: Maybe<Scalars['String']>,
+  audienceMaxAgeGt?: Maybe<Scalars['String']>
 };
 
 
@@ -469,7 +473,11 @@ export type QueryCourseListArgs = {
   superEvent?: Maybe<Scalars['ID']>,
   superEventType?: Maybe<Array<Maybe<Scalars['String']>>>,
   text?: Maybe<Scalars['String']>,
-  translation?: Maybe<Scalars['String']>
+  translation?: Maybe<Scalars['String']>,
+  audienceMinAgeLt?: Maybe<Scalars['String']>,
+  audienceMinAgeGt?: Maybe<Scalars['String']>,
+  audienceMaxAgeLt?: Maybe<Scalars['String']>,
+  audienceMaxAgeGt?: Maybe<Scalars['String']>
 };
 
 
@@ -1094,7 +1102,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   landingPages?: Resolver<ResolversTypes['LandingPagesResponse'], ParentType, ContextType, RequireFields<QueryLandingPagesArgs, never>>;
   neighborhoodList?: Resolver<ResolversTypes['NeighborhoodListResponse'], ParentType, ContextType>;
   organizationDetails?: Resolver<ResolversTypes['OrganizationDetails'], ParentType, ContextType, RequireFields<QueryOrganizationDetailsArgs, 'id'>>;
-  placeDetails?: Resolver<ResolversTypes['Place'], ParentType, ContextType, RequireFields<QueryPlaceDetailsArgs, 'id' | 'source'>>;
+  placeDetails?: Resolver<ResolversTypes['Place'], ParentType, ContextType, RequireFields<QueryPlaceDetailsArgs, 'id'>>;
   placeList?: Resolver<ResolversTypes['PlaceListResponse'], ParentType, ContextType, RequireFields<QueryPlaceListArgs, never>>;
 };
 

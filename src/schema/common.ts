@@ -23,4 +23,8 @@ export const linkedEventsBaseArgs = `
   superEventType: [String]
   text: String
   translation: String
+  audienceMinAgeLt: String
+  audienceMinAgeGt: String
+  audienceMaxAgeLt: String
+  audienceMaxAgeGt: String
 `;
