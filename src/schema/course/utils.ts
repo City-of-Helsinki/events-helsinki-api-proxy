@@ -27,5 +27,9 @@ export const buildCourseQuery = (params: QueryCourseListArgs) => {
     { key: 'super_event_type', value: params.superEventType },
     { key: 'text', value: params.text },
     { key: 'translation', value: params.translation },
+    { key: 'audience_min_age_lt', value: params.audienceMinAgeLt },
+    { key: 'audience_min_age_gt', value: params.audienceMinAgeGt },
+    { key: 'audience_max_age_lt', value: params.audienceMaxAgeLt },
+    { key: 'audience_max_age_gt', value: params.audienceMaxAgeGt },
   ]);
 };
