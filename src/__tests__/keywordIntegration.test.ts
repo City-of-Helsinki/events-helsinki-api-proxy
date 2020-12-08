@@ -95,12 +95,12 @@ it('uses correct path when source is provided', async () => {
     variables: { source: 'LINKEDEVENTS' },
   });
 
-  expect(getMock).toHaveBeenCalledWith('/linkedevents/v1/keyword');
+  expect(getMock).toHaveBeenCalledWith('linkedevents/v1/keyword');
 
   await query({
     query: GET_KEYWORDS,
     variables: { source: 'LINKEDCOURSES' },
   });
 
-  expect(getMock).toHaveBeenCalledWith('/linkedcourses/v1/keyword');
+  expect(getMock).toHaveBeenCalledWith('linkedcourses/v1/keyword');
 });
