@@ -20,6 +20,15 @@ export type AccessibilityPagesResponse = {
   data: Array<StaticPage>,
 };
 
+export type Audience = {
+   __typename?: 'Audience',
+  id?: Maybe<Scalars['ID']>,
+  name?: Maybe<LocalizedObject>,
+  internalId?: Maybe<Scalars['String']>,
+  internalContext?: Maybe<Scalars['String']>,
+  internalType?: Maybe<Scalars['String']>,
+};
+
 export type CmsImage = {
    __typename?: 'CmsImage',
   photographerCredit?: Maybe<Scalars['String']>,
@@ -93,7 +102,7 @@ export type EventDetails = {
   subEvents: Array<InternalIdObject>,
   images: Array<Image>,
   inLanguage: Array<InLanguage>,
-  audience: Array<InternalIdObject>,
+  audience: Array<Audience>,
   createdTime?: Maybe<Scalars['String']>,
   lastModifiedTime?: Maybe<Scalars['String']>,
   datePublished?: Maybe<Scalars['String']>,
@@ -679,6 +688,7 @@ export type ResolversTypes = {
   ExternalLink: ResolverTypeWrapper<ExternalLink>;
   Offer: ResolverTypeWrapper<Offer>;
   InLanguage: ResolverTypeWrapper<InLanguage>;
+  Audience: ResolverTypeWrapper<Audience>;
   ExtensionCourse: ResolverTypeWrapper<ExtensionCourse>;
   EventListResponse: ResolverTypeWrapper<EventListResponse>;
   Meta: ResolverTypeWrapper<Meta>;
@@ -721,6 +731,7 @@ export type ResolversParentTypes = {
   ExternalLink: ExternalLink;
   Offer: Offer;
   InLanguage: InLanguage;
+  Audience: Audience;
   ExtensionCourse: ExtensionCourse;
   EventListResponse: EventListResponse;
   Meta: Meta;
@@ -743,6 +754,15 @@ export type AboutPagesResponseResolvers<ContextType = any, ParentType extends Re
 
 export type AccessibilityPagesResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccessibilityPagesResponse'] = ResolversParentTypes['AccessibilityPagesResponse']> = {
   data?: Resolver<Array<ResolversTypes['StaticPage']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AudienceResolvers<ContextType = any, ParentType extends ResolversParentTypes['Audience'] = ResolversParentTypes['Audience']> = {
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
+  internalId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  internalContext?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  internalType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -818,7 +838,7 @@ export type EventDetailsResolvers<ContextType = any, ParentType extends Resolver
   subEvents?: Resolver<Array<ResolversTypes['InternalIdObject']>, ParentType, ContextType>;
   images?: Resolver<Array<ResolversTypes['Image']>, ParentType, ContextType>;
   inLanguage?: Resolver<Array<ResolversTypes['InLanguage']>, ParentType, ContextType>;
-  audience?: Resolver<Array<ResolversTypes['InternalIdObject']>, ParentType, ContextType>;
+  audience?: Resolver<Array<ResolversTypes['Audience']>, ParentType, ContextType>;
   createdTime?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lastModifiedTime?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   datePublished?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1145,6 +1165,7 @@ export type SubscriptionResolvers<ContextType = any, ParentType extends Resolver
 export type Resolvers<ContextType = any> = {
   AboutPagesResponse?: AboutPagesResponseResolvers<ContextType>;
   AccessibilityPagesResponse?: AccessibilityPagesResponseResolvers<ContextType>;
+  Audience?: AudienceResolvers<ContextType>;
   CmsImage?: CmsImageResolvers<ContextType>;
   CollectionDetails?: CollectionDetailsResolvers<ContextType>;
   CollectionListResponse?: CollectionListResponseResolvers<ContextType>;

@@ -27,7 +27,7 @@ const typeDefs = gql`
     subEvents: [InternalIdObject!]!
     images: [Image!]!
     inLanguage: [InLanguage!]!
-    audience: [InternalIdObject!]!
+    audience: [Audience!]!
     createdTime: String
     lastModifiedTime: String
     datePublished: String
@@ -49,6 +49,14 @@ const typeDefs = gql`
     # @context is renamed as internalContext so it's usable on GraphQl
     internalContext: String
     # @type is renamed as internalType so it's usable on GraphQl
+    internalType: String
+  }
+
+  type Audience {
+    id: ID
+    name: LocalizedObject
+    internalId: String
+    internalContext: String
     internalType: String
   }
 
