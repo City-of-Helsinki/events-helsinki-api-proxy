@@ -20,6 +20,7 @@ export type AccessibilityPagesResponse = {
   data: Array<StaticPage>,
 };
 
+
 export type Audience = {
    __typename?: 'Audience',
   id?: Maybe<Scalars['ID']>,
@@ -27,6 +28,22 @@ export type Audience = {
   internalId?: Maybe<Scalars['String']>,
   internalContext?: Maybe<Scalars['String']>,
   internalType?: Maybe<Scalars['String']>,
+};
+
+export type BannerPage = {
+   __typename?: 'BannerPage',
+  title?: Maybe<LocalizedObject>,
+  description?: Maybe<LocalizedObject>,
+  keywords?: Maybe<LocalizedCmsKeywords>,
+  titleAndDescriptionColor?: Maybe<LocalizedObject>,
+  buttonText?: Maybe<LocalizedObject>,
+  buttonUrl?: Maybe<LocalizedObject>,
+  heroBackgroundImage?: Maybe<LocalizedCmsImage>,
+  heroBackgroundImageMobile?: Maybe<LocalizedCmsImage>,
+  heroBackgroundImageColor?: Maybe<LocalizedObject>,
+  heroTopLayerImage?: Maybe<LocalizedCmsImage>,
+  socialMediaImage?: Maybe<LocalizedCmsImage>,
+
 };
 
 export type CmsImage = {
@@ -207,6 +224,8 @@ export type KeywordListResponse = {
 export type LandingPage = {
    __typename?: 'LandingPage',
   id: Scalars['ID'],
+  topBanner?: Maybe<BannerPage>,
+  bottomBanner?: Maybe<BannerPage>,
   path?: Maybe<Scalars['String']>,
   depth?: Maybe<Scalars['Int']>,
   numchild?: Maybe<Scalars['Int']>,
@@ -695,6 +714,7 @@ export type ResolversTypes = {
   LinkedEventsSource: LinkedEventsSource;
   KeywordListResponse: ResolverTypeWrapper<KeywordListResponse>;
   LandingPage: ResolverTypeWrapper<LandingPage>;
+  BannerPage: ResolverTypeWrapper<BannerPage>;
   LocalizedCmsImage: ResolverTypeWrapper<LocalizedCmsImage>;
   LandingPagesResponse: ResolverTypeWrapper<LandingPagesResponse>;
   NeighborhoodListResponse: ResolverTypeWrapper<NeighborhoodListResponse>;
@@ -737,6 +757,7 @@ export type ResolversParentTypes = {
   Meta: Meta;
   KeywordListResponse: KeywordListResponse;
   LandingPage: LandingPage;
+  BannerPage: BannerPage;
   LocalizedCmsImage: LocalizedCmsImage;
   LandingPagesResponse: LandingPagesResponse;
   NeighborhoodListResponse: NeighborhoodListResponse;
@@ -757,12 +778,27 @@ export type AccessibilityPagesResponseResolvers<ContextType = any, ParentType ex
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+<<<<<<< HEAD
 export type AudienceResolvers<ContextType = any, ParentType extends ResolversParentTypes['Audience'] = ResolversParentTypes['Audience']> = {
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
   internalId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   internalContext?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   internalType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+=======
+export type BannerPageResolvers<ContextType = any, ParentType extends ResolversParentTypes['BannerPage'] = ResolversParentTypes['BannerPage']> = {
+  title?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
+  keywords?: Resolver<Maybe<ResolversTypes['LocalizedCmsKeywords']>, ParentType, ContextType>;
+  titleAndDescriptionColor?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
+  buttonText?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
+  buttonUrl?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
+  heroBackgroundImage?: Resolver<Maybe<ResolversTypes['LocalizedCmsImage']>, ParentType, ContextType>;
+  heroBackgroundImageMobile?: Resolver<Maybe<ResolversTypes['LocalizedCmsImage']>, ParentType, ContextType>;
+  heroBackgroundImageColor?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
+  heroTopLayerImage?: Resolver<Maybe<ResolversTypes['LocalizedCmsImage']>, ParentType, ContextType>;
+  socialMediaImage?: Resolver<Maybe<ResolversTypes['LocalizedCmsImage']>, ParentType, ContextType>;
+>>>>>>> bbe37fd... Add top and bottom banner to LandingPage
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -943,6 +979,8 @@ export type KeywordListResponseResolvers<ContextType = any, ParentType extends R
 
 export type LandingPageResolvers<ContextType = any, ParentType extends ResolversParentTypes['LandingPage'] = ResolversParentTypes['LandingPage']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  topBanner?: Resolver<Maybe<ResolversTypes['BannerPage']>, ParentType, ContextType>;
+  bottomBanner?: Resolver<Maybe<ResolversTypes['BannerPage']>, ParentType, ContextType>;
   path?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   depth?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   numchild?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -1165,7 +1203,11 @@ export type SubscriptionResolvers<ContextType = any, ParentType extends Resolver
 export type Resolvers<ContextType = any> = {
   AboutPagesResponse?: AboutPagesResponseResolvers<ContextType>;
   AccessibilityPagesResponse?: AccessibilityPagesResponseResolvers<ContextType>;
+<<<<<<< HEAD
   Audience?: AudienceResolvers<ContextType>;
+=======
+  BannerPage?: BannerPageResolvers<ContextType>;
+>>>>>>> bbe37fd... Add top and bottom banner to LandingPage
   CmsImage?: CmsImageResolvers<ContextType>;
   CollectionDetails?: CollectionDetailsResolvers<ContextType>;
   CollectionListResponse?: CollectionListResponseResolvers<ContextType>;

@@ -24,7 +24,7 @@ const memoizedNormalizeKey = memoize(normalizeKey);
  *    }
  *  }
  */
-const normalizeKeys = value => {
+const normalizeKeys = (value) => {
   if (Array.isArray(value)) {
     return value.map(normalizeKeys);
   }
