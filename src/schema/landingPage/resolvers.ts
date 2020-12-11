@@ -23,52 +23,13 @@ const normalizeLandingPage = (collection) => {
     'keywords',
     'metaInformation',
     'pageTitle',
-    {
-      bottomBanner: [
-        'title',
-        'description',
-        'titleAndDescriptionColor',
-        'buttonText',
-        'buttonUrl',
-        'heroBackgroundImage',
-        'heroBackgroundImageMobile',
-        'heroBackgroundImageColor',
-        'heroTopLayerImage',
-        'socialMediaImage',
-      ],
-    },
-    {
-      topBanner: [
-        'title',
-        'description',
-        'titleAndDescriptionColor',
-        'buttonText',
-        'buttonUrl',
-        'heroBackgroundImage',
-        'heroBackgroundImageMobile',
-        'heroBackgroundImageColor',
-        'heroTopLayerImage',
-        'socialMediaImage',
-      ],
-    },
   ];
 
   normalizedKeys.forEach((item) => {
-    if (typeof item === 'string') {
       normalizedLandingPage = normalizeLocalizedObject(
         normalizedLandingPage,
         item
       );
-    } else if (typeof item === 'object') {
-      Object.entries(item).forEach(([nestedFieldName, nestedFields]) => {
-        nestedFields.forEach((localizeObject) => {
-          normalizedLandingPage[nestedFieldName] = normalizeLocalizedObject(
-            normalizedLandingPage[nestedFieldName],
-            localizeObject
-          );
-        });
-      });
-    }
   });
   return normalizedLandingPage;
 };
