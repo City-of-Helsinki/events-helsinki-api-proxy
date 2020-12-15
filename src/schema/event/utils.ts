@@ -1,10 +1,14 @@
 import { QueryEventListArgs } from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import queryBuilder from '../../utils/queryBuilder';
-
 export const buildEventListQuery = (params: QueryEventListArgs) => {
   return queryBuilder([
-    { key: 'combined_text', value: params.combinedText },
+    { key: 'local_ongoing_AND', value: params.localOngoingAnd },
+    { key: 'local_ongoing_OR', value: params.localOngoingOr },
+    { key: 'internet_ongoing_AND', value: params.internetOngoingAnd },
+    { key: 'internet_ongoing_OR', value: params.internetOngoingOr },
+    { key: 'all_ongoing_AND', value: params.allOngoingAnd },
+    { key: 'all_ongoing_OR', value: params.allOngoingOr },
     { key: 'division', value: params.division },
     { key: 'end', value: params.end },
     { key: 'ends_after', value: params.endsAfter },

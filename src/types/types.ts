@@ -415,6 +415,12 @@ export type QueryEventDetailsArgs = {
 
 
 export type QueryEventListArgs = {
+  localOngoingAnd?: Maybe<Array<Maybe<Scalars['String']>>>,
+  localOngoingOr?: Maybe<Array<Maybe<Scalars['String']>>>,
+  internetOngoingAnd?: Maybe<Array<Maybe<Scalars['String']>>>,
+  internetOngoingOr?: Maybe<Array<Maybe<Scalars['String']>>>,
+  allOngoingAnd?: Maybe<Array<Maybe<Scalars['String']>>>,
+  allOngoingOr?: Maybe<Array<Maybe<Scalars['String']>>>,
   combinedText?: Maybe<Array<Maybe<Scalars['String']>>>,
   division?: Maybe<Array<Maybe<Scalars['String']>>>,
   end?: Maybe<Scalars['String']>,
@@ -459,6 +465,12 @@ export type QueryCourseDetailsArgs = {
 
 
 export type QueryCourseListArgs = {
+  localOngoingAnd?: Maybe<Array<Maybe<Scalars['String']>>>,
+  localOngoingOr?: Maybe<Array<Maybe<Scalars['String']>>>,
+  internetOngoingAnd?: Maybe<Array<Maybe<Scalars['String']>>>,
+  internetOngoingOr?: Maybe<Array<Maybe<Scalars['String']>>>,
+  allOngoingAnd?: Maybe<Array<Maybe<Scalars['String']>>>,
+  allOngoingOr?: Maybe<Array<Maybe<Scalars['String']>>>,
   combinedText?: Maybe<Array<Maybe<Scalars['String']>>>,
   division?: Maybe<Array<Maybe<Scalars['String']>>>,
   end?: Maybe<Scalars['String']>,

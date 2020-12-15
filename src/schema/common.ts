@@ -1,4 +1,10 @@
 export const linkedEventsBaseArgs = `
+  localOngoingAnd: [String]
+  localOngoingOr: [String]
+  internetOngoingAnd: [String]
+  internetOngoingOr: [String]
+  allOngoingAnd: [String]
+  allOngoingOr: [String]
   combinedText: [String]
   division: [String]
   end: String
