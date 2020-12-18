@@ -1,20 +1,20 @@
 import { basePaths } from './constants';
 import DataSource from './LinkedEventsDataSource';
 
-class EventAPI extends DataSource {
-  public basePath = basePaths.LINKEDEVENTS;
+class CourseAPI extends DataSource {
+  public basePath = basePaths.LINKEDCOURSES;
 
   public get(path: string) {
     return super.get(`${this.basePath}${path}`);
   }
 
-  public async getEventDetails(id: string, query: string) {
+  public async getCourseDetails(id: string, query: string) {
     return this.get(`event/${id}${query}`);
   }
 
-  public async getEventList(query: string) {
+  public async getCourseList(query: string) {
     return this.get(`event${query}`);
   }
 }
 
-export default EventAPI;
+export default CourseAPI;

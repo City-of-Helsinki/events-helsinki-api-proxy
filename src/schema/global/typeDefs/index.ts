@@ -95,7 +95,14 @@ export const StaticPage = gql`
   }
 `;
 
-const global = [
+export const Enums = gql`
+  enum LinkedEventsSource {
+    LINKEDEVENTS
+    LINKEDCOURSES
+  }
+`;
+
+const globalDefs = [
   CmsImage,
   InternalIdObject,
   LocalizedCmsImage,
@@ -106,6 +113,7 @@ const global = [
   Query,
   StaticPage,
   Subscription,
+  Enums,
 ];
 
-export default global;
+export default globalDefs;

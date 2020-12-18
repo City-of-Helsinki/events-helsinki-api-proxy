@@ -1,15 +1,18 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-require-imports */
+require('dotenv').config();
 import { RewriteFrames } from '@sentry/integrations';
 import * as Sentry from '@sentry/node';
 import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPlugin } from 'apollo-server-plugin-base';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import express from 'express';
 import depthLimit from 'graphql-depth-limit';
 
 import AboutPageAPI from './datasources/aboutPage';
 import AccessibilityPageAPI from './datasources/accessibilityPage';
 import CollectionAPI from './datasources/collection';
+import CourseAPI from './datasources/course';
 import EventAPI from './datasources/event';
 import KeywordAPI from './datasources/keyword';
 import LandingPageAPI from './datasources/landingPage';
@@ -20,8 +23,6 @@ import schema from './schema';
 
 const OK = 'OK';
 const SERVER_IS_NOT_READY = 'SERVER_IS_NOT_READY';
-
-dotenv.config();
 
 Sentry.init({
   dsn: process.env.GRAPHQL_PROXY_SENTRY_DSN,
@@ -41,13 +42,13 @@ const apolloServerSentryPlugin = {
   requestDidStart() {
     return {
       didEncounterErrors(rc) {
-        Sentry.withScope(scope => {
+        Sentry.withScope((scope) => {
           scope.setTags({
-            graphql: rc.operation.operation || 'parse_err',
+            graphql: rc.operation?.operation || 'parse_err',
             graphqlName: rc.operationName || rc.request.operationName,
           });
 
-          rc.errors.forEach(error => {
+          rc.errors.forEach((error) => {
             if (error.path || error.name !== 'GraphQLError') {
               scope.setExtras({
                 path: error.path,
@@ -69,6 +70,7 @@ const dataSources = () => ({
   accessibilityPageAPI: new AccessibilityPageAPI(),
   collectionAPI: new CollectionAPI(),
   eventAPI: new EventAPI(),
+  courseAPI: new CourseAPI(),
   keywordAPI: new KeywordAPI(),
   landingPageAPI: new LandingPageAPI(),
   neighborhoodAPI: new NeighborhoodAPI(),
@@ -78,7 +80,8 @@ const dataSources = () => ({
 
 (async () => {
   const server = new ApolloServer({
-    context: ({ req }) => {
+    // for some reason typing not working here automatically after package updates
+    context: ({ req }: { req: { headers: { authorization: string } } }) => {
       const token = req.headers.authorization || '';
       return { token };
     },
@@ -86,15 +89,11 @@ const dataSources = () => ({
     debug:
       process.env.GRAPHQL_PROXY_DEBUG === 'debug' ||
       process.env.GRAPHQL_PROXY_ENV !== 'production',
-    engine: {
-      apiKey: process.env.GRAPHQL_PROXY_ENGINE_API_KEY,
-    },
-    formatError: err => {
+    formatError: (err) => {
       return err;
     },
     plugins: [apolloServerSentryPlugin],
     schema,
-
     validationRules: [depthLimit(10)],
   });
 
@@ -104,7 +103,7 @@ const dataSources = () => ({
     serverIsReady = true;
   };
 
-  const checkIsServerReady = response => {
+  const checkIsServerReady = (response) => {
     if (serverIsReady) {
       response.send(OK);
     } else {

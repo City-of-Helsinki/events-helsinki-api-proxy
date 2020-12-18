@@ -5,18 +5,21 @@
     "commonjs": true
   },
   "extends": [
-    "plugin:@typescript-eslint/recommended", 
+    "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript"
   ],
-  "plugins": [
-    "simple-import-sort"
-  ],
+  "plugins": ["simple-import-sort"],
   "rules": {
-    "@typescript-eslint/brace-style": ["error", "1tbs", { "allowSingleLine": true }],
+    "@typescript-eslint/brace-style": [
+      "error",
+      "1tbs",
+      { "allowSingleLine": true }
+    ],
     "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/func-call-spacing": ["error"],
     "@typescript-eslint/member-ordering": ["warn"],
     "@typescript-eslint/no-require-imports": ["error"],
@@ -26,7 +29,7 @@
     "no-plusplus": "error",
     "no-undef": "warn",
     "object-curly-spacing": ["warn", "always"],
-    "sort-keys": ["warn", "asc", { "caseSensitive": true, "natural": true, "minKeys": 2 }],
+    "sort-keys": "off",
     "sort-imports": "off",
     "import/order": "off",
     "simple-import-sort/sort": "error"

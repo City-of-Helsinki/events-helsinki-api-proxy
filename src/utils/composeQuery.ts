@@ -5,6 +5,11 @@
  * @param {string} value
  * @return {string}
  */
-export default (query: string, key: string, value: string) => {
-  return query.concat(`${query ? '&' : '?'}${key}=`, value);
+export default (
+  query: string,
+  key: string,
+  value: string | boolean | number
+): string => {
+  const delimiter = query ? '&' : '?';
+  return `${query}${delimiter}${key}=${value}`;
 };
