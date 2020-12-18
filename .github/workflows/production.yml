@@ -30,11 +30,12 @@ jobs:
           DOCKER_IMAGE_NAME: ${{ env.REPO_NAME }}-production
           DOCKER_BUILD_ARG_GRAPHQL_PROXY_PORT: 4000
           DOCKER_BUILD_ARG_GRAPHQL_PROXY_CMS_API_BASE_URL: 'https://cms.prod.kuva.hel.ninja/api/'
-          DOCKER_BUILD_ARG_GRAPHQL_PROXY_API_BASE_URL: 'https://api.hel.fi/linkedevents/v1/'
+          DOCKER_BUILD_ARG_GRAPHQL_PROXY_API_BASE_URL: 'https://api.hel.fi'
+          DOCKER_BUILD_ARG_GRAPHQL_PROXY_LINKED_EVENTS_API_BASE_PATH: '/linkedevents/v1/'
+          DOCKER_BUILD_ARG_GRAPHQL_PROXY_LINKED_COURSES_API_BASE_PATH: '/linkedcourses/v1/'
           DOCKER_BUILD_ARG_GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL: 'https://kartta.hel.fi/ws/geoserver/avoindata'
           DOCKER_BUILD_ARG_GRAPHQL_PROXY_SENTRY_DSN: ${{ secrets.GH_SENTRY_DSN }}
           DOCKER_BUILD_ARG_GRAPHQL_PROXY_SENTRY_ENVIRONMENT: 'production'
-
 
   production:
     if: startsWith(github.ref, 'refs/tags')
