@@ -102,6 +102,22 @@ export const Enums = gql`
   }
 `;
 
+export const BannerPage = gql`
+  type BannerPage {
+    title: LocalizedObject
+    description: LocalizedObject
+    keywords: LocalizedCmsKeywords
+    titleAndDescriptionColor: LocalizedObject
+    buttonText: LocalizedObject
+    buttonUrl: LocalizedObject
+    heroBackgroundImage: LocalizedCmsImage
+    heroBackgroundImageMobile: LocalizedCmsImage
+    heroBackgroundImageColor: LocalizedObject
+    heroTopLayerImage: LocalizedCmsImage
+    socialMediaImage: LocalizedCmsImage
+  }
+`;
+
 const globalDefs = [
   CmsImage,
   InternalIdObject,
@@ -112,6 +128,7 @@ const globalDefs = [
   Mutation,
   Query,
   StaticPage,
+  BannerPage,
   Subscription,
   Enums,
 ];

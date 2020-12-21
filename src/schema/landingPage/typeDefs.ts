@@ -12,6 +12,8 @@ const typeDefs = gql`
 
   type LandingPage {
     id: ID!
+    topBanner: BannerPage
+    bottomBanner: BannerPage
     path: String
     depth: Int
     numchild: Int

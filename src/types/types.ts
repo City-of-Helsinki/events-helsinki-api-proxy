@@ -29,6 +29,21 @@ export type Audience = {
   internalType?: Maybe<Scalars['String']>,
 };
 
+export type BannerPage = {
+   __typename?: 'BannerPage',
+  title?: Maybe<LocalizedObject>,
+  description?: Maybe<LocalizedObject>,
+  keywords?: Maybe<LocalizedCmsKeywords>,
+  titleAndDescriptionColor?: Maybe<LocalizedObject>,
+  buttonText?: Maybe<LocalizedObject>,
+  buttonUrl?: Maybe<LocalizedObject>,
+  heroBackgroundImage?: Maybe<LocalizedCmsImage>,
+  heroBackgroundImageMobile?: Maybe<LocalizedCmsImage>,
+  heroBackgroundImageColor?: Maybe<LocalizedObject>,
+  heroTopLayerImage?: Maybe<LocalizedCmsImage>,
+  socialMediaImage?: Maybe<LocalizedCmsImage>,
+};
+
 export type CmsImage = {
    __typename?: 'CmsImage',
   photographerCredit?: Maybe<Scalars['String']>,
@@ -46,6 +61,7 @@ export type CollectionDetails = {
   description?: Maybe<LocalizedObject>,
   draftTitle?: Maybe<Scalars['String']>,
   eventListQuery?: Maybe<LocalizedObject>,
+  courseListQuery?: Maybe<LocalizedObject>,
   eventListTitle?: Maybe<LocalizedObject>,
   expireAt?: Maybe<Scalars['String']>,
   expired?: Maybe<Scalars['Boolean']>,
@@ -207,6 +223,8 @@ export type KeywordListResponse = {
 export type LandingPage = {
    __typename?: 'LandingPage',
   id: Scalars['ID'],
+  topBanner?: Maybe<BannerPage>,
+  bottomBanner?: Maybe<BannerPage>,
   path?: Maybe<Scalars['String']>,
   depth?: Maybe<Scalars['Int']>,
   numchild?: Maybe<Scalars['Int']>,
@@ -707,6 +725,7 @@ export type ResolversTypes = {
   LinkedEventsSource: LinkedEventsSource;
   KeywordListResponse: ResolverTypeWrapper<KeywordListResponse>;
   LandingPage: ResolverTypeWrapper<LandingPage>;
+  BannerPage: ResolverTypeWrapper<BannerPage>;
   LocalizedCmsImage: ResolverTypeWrapper<LocalizedCmsImage>;
   LandingPagesResponse: ResolverTypeWrapper<LandingPagesResponse>;
   NeighborhoodListResponse: ResolverTypeWrapper<NeighborhoodListResponse>;
@@ -749,6 +768,7 @@ export type ResolversParentTypes = {
   Meta: Meta;
   KeywordListResponse: KeywordListResponse;
   LandingPage: LandingPage;
+  BannerPage: BannerPage;
   LocalizedCmsImage: LocalizedCmsImage;
   LandingPagesResponse: LandingPagesResponse;
   NeighborhoodListResponse: NeighborhoodListResponse;
@@ -778,6 +798,21 @@ export type AudienceResolvers<ContextType = any, ParentType extends ResolversPar
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type BannerPageResolvers<ContextType = any, ParentType extends ResolversParentTypes['BannerPage'] = ResolversParentTypes['BannerPage']> = {
+  title?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
+  keywords?: Resolver<Maybe<ResolversTypes['LocalizedCmsKeywords']>, ParentType, ContextType>;
+  titleAndDescriptionColor?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
+  buttonText?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
+  buttonUrl?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
+  heroBackgroundImage?: Resolver<Maybe<ResolversTypes['LocalizedCmsImage']>, ParentType, ContextType>;
+  heroBackgroundImageMobile?: Resolver<Maybe<ResolversTypes['LocalizedCmsImage']>, ParentType, ContextType>;
+  heroBackgroundImageColor?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
+  heroTopLayerImage?: Resolver<Maybe<ResolversTypes['LocalizedCmsImage']>, ParentType, ContextType>;
+  socialMediaImage?: Resolver<Maybe<ResolversTypes['LocalizedCmsImage']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type CmsImageResolvers<ContextType = any, ParentType extends ResolversParentTypes['CmsImage'] = ResolversParentTypes['CmsImage']> = {
   photographerCredit?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -794,6 +829,7 @@ export type CollectionDetailsResolvers<ContextType = any, ParentType extends Res
   description?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
   draftTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   eventListQuery?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
+  courseListQuery?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
   eventListTitle?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
   expireAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   expired?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
@@ -955,6 +991,8 @@ export type KeywordListResponseResolvers<ContextType = any, ParentType extends R
 
 export type LandingPageResolvers<ContextType = any, ParentType extends ResolversParentTypes['LandingPage'] = ResolversParentTypes['LandingPage']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  topBanner?: Resolver<Maybe<ResolversTypes['BannerPage']>, ParentType, ContextType>;
+  bottomBanner?: Resolver<Maybe<ResolversTypes['BannerPage']>, ParentType, ContextType>;
   path?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   depth?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   numchild?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -1178,6 +1216,7 @@ export type Resolvers<ContextType = any> = {
   AboutPagesResponse?: AboutPagesResponseResolvers<ContextType>;
   AccessibilityPagesResponse?: AccessibilityPagesResponseResolvers<ContextType>;
   Audience?: AudienceResolvers<ContextType>;
+  BannerPage?: BannerPageResolvers<ContextType>;
   CmsImage?: CmsImageResolvers<ContextType>;
   CollectionDetails?: CollectionDetailsResolvers<ContextType>;
   CollectionListResponse?: CollectionListResponseResolvers<ContextType>;
