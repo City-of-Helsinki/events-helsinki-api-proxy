@@ -14,6 +14,7 @@ const normalizeCollection = (collection) => {
     'socialMediaDescription',
     'curatedEventsTitle',
     'eventListQuery',
+    'courseListQuery',
     'eventListTitle',
   ];
 

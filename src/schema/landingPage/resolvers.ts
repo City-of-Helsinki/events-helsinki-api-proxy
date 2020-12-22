@@ -7,7 +7,10 @@ const normalizeLandingPage = (collection) => {
   let normalizedLandingPage = normalizeKeys(collection);
   const normalizedKeys = [
     'title',
+
+    // BEGIN deprecated fields
     'description',
+    'socialMediaImage',
     'titleAndDescriptionColor',
     'buttonText',
     'buttonUrl',
@@ -15,19 +18,19 @@ const normalizeLandingPage = (collection) => {
     'heroBackgroundImageMobile',
     'heroBackgroundImageColor',
     'heroTopLayerImage',
+    // END deprecated fields
+
     'keywords',
-    'socialMediaImage',
     'metaInformation',
     'pageTitle',
   ];
 
   normalizedKeys.forEach((item) => {
-    normalizedLandingPage = normalizeLocalizedObject(
-      normalizedLandingPage,
-      item
-    );
+      normalizedLandingPage = normalizeLocalizedObject(
+        normalizedLandingPage,
+        item
+      );
   });
-
   return normalizedLandingPage;
 };
 

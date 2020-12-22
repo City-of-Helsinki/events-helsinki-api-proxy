@@ -20,6 +20,7 @@ const typeDefs = gql`
     description: LocalizedObject
     draftTitle: String
     eventListQuery: LocalizedObject
+    courseListQuery: LocalizedObject
     eventListTitle: LocalizedObject
     expireAt: String
     expired: Boolean
