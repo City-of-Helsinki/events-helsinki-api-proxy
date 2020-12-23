@@ -1,4 +1,4 @@
-import Sentry from '@sentry/node';
+import * as Sentry from '@sentry/node';
 
 import { QueryResolvers } from '../../types/types';
 import normalizeKeys from '../../utils/normalizeKeys';

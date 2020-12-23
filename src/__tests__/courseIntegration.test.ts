@@ -1,8 +1,20 @@
+/* eslint-disable no-console */
+import * as Sentry from '@sentry/node';
 import { gql } from 'apollo-server';
 
 import CourseAPI from '../datasources/course';
 import { EventDetails, EventListResponse } from '../types/types';
 import { getApolloTestServer } from '../utils/testUtils';
+
+let errorSpy;
+
+beforeEach(() => {
+  errorSpy = jest.spyOn(console, 'error');
+});
+
+afterEach(() => {
+  (console.error as any).mockRestore();
+});
 
 it('resolves eventList correctly', async () => {
   const GET_COURSES = gql`
@@ -99,4 +111,33 @@ it('resolves coursesByIds correctly', async () => {
     { id: 'courseId', publisher: 'publisherId' },
     { id: 'courseId', publisher: 'publisherId' },
   ]);
+});
+
+it('handles error correctly in coursesByIds', async () => {
+  const COURSE_DETAILS = gql`
+    {
+      coursesByIds(ids: ["id1"]) {
+        id
+        publisher
+      }
+    }
+  `;
+
+  const spy = jest.spyOn(Sentry, 'captureException');
+  const errorMessage = 'Error message';
+
+  // avoid error message in test logs
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  errorSpy.mockImplementationOnce(() => {});
+
+  const courseAPI = new CourseAPI();
+  const getMock = jest.fn().mockResolvedValue(Promise.reject(errorMessage));
+  courseAPI.get = getMock;
+
+  const { query } = getApolloTestServer({ dataSources: () => ({ courseAPI }) });
+
+  await query({ query: COURSE_DETAILS });
+
+  expect(spy.mock.calls).toEqual([[errorMessage]]);
+  expect(console.error).toHaveBeenCalled();
 });
