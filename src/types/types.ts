@@ -48,6 +48,7 @@ export type CmsImage = {
    __typename?: 'CmsImage',
   photographerCredit?: Maybe<Scalars['String']>,
   url?: Maybe<Scalars['String']>,
+  title?: Maybe<Scalars['String']>,
 };
 
 export type CollectionDetails = {
@@ -816,6 +817,7 @@ export type BannerPageResolvers<ContextType = any, ParentType extends ResolversP
 export type CmsImageResolvers<ContextType = any, ParentType extends ResolversParentTypes['CmsImage'] = ResolversParentTypes['CmsImage']> = {
   photographerCredit?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
