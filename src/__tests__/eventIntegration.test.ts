@@ -13,6 +13,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (console.error as any).mockRestore();
 });
 
