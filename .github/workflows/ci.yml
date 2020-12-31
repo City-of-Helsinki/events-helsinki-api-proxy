@@ -30,6 +30,8 @@ jobs:
         run: yarn --prefer-offline
       - name: Run linter
         run: yarn lint
+      - name: Init env variables for jest
+        run: cp .env.example .env
       - name: Run tests
         run: yarn ci
       - name: Upload coverage to Codecov
