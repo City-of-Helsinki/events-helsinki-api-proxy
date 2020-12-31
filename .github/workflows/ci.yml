@@ -5,7 +5,17 @@ on:
   push:
     branches: [master]
   workflow_dispatch:
-
+env:
+  NODE_ENV: development
+  GRAPHQL_PROXY_DEBUG: debug
+  GRAPHQL_PROXY_PORT: 4000
+  GRAPHQL_PROXY_CMS_API_BASE_URL: https://cms.test.kuva.hel.ninja/api/
+  GRAPHQL_PROXY_API_BASE_URL: https://api.hel.fi
+  GRAPHQL_PROXY_LINKED_EVENTS_API_BASE_PATH: linkedevents/v1/
+  GRAPHQL_PROXY_LINKED_COURSES_API_BASE_PATH: linkedcourses/v1/
+  GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL: https://kartta.hel.fi/ws/geoserver/avoindata
+  GRAPHQL_PROXY_SENTRY_DSN:
+  GRAPHQL_PROXY_SENTRY_ENVIRONMENT: local
 jobs:
   test:
     name: Test
@@ -30,8 +40,6 @@ jobs:
         run: yarn --prefer-offline
       - name: Run linter
         run: yarn lint
-      - name: Init env variables for jest
-        run: cp .env.example .env
       - name: Run tests
         run: yarn ci
       - name: Upload coverage to Codecov
