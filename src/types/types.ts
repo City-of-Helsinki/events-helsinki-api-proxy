@@ -246,16 +246,7 @@ export type LandingPage = {
   lastPublishedAt?: Maybe<Scalars['String']>,
   latestRevisionCreatedAt?: Maybe<Scalars['String']>,
   title?: Maybe<LocalizedObject>,
-  description?: Maybe<LocalizedObject>,
   keywords?: Maybe<LocalizedCmsKeywords>,
-  titleAndDescriptionColor?: Maybe<LocalizedObject>,
-  buttonText?: Maybe<LocalizedObject>,
-  buttonUrl?: Maybe<LocalizedObject>,
-  heroBackgroundImage?: Maybe<LocalizedCmsImage>,
-  heroBackgroundImageMobile?: Maybe<LocalizedCmsImage>,
-  heroBackgroundImageColor?: Maybe<LocalizedObject>,
-  heroTopLayerImage?: Maybe<LocalizedCmsImage>,
-  socialMediaImage?: Maybe<LocalizedCmsImage>,
   metaInformation?: Maybe<LocalizedObject>,
   pageTitle?: Maybe<LocalizedObject>,
   contentType?: Maybe<Scalars['Int']>,
@@ -1015,16 +1006,7 @@ export type LandingPageResolvers<ContextType = any, ParentType extends Resolvers
   lastPublishedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   latestRevisionCreatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   title?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
-  description?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
   keywords?: Resolver<Maybe<ResolversTypes['LocalizedCmsKeywords']>, ParentType, ContextType>;
-  titleAndDescriptionColor?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
-  buttonText?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
-  buttonUrl?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
-  heroBackgroundImage?: Resolver<Maybe<ResolversTypes['LocalizedCmsImage']>, ParentType, ContextType>;
-  heroBackgroundImageMobile?: Resolver<Maybe<ResolversTypes['LocalizedCmsImage']>, ParentType, ContextType>;
-  heroBackgroundImageColor?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
-  heroTopLayerImage?: Resolver<Maybe<ResolversTypes['LocalizedCmsImage']>, ParentType, ContextType>;
-  socialMediaImage?: Resolver<Maybe<ResolversTypes['LocalizedCmsImage']>, ParentType, ContextType>;
   metaInformation?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
   pageTitle?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
   contentType?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;

@@ -5,25 +5,7 @@ import normalizeLocalizedObject from '../../utils/normalizeLocalizedObject';
 
 const normalizeLandingPage = (collection) => {
   let normalizedLandingPage = normalizeKeys(collection);
-  const normalizedKeys = [
-    'title',
-
-    // BEGIN deprecated fields
-    'description',
-    'socialMediaImage',
-    'titleAndDescriptionColor',
-    'buttonText',
-    'buttonUrl',
-    'heroBackgroundImage',
-    'heroBackgroundImageMobile',
-    'heroBackgroundImageColor',
-    'heroTopLayerImage',
-    // END deprecated fields
-
-    'keywords',
-    'metaInformation',
-    'pageTitle',
-  ];
+  const normalizedKeys = ['title', 'keywords', 'metaInformation', 'pageTitle'];
 
   normalizedKeys.forEach((item) => {
     normalizedLandingPage = normalizeLocalizedObject(
