@@ -35,6 +35,7 @@ export const CmsImage = gql`
   type CmsImage {
     photographerCredit: String
     url: String
+    title: String
   }
 `;
 
