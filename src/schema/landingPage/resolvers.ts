@@ -26,10 +26,10 @@ const normalizeLandingPage = (collection) => {
   ];
 
   normalizedKeys.forEach((item) => {
-      normalizedLandingPage = normalizeLocalizedObject(
-        normalizedLandingPage,
-        item
-      );
+    normalizedLandingPage = normalizeLocalizedObject(
+      normalizedLandingPage,
+      item
+    );
   });
   return normalizedLandingPage;
 };

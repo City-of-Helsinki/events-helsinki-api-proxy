@@ -45,7 +45,7 @@ it('resolves keywordList correctly', async () => {
       count: 1,
     },
   };
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (keywordAPI as any).get = jest.fn().mockResolvedValue(keywordResponse);
 
   const { query } = getApolloTestServer({
@@ -83,7 +83,7 @@ it('uses correct path when source is provided', async () => {
   const keywordAPI = new KeywordAPI();
 
   const getMock = jest.fn();
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (keywordAPI as any).get = getMock;
 
   const { query } = getApolloTestServer({
