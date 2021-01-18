@@ -1,6 +1,9 @@
 export const linkedEventsBaseArgs = `
   localOngoingAnd: [String]
   localOngoingOr: [String]
+  localOngoingOrSet1: [String]
+  localOngoingOrSet2: [String]
+  localOngoingOrSet3: [String]
   internetOngoingAnd: [String]
   internetOngoingOr: [String]
   allOngoingAnd: [String]
