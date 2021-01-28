@@ -17,6 +17,9 @@ export const linkedEventsBaseArgs = `
   include: [String]
   isFree: Boolean
   keywordAnd: [String]
+  keywordOrSet1: [String]
+  keywordOrSet2: [String]
+  keywordOrSet3: [String]
   keywordNot: [String]
   keyword: [String]
   language: String
