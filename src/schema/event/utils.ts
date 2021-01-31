@@ -22,6 +22,7 @@ export const buildEventListQuery = (params: QueryEventListArgs) => {
     { key: 'is_free', value: params.isFree },
     { key: 'keyword', value: params.keyword },
     { key: 'keyword_AND', value: params.keywordAnd },
+    { key: 'keyword_OR_set1', value: params.keywordOrSet1 },
     { key: 'keyword!', value: params.keywordNot },
     { key: 'language', value: params.language },
     { key: 'location', value: params.location },
