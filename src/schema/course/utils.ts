@@ -13,6 +13,8 @@ export const buildCourseQuery = (params: QueryCourseListArgs) => {
     { key: 'is_free', value: params.isFree },
     { key: 'keyword', value: params.keyword },
     { key: 'keyword_AND', value: params.keywordAnd },
+    { key: 'keyword_OR_set2', value: params.keywordOrSet2 },
+    { key: 'keyword_OR_set3', value: params.keywordOrSet3 },
     { key: 'keyword!', value: params.keywordNot },
     { key: 'language', value: params.language },
     { key: 'location', value: params.location },
