@@ -88,7 +88,7 @@ it('resolves eventDetails correctly', async () => {
   });
 });
 
-it.only('resolves eventsByIds correctly', async () => {
+it('resolves eventsByIds correctly', async () => {
   const EVENT_DETAILS = gql`
     {
       eventsByIds(ids: ["id1", "id2"]) {
