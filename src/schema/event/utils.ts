@@ -1,6 +1,7 @@
 import { QueryEventListArgs } from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import queryBuilder from '../../utils/queryBuilder';
+
 export const buildEventListQuery = (params: QueryEventListArgs) => {
   return queryBuilder([
     { key: 'combined_text', value: params.combinedText },
@@ -41,14 +42,25 @@ export const buildEventListQuery = (params: QueryEventListArgs) => {
     { key: 'audience_min_age_gt', value: params.audienceMinAgeGt },
     { key: 'audience_max_age_lt', value: params.audienceMaxAgeLt },
     { key: 'audience_max_age_gt', value: params.audienceMaxAgeGt },
+    { key: 'ids', value: params.ids },
   ]);
 };
 
-export const buildEventDetailsQuery = (include: string[]) => {
+export const buildEventDetailsQuery = ({
+  include,
+  ids,
+}: {
+  include?: string[];
+  ids?: string[];
+}) => {
   let query = '';
 
   if (include && include.length) {
     query = composeQuery(query, 'include', include.join(','));
   }
+  if (ids && ids.length) {
+    query = composeQuery(query, 'ids', include.join(','));
+  }
+
   return query;
 };

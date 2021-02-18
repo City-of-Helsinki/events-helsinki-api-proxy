@@ -88,7 +88,7 @@ it('resolves eventDetails correctly', async () => {
   });
 });
 
-it('resolves eventsByIds correctly', async () => {
+it.only('resolves eventsByIds correctly', async () => {
   const EVENT_DETAILS = gql`
     {
       eventsByIds(ids: ["id1", "id2"]) {
@@ -104,9 +104,17 @@ it('resolves eventsByIds correctly', async () => {
   const publisherId = 'publisherId';
 
   const getMock = jest.fn().mockResolvedValue({
-    id: eventId,
-    publisher: publisherId,
-  } as EventDetails);
+    data: [
+      {
+        id: eventId,
+        publisher: publisherId,
+      },
+      {
+        id: eventId,
+        publisher: publisherId,
+      },
+    ],
+  } as { data: EventDetails[] });
 
   eventAPI.get = getMock;
 

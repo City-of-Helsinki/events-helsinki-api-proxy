@@ -6,12 +6,11 @@ import { buildEventDetailsQuery, buildEventListQuery } from './utils';
 
 const Query: QueryResolvers = {
   eventDetails: async (_, { id, include }, { dataSources }) => {
-    const query = buildEventDetailsQuery(include);
+    const query = buildEventDetailsQuery({ include });
     const data = await dataSources.eventAPI.getEventDetails(id, query);
 
     return normalizeKeys(data);
   },
-
   eventList: async (_, params, { dataSources }) => {
     const query = buildEventListQuery(params);
     const data = await dataSources.eventAPI.getEventList(query);
@@ -23,24 +22,18 @@ const Query: QueryResolvers = {
       meta: data.meta,
     };
   },
-
   eventsByIds: async (_, { ids, include }, { dataSources }) => {
-    const events = await Promise.all(
-      ids.map(async (id) => {
-        try {
-          const query = buildEventDetailsQuery(include);
-          const event = await dataSources.eventAPI.getEventDetails(id, query);
-          return normalizeKeys(event);
-        } catch (e) {
-          Sentry.captureException(e);
-          // eslint-disable-next-line no-console
-          console.error('error', e);
-          return null;
-        }
-      })
-    );
+    const query = buildEventListQuery({ ids, include });
 
-    return events.filter((e) => e);
+    try {
+      const { data } = await dataSources.eventAPI.getEventList(query);
+      return data.map((event) => normalizeKeys(event));
+    } catch (e) {
+      Sentry.captureException(e);
+      // eslint-disable-next-line no-console
+      console.error('error', e);
+      return null;
+    }
   },
 };
 
