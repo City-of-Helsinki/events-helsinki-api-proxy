@@ -6,7 +6,7 @@ import { buildEventDetailsQuery, buildEventListQuery } from './utils';
 
 const Query: QueryResolvers = {
   eventDetails: async (_, { id, include }, { dataSources }) => {
-    const query = buildEventDetailsQuery({ include });
+    const query = buildEventDetailsQuery(include);
     const data = await dataSources.eventAPI.getEventDetails(id, query);
 
     return normalizeKeys(data);

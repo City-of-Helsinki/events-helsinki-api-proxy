@@ -46,20 +46,11 @@ export const buildEventListQuery = (params: QueryEventListArgs) => {
   ]);
 };
 
-export const buildEventDetailsQuery = ({
-  include,
-  ids,
-}: {
-  include?: string[];
-  ids?: string[];
-}) => {
+export const buildEventDetailsQuery = (include?: string[]) => {
   let query = '';
 
   if (include && include.length) {
     query = composeQuery(query, 'include', include.join(','));
-  }
-  if (ids && ids.length) {
-    query = composeQuery(query, 'ids', include.join(','));
   }
 
   return query;
