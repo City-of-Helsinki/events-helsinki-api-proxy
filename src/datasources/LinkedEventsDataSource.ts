@@ -9,6 +9,7 @@ class DataSource extends RESTDataSource {
     }
 
     request.headers.set('Content-Type', 'application/json');
+    request.headers.set('Connection', 'keep-alive');
   }
 }
 
