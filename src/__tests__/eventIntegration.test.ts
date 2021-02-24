@@ -104,9 +104,17 @@ it('resolves eventsByIds correctly', async () => {
   const publisherId = 'publisherId';
 
   const getMock = jest.fn().mockResolvedValue({
-    id: eventId,
-    publisher: publisherId,
-  } as EventDetails);
+    data: [
+      {
+        id: eventId,
+        publisher: publisherId,
+      },
+      {
+        id: eventId,
+        publisher: publisherId,
+      },
+    ],
+  } as { data: EventDetails[] });
 
   eventAPI.get = getMock;
 

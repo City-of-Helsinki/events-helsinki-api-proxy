@@ -13,6 +13,7 @@ export const linkedEventsBaseArgs = `
   end: String
   endsAfter: String
   endsBefore: String
+  ids: [String]
   inLanguage: String
   include: [String]
   isFree: Boolean
