@@ -6,6 +6,7 @@ export const linkedEventsBaseArgs = `
   localOngoingOrSet3: [String]
   internetOngoingAnd: [String]
   internetOngoingOr: [String]
+  allOngoing: Boolean
   allOngoingAnd: [String]
   allOngoingOr: [String]
   combinedText: [String]
