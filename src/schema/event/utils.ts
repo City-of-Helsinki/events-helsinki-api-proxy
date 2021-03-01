@@ -12,6 +12,7 @@ export const buildEventListQuery = (params: QueryEventListArgs) => {
     { key: 'local_ongoing_OR_set3', value: params.localOngoingOrSet3 },
     { key: 'internet_ongoing_AND', value: params.internetOngoingAnd },
     { key: 'internet_ongoing_OR', value: params.internetOngoingOr },
+    { key: 'all_ongoing', value: params.allOngoing },
     { key: 'all_ongoing_AND', value: params.allOngoingAnd },
     { key: 'all_ongoing_OR', value: params.allOngoingOr },
     { key: 'division', value: params.division },
