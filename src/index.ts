@@ -37,6 +37,27 @@ Sentry.init({
   ],
 });
 
+const apolloServerBasicLoggingPlugin = {
+  requestDidStart(requestContext) {
+    /* eslint-disable no-console */
+    console.log('request started');
+    console.log(requestContext.request.query);
+    console.log(requestContext.request.variables);
+    /* eslint-enable no-console */
+    return {
+      didEncounterErrors(requestContext) {
+        // eslint-disable-next-line no-console
+        console.error(requestContext.errors);
+      },
+    };
+  },
+
+  willSendResponse(requestContext) {
+    // eslint-disable-next-line no-console
+    console.log('response sent', requestContext.response);
+  },
+} as ApolloServerPlugin;
+
 const apolloServerSentryPlugin = {
   // For plugin definition see the docs: https://www.apollographql.com/docs/apollo-server/integrations/plugins/
   requestDidStart() {
@@ -92,7 +113,7 @@ const dataSources = () => ({
     formatError: (err) => {
       return err;
     },
-    plugins: [apolloServerSentryPlugin],
+    plugins: [apolloServerSentryPlugin, apolloServerBasicLoggingPlugin],
     schema,
     validationRules: [depthLimit(10)],
   });
