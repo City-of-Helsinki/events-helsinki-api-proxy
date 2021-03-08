@@ -38,22 +38,22 @@ Sentry.init({
 });
 
 const apolloServerBasicLoggingPlugin = {
-  requestDidStart(requestContext) {
+  requestDidStart({ request }) {
     /* eslint-disable no-console */
     console.log('Request started', {
-      operationName: requestContext.request.operationName,
-      variables: requestContext.request.variables,
+      operationName: request.operationName,
+      variables: request.variables,
     });
 
     /* eslint-enable no-console */
     return {
-      didEncounterErrors(requestContext) {
+      didEncounterErrors({ request, errors }) {
         /* eslint-disable no-console */
         console.error('Encountered errors: \n', {
-          variables: requestContext.request.variables,
-          operationName: requestContext.request.operationName,
-          errors: requestContext.errors,
-          query: requestContext.request.query,
+          variables: request.variables,
+          operationName: request.operationName,
+          errors: errors,
+          query: request.query,
         });
       },
     };
