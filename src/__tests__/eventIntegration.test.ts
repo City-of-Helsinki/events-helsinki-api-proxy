@@ -154,5 +154,4 @@ it('handles error correctly in eventsByIds', async () => {
   await query({ query: EVENT_DETAILS });
 
   expect(spy.mock.calls).toEqual([[errorMessage]]);
-  expect(console.error).toHaveBeenCalled();
 });
