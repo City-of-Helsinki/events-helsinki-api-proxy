@@ -40,14 +40,21 @@ Sentry.init({
 const apolloServerBasicLoggingPlugin = {
   requestDidStart(requestContext) {
     /* eslint-disable no-console */
-    console.log('request started');
-    console.log(requestContext.request.query);
-    console.log(requestContext.request.variables);
+    console.log('Request started', {
+      operationName: requestContext.request.operationName,
+      variables: requestContext.request.variables,
+    });
+
     /* eslint-enable no-console */
     return {
       didEncounterErrors(requestContext) {
-        // eslint-disable-next-line no-console
-        console.error(requestContext.errors);
+        /* eslint-disable no-console */
+        console.error('Encountered errors: \n', {
+          variables: requestContext.request.variables,
+          operationName: requestContext.request.operationName,
+          errors: requestContext.errors,
+          query: requestContext.request.query,
+        });
       },
     };
   },

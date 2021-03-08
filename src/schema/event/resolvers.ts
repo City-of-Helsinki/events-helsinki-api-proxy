@@ -30,9 +30,7 @@ const Query: QueryResolvers = {
       return data.map((event) => normalizeKeys(event));
     } catch (e) {
       Sentry.captureException(e);
-      // eslint-disable-next-line no-console
-      console.error('error', e);
-      return null;
+      throw new Error(e);
     }
   },
 };
