@@ -43,6 +43,7 @@ const apolloServerBasicLoggingPlugin = {
     console.log('Request started', {
       operationName: request.operationName,
       variables: request.variables,
+      requestId: request.http.headers.get('X-Request-ID'),
     });
 
     /* eslint-enable no-console */
