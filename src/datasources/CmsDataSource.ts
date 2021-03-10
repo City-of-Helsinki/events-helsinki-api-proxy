@@ -5,7 +5,7 @@ import { X_REQUEST_ID } from '..';
 class DataSource extends RESTDataSource {
   public baseURL = process.env.GRAPHQL_PROXY_CMS_API_BASE_URL;
   public willSendRequest(request) {
-    if (this.context.requestId) {
+    if (this.context[X_REQUEST_ID]) {
       request.headers.set(X_REQUEST_ID, this.context[X_REQUEST_ID]);
     }
 

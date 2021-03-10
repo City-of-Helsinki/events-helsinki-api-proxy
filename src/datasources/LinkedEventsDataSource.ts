@@ -10,7 +10,7 @@ class DataSource extends RESTDataSource {
       request.headers.set('Authorization', this.context.token);
     }
 
-    if (this.context.requestId) {
+    if (this.context[X_REQUEST_ID]) {
       request.headers.set(X_REQUEST_ID, this.context[X_REQUEST_ID]);
     }
 
