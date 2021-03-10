@@ -24,6 +24,8 @@ import schema from './schema';
 const OK = 'OK';
 const SERVER_IS_NOT_READY = 'SERVER_IS_NOT_READY';
 
+export const X_REQUEST_ID = 'X-Request-ID';
+
 Sentry.init({
   dsn: process.env.GRAPHQL_PROXY_SENTRY_DSN,
   environment: process.env.GRAPHQL_PROXY_SENTRY_ENVIRONMENT,
@@ -38,12 +40,15 @@ Sentry.init({
 });
 
 const apolloServerBasicLoggingPlugin = {
-  requestDidStart({ request }) {
+  requestDidStart({ request, context }) {
+    // Add request id to context so it can be passed upstream in datasources
+    context[X_REQUEST_ID] = request.http.headers.get(X_REQUEST_ID);
+
     /* eslint-disable no-console */
     console.log('Request started', {
       operationName: request.operationName,
       variables: request.variables,
-      requestId: request.http.headers.get('X-Request-ID'),
+      requestId: request.http.headers.get(X_REQUEST_ID),
     });
 
     /* eslint-enable no-console */
