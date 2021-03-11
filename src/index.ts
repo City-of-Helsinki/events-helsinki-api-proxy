@@ -20,6 +20,7 @@ import NeighborhoodAPI from './datasources/neighborhood';
 import OrganizationAPI from './datasources/organization';
 import PlaceAPI from './datasources/place';
 import schema from './schema';
+import apolloLoggingPlugin from './utils/apolloLoggingPlugin';
 
 const OK = 'OK';
 const SERVER_IS_NOT_READY = 'SERVER_IS_NOT_READY';
@@ -38,38 +39,6 @@ Sentry.init({
     }),
   ],
 });
-
-const apolloServerBasicLoggingPlugin = {
-  requestDidStart({ request, context }) {
-    // Add request id to context so it can be passed upstream in datasources
-    context[X_REQUEST_ID] = request.http.headers.get(X_REQUEST_ID);
-
-    /* eslint-disable no-console */
-    console.log('Request started', {
-      operationName: request.operationName,
-      variables: request.variables,
-      requestId: request.http.headers.get(X_REQUEST_ID),
-    });
-
-    /* eslint-enable no-console */
-    return {
-      didEncounterErrors({ request, errors }) {
-        /* eslint-disable no-console */
-        console.error('Encountered errors: \n', {
-          variables: request.variables,
-          operationName: request.operationName,
-          errors: errors,
-          query: request.query,
-        });
-      },
-    };
-  },
-
-  willSendResponse(requestContext) {
-    // eslint-disable-next-line no-console
-    console.log('response sent', requestContext.response);
-  },
-} as ApolloServerPlugin;
 
 const apolloServerSentryPlugin = {
   // For plugin definition see the docs: https://www.apollographql.com/docs/apollo-server/integrations/plugins/
@@ -126,7 +95,7 @@ const dataSources = () => ({
     formatError: (err) => {
       return err;
     },
-    plugins: [apolloServerSentryPlugin, apolloServerBasicLoggingPlugin],
+    plugins: [apolloServerSentryPlugin, apolloLoggingPlugin],
     schema,
     validationRules: [depthLimit(10)],
   });
