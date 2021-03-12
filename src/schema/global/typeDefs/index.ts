@@ -33,7 +33,7 @@ export const LocalizedObject = gql`
 
 export const CmsImage = gql`
   type CmsImage {
-    photographerCredit: String
+    photographerCredit: LocalizedObject
     url: String
     title: String
   }
