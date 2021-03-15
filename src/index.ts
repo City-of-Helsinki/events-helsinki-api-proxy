@@ -25,8 +25,6 @@ import apolloLoggingPlugin from './utils/apolloLoggingPlugin';
 const OK = 'OK';
 const SERVER_IS_NOT_READY = 'SERVER_IS_NOT_READY';
 
-export const X_REQUEST_ID = 'X-Request-ID';
-
 Sentry.init({
   dsn: process.env.GRAPHQL_PROXY_SENTRY_DSN,
   environment: process.env.GRAPHQL_PROXY_SENTRY_ENVIRONMENT,

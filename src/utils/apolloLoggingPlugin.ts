@@ -1,7 +1,7 @@
 import { ApolloServerPlugin } from 'apollo-server-plugin-base';
 import { v4 as uuidv4 } from 'uuid';
 
-import { X_REQUEST_ID } from '..';
+import { X_REQUEST_ID } from '../constants';
 import logger from './logger';
 
 export default {

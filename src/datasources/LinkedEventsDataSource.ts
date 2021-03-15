@@ -1,6 +1,6 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 
-import { X_REQUEST_ID } from '..';
+import { X_REQUEST_ID } from '../constants';
 
 class DataSource extends RESTDataSource {
   public baseURL = process.env.GRAPHQL_PROXY_API_BASE_URL;
@@ -18,5 +18,4 @@ class DataSource extends RESTDataSource {
     request.headers.set('Connection', 'keep-alive');
   }
 }
-
 export default DataSource;
