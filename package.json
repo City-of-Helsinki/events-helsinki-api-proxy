@@ -29,7 +29,9 @@
     "graphql-depth-limit": "^1.1.0",
     "lodash": "^4.17.19",
     "promise": "^8.1.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.8.1",
