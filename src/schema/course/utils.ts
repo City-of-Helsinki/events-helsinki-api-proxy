@@ -1,4 +1,7 @@
+import * as Sentry from '@sentry/node';
+
 import { QueryCourseListArgs } from '../../types/types';
+import normalizeKeys from '../../utils/normalizeKeys';
 import queryBuilder from '../../utils/queryBuilder';
 
 export const buildCourseQuery = (params: QueryCourseListArgs) => {
@@ -34,4 +37,31 @@ export const buildCourseQuery = (params: QueryCourseListArgs) => {
     { key: 'audience_max_age_lt', value: params.audienceMaxAgeLt },
     { key: 'audience_max_age_gt', value: params.audienceMaxAgeGt },
   ]);
+};
+
+export const getCoursesList = async ({
+  dataSources,
+  include,
+  ids,
+}: {
+  dataSources: any;
+  include: string[];
+  ids: string[];
+}) => {
+  const courses = await Promise.all(
+    ids.map(async (id) => {
+      try {
+        const query = buildCourseQuery({ include });
+        const course = await dataSources.courseAPI.getCourseDetails(id, query);
+        return normalizeKeys(course);
+      } catch (e) {
+        Sentry.captureException(e);
+        // eslint-disable-next-line no-console
+        console.error('error', e);
+        return null;
+      }
+    })
+  );
+
+  return courses.filter(Boolean);
 };

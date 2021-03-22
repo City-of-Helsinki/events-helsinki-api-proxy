@@ -1,8 +1,6 @@
-import * as Sentry from '@sentry/node';
-
 import { QueryResolvers } from '../../types/types';
 import normalizeKeys from '../../utils/normalizeKeys';
-import { buildCourseQuery } from './utils';
+import { buildCourseQuery, getCoursesList } from './utils';
 
 const Query: QueryResolvers = {
   courseDetails: async (_, { id, include }, { dataSources }) => {
@@ -25,25 +23,7 @@ const Query: QueryResolvers = {
   },
 
   coursesByIds: async (_, { ids, include }, { dataSources }) => {
-    const courses = await Promise.all(
-      ids.map(async (id) => {
-        try {
-          const query = buildCourseQuery({ include });
-          const course = await dataSources.courseAPI.getCourseDetails(
-            id,
-            query
-          );
-          return normalizeKeys(course);
-        } catch (e) {
-          Sentry.captureException(e);
-          // eslint-disable-next-line no-console
-          console.error('error', e);
-          return null;
-        }
-      })
-    );
-
-    return courses.filter((e) => e);
+    return getCoursesList({ ids, include, dataSources });
   },
 };
 
