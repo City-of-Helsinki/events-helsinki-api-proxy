@@ -2,6 +2,7 @@
 import * as Sentry from '@sentry/node';
 import { gql } from 'apollo-server';
 
+import CourseAPI from '../datasources/course';
 import EventAPI from '../datasources/event';
 import { EventDetails, EventListResponse } from '../types/types';
 import { getApolloTestServer } from '../utils/testUtils';
@@ -99,7 +100,6 @@ it('resolves eventsByIds correctly', async () => {
   `;
 
   const eventAPI = new EventAPI();
-
   const eventId = 'eventId';
   const publisherId = 'publisherId';
 
@@ -154,4 +154,36 @@ it('handles error correctly in eventsByIds', async () => {
   await query({ query: EVENT_DETAILS });
 
   expect(spy.mock.calls).toEqual([[errorMessage]]);
+});
+
+it('resolves eventsByIds with LINKEDCOURSES source', async () => {
+  const EVENT_DETAILS = gql`
+    {
+      eventsByIds(ids: ["id1", "id2"], source: LINKEDCOURSES) {
+        id
+        publisher
+      }
+    }
+  `;
+  const courseAPI = new CourseAPI();
+  const eventId = 'eventId';
+  const publisherId = 'publisherId';
+
+  const getMock = jest.fn().mockResolvedValue({
+    data: {
+      id: eventId,
+      publisher: publisherId,
+    },
+  } as { data: EventDetails });
+
+  courseAPI.get = getMock;
+
+  const { query } = getApolloTestServer({ dataSources: () => ({ courseAPI }) });
+
+  const res = await query({ query: EVENT_DETAILS });
+
+  expect(res.data.eventsByIds).toEqual([
+    { id: eventId, publisher: publisherId },
+    { id: eventId, publisher: publisherId },
+  ]);
 });
