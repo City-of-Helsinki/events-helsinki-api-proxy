@@ -4,13 +4,30 @@ import { gql } from 'apollo-server';
 
 import CourseAPI from '../datasources/course';
 import EventAPI from '../datasources/event';
-import { EventDetails, EventListResponse } from '../types/types';
+import {
+  EventDetails,
+  EventListResponse,
+  LinkedEventsSource,
+} from '../types/types';
 import { getApolloTestServer } from '../utils/testUtils';
 
 let errorSpy;
 
+const eventId = 'eventId';
+const publisherId = 'publisherId';
+const eventName = 'tapahtuma';
+
+let eventAPI: EventAPI;
+let courseAPI: CourseAPI;
+let apolloTestServer: ReturnType<typeof getApolloTestServer>;
+
 beforeEach(() => {
   errorSpy = jest.spyOn(console, 'error');
+  eventAPI = new EventAPI();
+  courseAPI = new CourseAPI();
+  apolloTestServer = getApolloTestServer({
+    dataSources: () => ({ eventAPI, courseAPI }),
+  });
 });
 
 afterEach(() => {
@@ -19,125 +36,51 @@ afterEach(() => {
 });
 
 it('resolves eventList correctly', async () => {
-  const GET_EVENTS = gql`
-    {
-      eventList {
-        data {
-          id
-          name {
-            fi
-          }
-        }
-        meta {
-          count
-        }
-      }
-    }
-  `;
-
-  const eventAPI = new EventAPI();
-
-  const eventId = 'eventId';
-  const eventName = 'tapahtuma';
-
-  const eventMock = jest.fn().mockResolvedValue({
+  const mockData = {
     data: [{ id: eventId, name: { fi: eventName } }],
     meta: { count: 1 },
-  } as EventListResponse);
+  } as EventListResponse;
+  eventAPI.get = jest.fn().mockResolvedValue(mockData);
 
-  eventAPI.get = eventMock;
+  const res = await apolloTestServer.query({ query: EVENTS_QUERY });
 
-  const { query } = getApolloTestServer({ dataSources: () => ({ eventAPI }) });
-
-  const res = await query({ query: GET_EVENTS });
-
-  expect(res.data.eventList).toEqual({
-    data: [{ id: eventId, name: { fi: eventName } }],
-    meta: {
-      count: 1,
-    },
-  });
+  expect(res.data.eventList).toEqual(mockData);
 });
 
 it('resolves eventDetails correctly', async () => {
-  const EVENT_DETAILS = gql`
-    {
-      eventDetails {
-        id
-        publisher
-      }
-    }
-  `;
-
-  const eventAPI = new EventAPI();
-
-  const eventId = 'eventId';
-  const publisherId = 'publisherId';
-
-  eventAPI.get = jest.fn().mockResolvedValue({
+  const mockData = {
     id: eventId,
     publisher: publisherId,
-  } as EventDetails);
+  } as EventDetails;
+  eventAPI.get = jest.fn().mockResolvedValue(mockData);
 
-  const { query } = getApolloTestServer({ dataSources: () => ({ eventAPI }) });
+  const res = await apolloTestServer.query({ query: EVENT_DETAILS_QUERY });
 
-  const res = await query({ query: EVENT_DETAILS });
-
-  expect(res.data.eventDetails).toEqual({
-    id: eventId,
-    publisher: publisherId,
-  });
+  expect(res.data.eventDetails).toEqual(mockData);
 });
 
 it('resolves eventsByIds correctly', async () => {
-  const EVENT_DETAILS = gql`
+  const mockData = [
     {
-      eventsByIds(ids: ["id1", "id2"]) {
-        id
-        publisher
-      }
-    }
-  `;
+      id: eventId,
+      publisher: publisherId,
+    },
+    {
+      id: eventId,
+      publisher: publisherId,
+    },
+  ] as EventDetails[];
+  eventAPI.get = jest.fn().mockResolvedValue({ data: mockData });
 
-  const eventAPI = new EventAPI();
-  const eventId = 'eventId';
-  const publisherId = 'publisherId';
+  const res = await apolloTestServer.query({
+    query: EVENTS_BY_IDS_QUERY,
+    variables: { ids: ['id1', 'id2'] },
+  });
 
-  const getMock = jest.fn().mockResolvedValue({
-    data: [
-      {
-        id: eventId,
-        publisher: publisherId,
-      },
-      {
-        id: eventId,
-        publisher: publisherId,
-      },
-    ],
-  } as { data: EventDetails[] });
-
-  eventAPI.get = getMock;
-
-  const { query } = getApolloTestServer({ dataSources: () => ({ eventAPI }) });
-
-  const res = await query({ query: EVENT_DETAILS });
-
-  expect(res.data.eventsByIds).toEqual([
-    { id: 'eventId', publisher: 'publisherId' },
-    { id: 'eventId', publisher: 'publisherId' },
-  ]);
+  expect(res.data.eventsByIds).toEqual(mockData);
 });
 
 it('handles error correctly in eventsByIds', async () => {
-  const EVENT_DETAILS = gql`
-    {
-      eventsByIds(ids: ["id1"]) {
-        id
-        publisher
-      }
-    }
-  `;
-
   const spy = jest.spyOn(Sentry, 'captureException');
   const errorMessage = 'Error message';
 
@@ -145,45 +88,95 @@ it('handles error correctly in eventsByIds', async () => {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   errorSpy.mockImplementationOnce(() => {});
 
-  const eventAPI = new EventAPI();
-  const getMock = jest.fn().mockResolvedValue(Promise.reject(errorMessage));
-  eventAPI.get = getMock;
+  eventAPI.get = jest.fn().mockResolvedValue(Promise.reject(errorMessage));
 
-  const { query } = getApolloTestServer({ dataSources: () => ({ eventAPI }) });
-
-  await query({ query: EVENT_DETAILS });
+  await await apolloTestServer.query({
+    query: EVENTS_BY_IDS_QUERY,
+    variables: { ids: ['id1'] },
+  });
 
   expect(spy.mock.calls).toEqual([[errorMessage]]);
 });
 
-it('resolves eventsByIds with LINKEDCOURSES source', async () => {
-  const EVENT_DETAILS = gql`
-    {
-      eventsByIds(ids: ["id1", "id2"], source: LINKEDCOURSES) {
-        id
-        publisher
-      }
-    }
-  `;
-  const courseAPI = new CourseAPI();
-  const eventId = 'eventId';
-  const publisherId = 'publisherId';
-
-  const getMock = jest.fn().mockResolvedValue({
-    data: {
+describe('source argument works correctly', () => {
+  it('resolves eventsByIds with LINKEDCOURSES source', async () => {
+    const mockData = {
       id: eventId,
       publisher: publisherId,
-    },
-  } as { data: EventDetails });
+    } as EventDetails;
 
-  courseAPI.get = getMock;
+    courseAPI.get = jest.fn().mockResolvedValue({ data: mockData });
 
-  const { query } = getApolloTestServer({ dataSources: () => ({ courseAPI }) });
+    const res = await apolloTestServer.query({
+      query: EVENTS_BY_IDS_QUERY,
+      variables: {
+        ids: ['id1', 'id2'],
+        source: LinkedEventsSource.Linkedcourses,
+      },
+    });
 
-  const res = await query({ query: EVENT_DETAILS });
+    expect(res.data.eventsByIds).toEqual([mockData, mockData]);
+  });
 
-  expect(res.data.eventsByIds).toEqual([
-    { id: eventId, publisher: publisherId },
-    { id: eventId, publisher: publisherId },
-  ]);
+  it('resolves eventsByIds with LINKEDEVENTS source', async () => {
+    const mockData = [
+      {
+        id: eventId,
+        publisher: publisherId,
+      },
+      {
+        id: eventId,
+        publisher: publisherId,
+      },
+    ] as EventDetails[];
+    eventAPI.get = jest.fn().mockResolvedValue({ data: mockData });
+
+    const res = await apolloTestServer.query({
+      query: EVENTS_BY_IDS_QUERY,
+      variables: {
+        ids: ['id1', 'id2'],
+        source: LinkedEventsSource.Linkedevents,
+      },
+    });
+
+    expect(res.data.eventsByIds).toEqual(mockData);
+  });
 });
+
+const EVENTS_BY_IDS_QUERY = gql`
+  query EventsByIds(
+    $ids: [ID!]!
+    $include: [String]
+    $source: LinkedEventsSource
+  ) {
+    eventsByIds(ids: $ids, include: $include, source: $source) {
+      id
+      publisher
+    }
+  }
+`;
+
+const EVENTS_QUERY = gql`
+  {
+    eventList {
+      data {
+        id
+        name {
+          fi
+        }
+      }
+      meta {
+        count
+      }
+    }
+  }
+`;
+
+const EVENT_DETAILS_QUERY = gql`
+  {
+    eventDetails {
+      id
+      publisher
+    }
+  }
+`;
