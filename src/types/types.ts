@@ -420,7 +420,8 @@ export type QueryCollectionListArgs = {
 
 export type QueryEventDetailsArgs = {
   id?: Maybe<Scalars['ID']>,
-  include?: Maybe<Array<Maybe<Scalars['String']>>>
+  include?: Maybe<Array<Maybe<Scalars['String']>>>,
+  source?: Maybe<LinkedEventsSource>
 };
 
 
@@ -466,13 +467,15 @@ export type QueryEventListArgs = {
   audienceMinAgeLt?: Maybe<Scalars['String']>,
   audienceMinAgeGt?: Maybe<Scalars['String']>,
   audienceMaxAgeLt?: Maybe<Scalars['String']>,
-  audienceMaxAgeGt?: Maybe<Scalars['String']>
+  audienceMaxAgeGt?: Maybe<Scalars['String']>,
+  source?: Maybe<LinkedEventsSource>
 };
 
 
 export type QueryEventsByIdsArgs = {
   ids: Array<Scalars['ID']>,
-  include?: Maybe<Array<Maybe<Scalars['String']>>>
+  include?: Maybe<Array<Maybe<Scalars['String']>>>,
+  source?: Maybe<LinkedEventsSource>
 };
 
 
@@ -715,6 +718,7 @@ export type ResolversTypes = {
   CollectionDetails: ResolverTypeWrapper<CollectionDetails>;
   CmsImage: ResolverTypeWrapper<CmsImage>;
   CollectionListResponse: ResolverTypeWrapper<CollectionListResponse>;
+  LinkedEventsSource: LinkedEventsSource;
   EventDetails: ResolverTypeWrapper<EventDetails>;
   Place: ResolverTypeWrapper<Place>;
   Division: ResolverTypeWrapper<Division>;
@@ -730,7 +734,6 @@ export type ResolversTypes = {
   ExtensionCourse: ResolverTypeWrapper<ExtensionCourse>;
   EventListResponse: ResolverTypeWrapper<EventListResponse>;
   Meta: ResolverTypeWrapper<Meta>;
-  LinkedEventsSource: LinkedEventsSource;
   KeywordListResponse: ResolverTypeWrapper<KeywordListResponse>;
   LandingPage: ResolverTypeWrapper<LandingPage>;
   BannerPage: ResolverTypeWrapper<BannerPage>;
