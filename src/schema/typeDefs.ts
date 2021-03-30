@@ -9,11 +9,13 @@ import landingPage from './landingPage/typeDefs';
 import neighborhood from './neighborhood/typeDefs';
 import organization from './organization/typeDefs';
 import place from './place/typeDefs';
+import wpAccessibilityPage from './wpAccessibilityPage/typeDefs';
 
 const typeDefs = [
   ...globalDefs,
   aboutPage,
   accessibilityPage,
+  wpAccessibilityPage,
   collection,
   event,
   course,

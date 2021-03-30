@@ -388,6 +388,7 @@ export type Query = {
   _empty?: Maybe<Scalars['String']>,
   aboutPages: AboutPagesResponse,
   accessibilityPages: AccessibilityPagesResponse,
+  wpAccessibilityPages: WpAccessibilityPagesResponse,
   collectionDetails: CollectionDetails,
   collectionList: CollectionListResponse,
   eventDetails: EventDetails,
@@ -627,6 +628,23 @@ export type Subscription = {
   _empty?: Maybe<Scalars['String']>,
 };
 
+export type WpAccessibilityPagesResponse = {
+   __typename?: 'WpAccessibilityPagesResponse',
+  data: Array<WpStaticPage>,
+};
+
+export type WpStaticPage = {
+   __typename?: 'WPStaticPage',
+  id: Scalars['ID'],
+  title?: Maybe<Scalars['String']>,
+  slug?: Maybe<Scalars['String']>,
+  status?: Maybe<Scalars['String']>,
+  date?: Maybe<Scalars['String']>,
+  modified?: Maybe<Scalars['String']>,
+  type?: Maybe<Scalars['String']>,
+  content?: Maybe<Scalars['String']>,
+};
+
 
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -715,6 +733,8 @@ export type ResolversTypes = {
   LocalizedCmsKeywords: ResolverTypeWrapper<LocalizedCmsKeywords>;
   LocalizedObject: ResolverTypeWrapper<LocalizedObject>;
   AccessibilityPagesResponse: ResolverTypeWrapper<AccessibilityPagesResponse>;
+  WpAccessibilityPagesResponse: ResolverTypeWrapper<WpAccessibilityPagesResponse>;
+  WPStaticPage: ResolverTypeWrapper<WpStaticPage>;
   CollectionDetails: ResolverTypeWrapper<CollectionDetails>;
   CmsImage: ResolverTypeWrapper<CmsImage>;
   CollectionListResponse: ResolverTypeWrapper<CollectionListResponse>;
@@ -759,6 +779,8 @@ export type ResolversParentTypes = {
   LocalizedCmsKeywords: LocalizedCmsKeywords;
   LocalizedObject: LocalizedObject;
   AccessibilityPagesResponse: AccessibilityPagesResponse;
+  WpAccessibilityPagesResponse: WpAccessibilityPagesResponse;
+  WPStaticPage: WpStaticPage;
   CollectionDetails: CollectionDetails;
   CmsImage: CmsImage;
   CollectionListResponse: CollectionListResponse;
@@ -1161,6 +1183,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   _empty?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   aboutPages?: Resolver<ResolversTypes['AboutPagesResponse'], ParentType, ContextType>;
   accessibilityPages?: Resolver<ResolversTypes['AccessibilityPagesResponse'], ParentType, ContextType>;
+  wpAccessibilityPages?: Resolver<ResolversTypes['WpAccessibilityPagesResponse'], ParentType, ContextType>;
   collectionDetails?: Resolver<ResolversTypes['CollectionDetails'], ParentType, ContextType, RequireFields<QueryCollectionDetailsArgs, never>>;
   collectionList?: Resolver<ResolversTypes['CollectionListResponse'], ParentType, ContextType, RequireFields<QueryCollectionListArgs, never>>;
   eventDetails?: Resolver<ResolversTypes['EventDetails'], ParentType, ContextType, RequireFields<QueryEventDetailsArgs, never>>;
@@ -1215,6 +1238,23 @@ export type SubscriptionResolvers<ContextType = any, ParentType extends Resolver
   _empty?: SubscriptionResolver<Maybe<ResolversTypes['String']>, "_empty", ParentType, ContextType>;
 };
 
+export type WpAccessibilityPagesResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['WpAccessibilityPagesResponse'] = ResolversParentTypes['WpAccessibilityPagesResponse']> = {
+  data?: Resolver<Array<ResolversTypes['WPStaticPage']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type WpStaticPageResolvers<ContextType = any, ParentType extends ResolversParentTypes['WPStaticPage'] = ResolversParentTypes['WPStaticPage']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  modified?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
   AboutPagesResponse?: AboutPagesResponseResolvers<ContextType>;
   AccessibilityPagesResponse?: AccessibilityPagesResponseResolvers<ContextType>;
@@ -1250,6 +1290,8 @@ export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
   StaticPage?: StaticPageResolvers<ContextType>;
   Subscription?: SubscriptionResolvers<ContextType>;
+  WpAccessibilityPagesResponse?: WpAccessibilityPagesResponseResolvers<ContextType>;
+  WPStaticPage?: WpStaticPageResolvers<ContextType>;
 };
 
 

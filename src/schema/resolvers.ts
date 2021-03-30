@@ -10,10 +10,12 @@ import landingPage from './landingPage/resolvers';
 import neighborhood from './neighborhood/resolvers';
 import organization from './organization/resolvers';
 import place from './place/resolvers';
+import wpAccessibilityPage from './wpAccessibilityPage/resolvers';
 
 const resolvers = merge(
   aboutPage,
   accessibilityPage,
+  wpAccessibilityPage,
   collection,
   event,
   course,

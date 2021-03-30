@@ -21,6 +21,9 @@ ARG GRAPHQL_PROXY_PORT
 # set cms api base url
 ARG GRAPHQL_PROXY_CMS_API_BASE_URL
 
+# set headless wordpress cms api base url
+ARG GRAPHQL_PROXY_WP_CMS_API_BASE_URL
+
 # set linked events api base url
 ARG GRAPHQL_PROXY_API_BASE_URL
 
