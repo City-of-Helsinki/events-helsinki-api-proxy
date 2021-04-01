@@ -2,10 +2,10 @@ import { gql } from 'apollo-server';
 
 const typeDefs = gql`
   extend type Query {
-    wpAccessibilityPages: WpAccessibilityPagesResponse!
+    wpPages(slug: String!): WpPagesResponse!
   }
 
-  type WpAccessibilityPagesResponse {
+  type WpPagesResponse {
     data: [WPStaticPage!]
   }
 `;
