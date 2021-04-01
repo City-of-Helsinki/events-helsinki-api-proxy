@@ -19,6 +19,7 @@ import LandingPageAPI from './datasources/landingPage';
 import NeighborhoodAPI from './datasources/neighborhood';
 import OrganizationAPI from './datasources/organization';
 import PlaceAPI from './datasources/place';
+import WpPageAPI from './datasources/wpPage';
 import schema from './schema';
 import apolloLoggingPlugin from './utils/apolloLoggingPlugin';
 
@@ -69,6 +70,7 @@ const apolloServerSentryPlugin = {
 const dataSources = () => ({
   aboutPageAPI: new AboutPageAPI(),
   accessibilityPageAPI: new AccessibilityPageAPI(),
+  wpPageAPI: new WpPageAPI(),
   collectionAPI: new CollectionAPI(),
   eventAPI: new EventAPI(),
   courseAPI: new CourseAPI(),

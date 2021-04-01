@@ -10,6 +10,7 @@ env:
   GRAPHQL_PROXY_DEBUG: debug
   GRAPHQL_PROXY_PORT: 4000
   GRAPHQL_PROXY_CMS_API_BASE_URL: https://cms.test.kuva.hel.ninja/api/
+  GRAPHQL_PROXY_WP_CMS_API_BASE_URL: https://tapahtumat.hkih.production.geniem.io/wp-json/wp/v2/
   GRAPHQL_PROXY_API_BASE_URL: https://api.hel.fi
   GRAPHQL_PROXY_LINKED_EVENTS_API_BASE_PATH: linkedevents/v1/
   GRAPHQL_PROXY_LINKED_COURSES_API_BASE_PATH: linkedcourses/v1/

@@ -96,6 +96,19 @@ export const StaticPage = gql`
   }
 `;
 
+export const WPStaticPage = gql`
+  type WPStaticPage {
+    id: ID!
+    title: String
+    slug: String
+    status: String
+    date: String
+    modified: String
+    type: String
+    content: String
+  }
+`;
+
 export const Enums = gql`
   enum LinkedEventsSource {
     LINKEDEVENTS
@@ -129,6 +142,7 @@ const globalDefs = [
   Mutation,
   Query,
   StaticPage,
+  WPStaticPage,
   BannerPage,
   Subscription,
   Enums,

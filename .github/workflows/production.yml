@@ -35,6 +35,7 @@ jobs:
           DOCKER_IMAGE_NAME: ${{ env.REPO_NAME }}-production
           DOCKER_BUILD_ARG_GRAPHQL_PROXY_PORT: 4000
           DOCKER_BUILD_ARG_GRAPHQL_PROXY_CMS_API_BASE_URL: 'https://cms.prod.kuva.hel.ninja/api/'
+          DOCKER_BUILD_ARG_GRAPHQL_PROXY_WP_CMS_API_BASE_URL: https://tapahtumat.hkih.production.geniem.io/wp-json/wp/v2/
           DOCKER_BUILD_ARG_GRAPHQL_PROXY_API_BASE_URL: 'https://api.hel.fi'
           DOCKER_BUILD_ARG_GRAPHQL_PROXY_LINKED_EVENTS_API_BASE_PATH: '/linkedevents/v1/'
           DOCKER_BUILD_ARG_GRAPHQL_PROXY_LINKED_COURSES_API_BASE_PATH: '/linkedcourses/v1/'
