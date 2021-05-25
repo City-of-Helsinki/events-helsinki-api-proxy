@@ -97,9 +97,9 @@ export const StaticPage = gql`
 `;
 
 export const Enums = gql`
-  enum LinkedEventsSource {
-    LINKEDEVENTS
-    LINKEDCOURSES
+  enum EventTypeId {
+    General
+    Course
   }
 `;
 

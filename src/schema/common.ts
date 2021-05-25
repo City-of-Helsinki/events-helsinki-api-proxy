@@ -1,4 +1,5 @@
 export const linkedEventsBaseArgs = `
+  eventType: EventTypeId = General
   localOngoingAnd: [String]
   localOngoingOr: [String]
   localOngoingOrSet1: [String]

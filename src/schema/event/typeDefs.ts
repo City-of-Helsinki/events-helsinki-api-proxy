@@ -4,9 +4,9 @@ import { linkedEventsBaseArgs } from '../common';
 
 const typeDefs = gql`
   extend type Query {
-    eventDetails(id: ID, include: [String], source: LinkedEventsSource): EventDetails!
-    eventList(${linkedEventsBaseArgs}, source: LinkedEventsSource): EventListResponse!
-    eventsByIds(ids: [ID!]!, include: [String], source: LinkedEventsSource): [EventDetails!]!
+    eventDetails(id: ID, include: [String]): EventDetails!
+    eventList(${linkedEventsBaseArgs}): EventListResponse!
+    eventsByIds(ids: [ID!]!, include: [String]): [EventDetails!]!
   }
 
   type EventListResponse {
@@ -50,6 +50,15 @@ const typeDefs = gql`
     internalContext: String
     # @type is renamed as internalType so it's usable on GraphQl
     internalType: String
+  }
+
+  # Course fields
+  extend type EventDetails {
+    enrolmentStartTime: String
+    enrolmentEndTime: String
+    maximumAttendeeCapacity: Int
+    minimumAttendeeCapacity: Int
+    remainingAttendeeCapacity: Int
   }
 
   type Audience {

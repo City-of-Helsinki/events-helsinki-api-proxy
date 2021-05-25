@@ -1,20 +1,19 @@
 import * as Sentry from '@sentry/node';
 
-import { LinkedEventsSource, QueryResolvers } from '../../types/types';
+import { QueryResolvers } from '../../types/types';
 import normalizeKeys from '../../utils/normalizeKeys';
-import { getCoursesList } from '../course/utils';
 import { buildEventDetailsQuery, buildEventListQuery } from './utils';
 
 const Query: QueryResolvers = {
-  eventDetails: async (_, { id, include, source }, { dataSources }) => {
+  eventDetails: async (_, { id, include }, { dataSources }) => {
     const query = buildEventDetailsQuery(include);
-    const data = await dataSources.eventAPI.getEventDetails(id, query, source);
+    const data = await dataSources.eventAPI.getEventDetails(id, query);
 
     return normalizeKeys(data);
   },
-  eventList: async (_, { source, ...params }, { dataSources }) => {
+  eventList: async (_, { ...params }, { dataSources }) => {
     const query = buildEventListQuery(params);
-    const data = await dataSources.eventAPI.getEventList(query, source);
+    const data = await dataSources.eventAPI.getEventList(query);
 
     return {
       data: data.data.map((event) => {
@@ -23,16 +22,11 @@ const Query: QueryResolvers = {
       meta: data.meta,
     };
   },
-  eventsByIds: async (_, { ids, include, source }, { dataSources }) => {
-    // TEMPORARY HACK (linkedcourses doesn't suport new way of getting list of ids!!)
-    if (source === LinkedEventsSource.Linkedcourses) {
-      return getCoursesList({ ids, include, dataSources });
-    }
-
+  eventsByIds: async (_, { ids, include }, { dataSources }) => {
     const query = buildEventListQuery({ ids, include });
 
     try {
-      const { data } = await dataSources.eventAPI.getEventList(query, source);
+      const { data } = await dataSources.eventAPI.getEventList(query);
       return data.map((event) => normalizeKeys(event));
     } catch (e) {
       Sentry.captureException(e);

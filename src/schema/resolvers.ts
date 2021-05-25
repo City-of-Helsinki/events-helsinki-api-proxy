@@ -3,7 +3,6 @@ import merge from 'lodash/merge';
 import aboutPage from './aboutPage/resolvers';
 import accessibilityPage from './accessibilityPage/resolvers';
 import collection from './collection/resolvers';
-import course from './course/resolvers';
 import event from './event/resolvers';
 import keyword from './keyword/resolvers';
 import landingPage from './landingPage/resolvers';
@@ -16,7 +15,6 @@ const resolvers = merge(
   accessibilityPage,
   collection,
   event,
-  course,
   keyword,
   landingPage,
   neighborhood,

@@ -2,7 +2,7 @@ import { gql } from 'apollo-server';
 
 const typeDefs = gql`
   extend type Query {
-    placeDetails(id: ID!, source: LinkedEventsSource): Place!
+    placeDetails(id: ID!): Place!
     placeList(
       dataSource: String
       divisions: [String]
@@ -12,7 +12,6 @@ const typeDefs = gql`
       showAllPlaces: Boolean
       sort: String
       text: String
-      source: LinkedEventsSource
     ): PlaceListResponse!
   }
 

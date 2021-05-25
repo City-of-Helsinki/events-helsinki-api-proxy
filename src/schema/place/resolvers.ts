@@ -68,8 +68,8 @@ const placeListQueryBuilder = ({
 };
 
 const Query: QueryResolvers = {
-  placeDetails: async (_, { id, source }, { dataSources }) => {
-    const data = await dataSources.placeAPI.getPlaceDetails(id, source);
+  placeDetails: async (_, { id }, { dataSources }) => {
+    const data = await dataSources.placeAPI.getPlaceDetails(id);
     return normalizeKeys(data);
   },
   placeList: async (
@@ -83,7 +83,6 @@ const Query: QueryResolvers = {
       showAllPlaces,
       sort,
       text,
-      source,
     },
     { dataSources }
   ) => {
@@ -97,7 +96,7 @@ const Query: QueryResolvers = {
       sort,
       text,
     });
-    const data = await dataSources.placeAPI.getPlaceList(query, source);
+    const data = await dataSources.placeAPI.getPlaceList(query);
 
     return {
       data: data.data.map((place) => {

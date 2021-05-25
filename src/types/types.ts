@@ -139,7 +139,6 @@ export type EventDetails = {
   internalId?: Maybe<Scalars['String']>,
   internalContext?: Maybe<Scalars['String']>,
   internalType?: Maybe<Scalars['String']>,
-  extensionCourse?: Maybe<ExtensionCourse>,
 };
 
 export type EventListResponse = {
@@ -148,14 +147,10 @@ export type EventListResponse = {
   data: Array<EventDetails>,
 };
 
-export type ExtensionCourse = {
-   __typename?: 'ExtensionCourse',
-  enrolmentStartTime?: Maybe<Scalars['String']>,
-  enrolmentEndTime?: Maybe<Scalars['String']>,
-  maximumAttendeeCapacity?: Maybe<Scalars['Int']>,
-  minimumAttendeeCapacity?: Maybe<Scalars['Int']>,
-  remainingAttendeeCapacity?: Maybe<Scalars['Int']>,
-};
+export enum EventTypeId {
+  General = 'General',
+  Course = 'Course'
+}
 
 export type ExternalLink = {
    __typename?: 'ExternalLink',
@@ -259,11 +254,6 @@ export type LandingPagesResponse = {
    __typename?: 'LandingPagesResponse',
   data: Array<LandingPage>,
 };
-
-export enum LinkedEventsSource {
-  Linkedevents = 'LINKEDEVENTS',
-  Linkedcourses = 'LINKEDCOURSES'
-}
 
 export type LocalizedCmsImage = {
    __typename?: 'LocalizedCmsImage',
@@ -393,9 +383,6 @@ export type Query = {
   eventDetails: EventDetails,
   eventList: EventListResponse,
   eventsByIds: Array<EventDetails>,
-  courseDetails: EventDetails,
-  courseList: EventListResponse,
-  coursesByIds: Array<EventDetails>,
   keywordDetails: Keyword,
   keywordList: KeywordListResponse,
   landingPage: LandingPage,
@@ -420,72 +407,12 @@ export type QueryCollectionListArgs = {
 
 export type QueryEventDetailsArgs = {
   id?: Maybe<Scalars['ID']>,
-  include?: Maybe<Array<Maybe<Scalars['String']>>>,
-  source?: Maybe<LinkedEventsSource>
-};
-
-
-export type QueryEventListArgs = {
-  localOngoingAnd?: Maybe<Array<Maybe<Scalars['String']>>>,
-  localOngoingOr?: Maybe<Array<Maybe<Scalars['String']>>>,
-  localOngoingOrSet1?: Maybe<Array<Maybe<Scalars['String']>>>,
-  localOngoingOrSet2?: Maybe<Array<Maybe<Scalars['String']>>>,
-  localOngoingOrSet3?: Maybe<Array<Maybe<Scalars['String']>>>,
-  internetOngoingAnd?: Maybe<Array<Maybe<Scalars['String']>>>,
-  internetOngoingOr?: Maybe<Array<Maybe<Scalars['String']>>>,
-  allOngoing?: Maybe<Scalars['Boolean']>,
-  allOngoingAnd?: Maybe<Array<Maybe<Scalars['String']>>>,
-  allOngoingOr?: Maybe<Array<Maybe<Scalars['String']>>>,
-  combinedText?: Maybe<Array<Maybe<Scalars['String']>>>,
-  division?: Maybe<Array<Maybe<Scalars['String']>>>,
-  end?: Maybe<Scalars['String']>,
-  endsAfter?: Maybe<Scalars['String']>,
-  endsBefore?: Maybe<Scalars['String']>,
-  ids?: Maybe<Array<Maybe<Scalars['String']>>>,
-  inLanguage?: Maybe<Scalars['String']>,
-  include?: Maybe<Array<Maybe<Scalars['String']>>>,
-  isFree?: Maybe<Scalars['Boolean']>,
-  keywordAnd?: Maybe<Array<Maybe<Scalars['String']>>>,
-  keywordOrSet1?: Maybe<Array<Maybe<Scalars['String']>>>,
-  keywordOrSet2?: Maybe<Array<Maybe<Scalars['String']>>>,
-  keywordOrSet3?: Maybe<Array<Maybe<Scalars['String']>>>,
-  keywordNot?: Maybe<Array<Maybe<Scalars['String']>>>,
-  keyword?: Maybe<Array<Maybe<Scalars['String']>>>,
-  language?: Maybe<Scalars['String']>,
-  location?: Maybe<Array<Maybe<Scalars['String']>>>,
-  page?: Maybe<Scalars['Int']>,
-  pageSize?: Maybe<Scalars['Int']>,
-  publisher?: Maybe<Scalars['ID']>,
-  sort?: Maybe<Scalars['String']>,
-  start?: Maybe<Scalars['String']>,
-  startsAfter?: Maybe<Scalars['String']>,
-  startsBefore?: Maybe<Scalars['String']>,
-  superEvent?: Maybe<Scalars['ID']>,
-  superEventType?: Maybe<Array<Maybe<Scalars['String']>>>,
-  text?: Maybe<Scalars['String']>,
-  translation?: Maybe<Scalars['String']>,
-  audienceMinAgeLt?: Maybe<Scalars['String']>,
-  audienceMinAgeGt?: Maybe<Scalars['String']>,
-  audienceMaxAgeLt?: Maybe<Scalars['String']>,
-  audienceMaxAgeGt?: Maybe<Scalars['String']>,
-  source?: Maybe<LinkedEventsSource>
-};
-
-
-export type QueryEventsByIdsArgs = {
-  ids: Array<Scalars['ID']>,
-  include?: Maybe<Array<Maybe<Scalars['String']>>>,
-  source?: Maybe<LinkedEventsSource>
-};
-
-
-export type QueryCourseDetailsArgs = {
-  id?: Maybe<Scalars['ID']>,
   include?: Maybe<Array<Maybe<Scalars['String']>>>
 };
 
 
-export type QueryCourseListArgs = {
+export type QueryEventListArgs = {
+  eventType?: Maybe<EventTypeId>,
   localOngoingAnd?: Maybe<Array<Maybe<Scalars['String']>>>,
   localOngoingOr?: Maybe<Array<Maybe<Scalars['String']>>>,
   localOngoingOrSet1?: Maybe<Array<Maybe<Scalars['String']>>>,
@@ -531,15 +458,14 @@ export type QueryCourseListArgs = {
 };
 
 
-export type QueryCoursesByIdsArgs = {
+export type QueryEventsByIdsArgs = {
   ids: Array<Scalars['ID']>,
   include?: Maybe<Array<Maybe<Scalars['String']>>>
 };
 
 
 export type QueryKeywordDetailsArgs = {
-  id: Scalars['ID'],
-  source?: Maybe<LinkedEventsSource>
+  id: Scalars['ID']
 };
 
 
@@ -550,8 +476,7 @@ export type QueryKeywordListArgs = {
   pageSize?: Maybe<Scalars['Int']>,
   showAllKeywords?: Maybe<Scalars['Boolean']>,
   sort?: Maybe<Scalars['String']>,
-  text?: Maybe<Scalars['String']>,
-  source?: Maybe<LinkedEventsSource>
+  text?: Maybe<Scalars['String']>
 };
 
 
@@ -567,14 +492,12 @@ export type QueryLandingPagesArgs = {
 
 
 export type QueryOrganizationDetailsArgs = {
-  id: Scalars['ID'],
-  source?: Maybe<LinkedEventsSource>
+  id: Scalars['ID']
 };
 
 
 export type QueryPlaceDetailsArgs = {
-  id: Scalars['ID'],
-  source?: Maybe<LinkedEventsSource>
+  id: Scalars['ID']
 };
 
 
@@ -586,8 +509,7 @@ export type QueryPlaceListArgs = {
   pageSize?: Maybe<Scalars['Int']>,
   showAllPlaces?: Maybe<Scalars['Boolean']>,
   sort?: Maybe<Scalars['String']>,
-  text?: Maybe<Scalars['String']>,
-  source?: Maybe<LinkedEventsSource>
+  text?: Maybe<Scalars['String']>
 };
 
 export type StaticPage = {
@@ -718,7 +640,6 @@ export type ResolversTypes = {
   CollectionDetails: ResolverTypeWrapper<CollectionDetails>;
   CmsImage: ResolverTypeWrapper<CmsImage>;
   CollectionListResponse: ResolverTypeWrapper<CollectionListResponse>;
-  LinkedEventsSource: LinkedEventsSource;
   EventDetails: ResolverTypeWrapper<EventDetails>;
   Place: ResolverTypeWrapper<Place>;
   Division: ResolverTypeWrapper<Division>;
@@ -731,7 +652,7 @@ export type ResolversTypes = {
   Offer: ResolverTypeWrapper<Offer>;
   InLanguage: ResolverTypeWrapper<InLanguage>;
   Audience: ResolverTypeWrapper<Audience>;
-  ExtensionCourse: ResolverTypeWrapper<ExtensionCourse>;
+  EventTypeId: EventTypeId;
   EventListResponse: ResolverTypeWrapper<EventListResponse>;
   Meta: ResolverTypeWrapper<Meta>;
   KeywordListResponse: ResolverTypeWrapper<KeywordListResponse>;
@@ -774,7 +695,6 @@ export type ResolversParentTypes = {
   Offer: Offer;
   InLanguage: InLanguage;
   Audience: Audience;
-  ExtensionCourse: ExtensionCourse;
   EventListResponse: EventListResponse;
   Meta: Meta;
   KeywordListResponse: KeywordListResponse;
@@ -918,22 +838,12 @@ export type EventDetailsResolvers<ContextType = any, ParentType extends Resolver
   internalId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   internalContext?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   internalType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  extensionCourse?: Resolver<Maybe<ResolversTypes['ExtensionCourse']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type EventListResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['EventListResponse'] = ResolversParentTypes['EventListResponse']> = {
   meta?: Resolver<ResolversTypes['Meta'], ParentType, ContextType>;
   data?: Resolver<Array<ResolversTypes['EventDetails']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ExtensionCourseResolvers<ContextType = any, ParentType extends ResolversParentTypes['ExtensionCourse'] = ResolversParentTypes['ExtensionCourse']> = {
-  enrolmentStartTime?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  enrolmentEndTime?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  maximumAttendeeCapacity?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  minimumAttendeeCapacity?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  remainingAttendeeCapacity?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1164,12 +1074,9 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   collectionDetails?: Resolver<ResolversTypes['CollectionDetails'], ParentType, ContextType, RequireFields<QueryCollectionDetailsArgs, never>>;
   collectionList?: Resolver<ResolversTypes['CollectionListResponse'], ParentType, ContextType, RequireFields<QueryCollectionListArgs, never>>;
   eventDetails?: Resolver<ResolversTypes['EventDetails'], ParentType, ContextType, RequireFields<QueryEventDetailsArgs, never>>;
-  eventList?: Resolver<ResolversTypes['EventListResponse'], ParentType, ContextType, RequireFields<QueryEventListArgs, never>>;
+  eventList?: Resolver<ResolversTypes['EventListResponse'], ParentType, ContextType, RequireFields<QueryEventListArgs, 'eventType'>>;
   eventsByIds?: Resolver<Array<ResolversTypes['EventDetails']>, ParentType, ContextType, RequireFields<QueryEventsByIdsArgs, 'ids'>>;
-  courseDetails?: Resolver<ResolversTypes['EventDetails'], ParentType, ContextType, RequireFields<QueryCourseDetailsArgs, never>>;
-  courseList?: Resolver<ResolversTypes['EventListResponse'], ParentType, ContextType, RequireFields<QueryCourseListArgs, never>>;
-  coursesByIds?: Resolver<Array<ResolversTypes['EventDetails']>, ParentType, ContextType, RequireFields<QueryCoursesByIdsArgs, 'ids'>>;
-  keywordDetails?: Resolver<ResolversTypes['Keyword'], ParentType, ContextType, RequireFields<QueryKeywordDetailsArgs, 'id' | 'source'>>;
+  keywordDetails?: Resolver<ResolversTypes['Keyword'], ParentType, ContextType, RequireFields<QueryKeywordDetailsArgs, 'id'>>;
   keywordList?: Resolver<ResolversTypes['KeywordListResponse'], ParentType, ContextType, RequireFields<QueryKeywordListArgs, never>>;
   landingPage?: Resolver<ResolversTypes['LandingPage'], ParentType, ContextType, RequireFields<QueryLandingPageArgs, 'id'>>;
   landingPages?: Resolver<ResolversTypes['LandingPagesResponse'], ParentType, ContextType, RequireFields<QueryLandingPagesArgs, never>>;
@@ -1226,7 +1133,6 @@ export type Resolvers<ContextType = any> = {
   Division?: DivisionResolvers<ContextType>;
   EventDetails?: EventDetailsResolvers<ContextType>;
   EventListResponse?: EventListResponseResolvers<ContextType>;
-  ExtensionCourse?: ExtensionCourseResolvers<ContextType>;
   ExternalLink?: ExternalLinkResolvers<ContextType>;
   Image?: ImageResolvers<ContextType>;
   InLanguage?: InLanguageResolvers<ContextType>;
