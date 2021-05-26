@@ -4,22 +4,40 @@ import { gql } from 'apollo-server';
 import KeywordAPI from '../datasources/keyword';
 import { getApolloTestServer } from '../utils/testUtils';
 
-const GET_KEYWORDS = gql`
-  query KewordList($source: LinkedEventsSource) {
-    keywordList(source: $source) {
-      data {
-        id
-        internalId
-        name {
-          fi
-        }
-      }
-      meta {
-        count
-      }
-    }
-  }
-`;
+it('sends REST request correctly with params', async () => {
+  const keywordAPI = new KeywordAPI();
+
+  const keywordResponse = {
+    data: [],
+    meta: {},
+  };
+
+  const getMock = jest.fn().mockResolvedValue(keywordResponse);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (keywordAPI as any).get = getMock;
+
+  const { query } = getApolloTestServer({
+    dataSources: () => ({ keywordAPI }),
+  });
+
+  await query({
+    query: GET_KEYWORDS,
+    variables: {
+      dataSource: 'yso',
+      hasUpcomingEvents: true,
+      page: 1,
+      pageSize: 10,
+      showAllKeywords: false,
+      sort: 'asc',
+      text: 'malmi',
+    },
+  });
+
+  expect(getMock).toHaveBeenCalledWith(
+    'keyword?data_source=yso&has_upcoming_events=true&page=1&page_size=10&show_all_keywords=false&sort=asc&text=malmi'
+  );
+});
 
 it('resolves keywordList correctly', async () => {
   const keywordAPI = new KeywordAPI();
@@ -92,15 +110,46 @@ it('uses correct path when source is provided', async () => {
 
   await query({
     query: GET_KEYWORDS,
-    variables: { source: 'LINKEDEVENTS' },
   });
 
-  expect(getMock).toHaveBeenCalledWith('linkedevents/v1/keyword');
+  expect(getMock).toHaveBeenCalledWith('keyword');
 
   await query({
     query: GET_KEYWORDS,
-    variables: { source: 'LINKEDCOURSES' },
   });
 
-  expect(getMock).toHaveBeenCalledWith('linkedcourses/v1/keyword');
+  expect(getMock).toHaveBeenCalledWith('keyword');
 });
+
+const GET_KEYWORDS = gql`
+  query KewordList(
+    $dataSource: String
+    $hasUpcomingEvents: Boolean
+    $page: Int
+    $pageSize: Int
+    $showAllKeywords: Boolean
+    $sort: String
+    $text: String
+  ) {
+    keywordList(
+      dataSource: $dataSource
+      hasUpcomingEvents: $hasUpcomingEvents
+      page: $page
+      pageSize: $pageSize
+      showAllKeywords: $showAllKeywords
+      sort: $sort
+      text: $text
+    ) {
+      data {
+        id
+        internalId
+        name {
+          fi
+        }
+      }
+      meta {
+        count
+      }
+    }
+  }
+`;

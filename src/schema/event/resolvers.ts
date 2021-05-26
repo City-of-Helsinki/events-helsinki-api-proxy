@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/node';
 
-import { QueryResolvers } from '../../types/types';
+import { QueryResolvers } from '../../types';
 import normalizeKeys from '../../utils/normalizeKeys';
 import { buildEventDetailsQuery, buildEventListQuery } from './utils';
 
@@ -11,7 +11,7 @@ const Query: QueryResolvers = {
 
     return normalizeKeys(data);
   },
-  eventList: async (_, { ...params }, { dataSources }) => {
+  eventList: async (_, params, { dataSources }) => {
     const query = buildEventListQuery(params);
     const data = await dataSources.eventAPI.getEventList(query);
 

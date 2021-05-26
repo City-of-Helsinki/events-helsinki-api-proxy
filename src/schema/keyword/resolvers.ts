@@ -1,4 +1,5 @@
-import { QueryKeywordListArgs, QueryResolvers } from '../../types/types';
+import { QueryResolvers } from '../../types';
+import { QueryKeywordListArgs } from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import normalizeKeys from '../../utils/normalizeKeys';
 

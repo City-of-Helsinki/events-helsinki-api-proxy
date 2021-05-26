@@ -19,6 +19,7 @@ import NeighborhoodAPI from './datasources/neighborhood';
 import OrganizationAPI from './datasources/organization';
 import PlaceAPI from './datasources/place';
 import schema from './schema';
+import { DataSources } from './types';
 import apolloLoggingPlugin from './utils/apolloLoggingPlugin';
 
 const OK = 'OK';
@@ -65,7 +66,7 @@ const apolloServerSentryPlugin = {
   },
 } as ApolloServerPlugin;
 
-const dataSources = () => ({
+const dataSources = (): DataSources => ({
   aboutPageAPI: new AboutPageAPI(),
   accessibilityPageAPI: new AccessibilityPageAPI(),
   collectionAPI: new CollectionAPI(),

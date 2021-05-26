@@ -1,4 +1,4 @@
-import { QueryResolvers } from '../../types/types';
+import { QueryResolvers } from '../../types';
 import normalizeKeys from '../../utils/normalizeKeys';
 import normalizeLocalizedObject from '../../utils/normalizeLocalizedObject';
 
