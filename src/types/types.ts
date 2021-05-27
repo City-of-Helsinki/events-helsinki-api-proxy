@@ -62,7 +62,6 @@ export type CollectionDetails = {
   description?: Maybe<LocalizedObject>,
   draftTitle?: Maybe<Scalars['String']>,
   eventListQuery?: Maybe<LocalizedObject>,
-  courseListQuery?: Maybe<LocalizedObject>,
   eventListTitle?: Maybe<LocalizedObject>,
   expireAt?: Maybe<Scalars['String']>,
   expired?: Maybe<Scalars['Boolean']>,
@@ -761,7 +760,6 @@ export type CollectionDetailsResolvers<ContextType = any, ParentType extends Res
   description?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
   draftTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   eventListQuery?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
-  courseListQuery?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
   eventListTitle?: Resolver<Maybe<ResolversTypes['LocalizedObject']>, ParentType, ContextType>;
   expireAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   expired?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
