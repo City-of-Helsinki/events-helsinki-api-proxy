@@ -1,12 +1,54 @@
 import { gql } from 'apollo-server';
 
-import { linkedEventsBaseArgs } from '../common';
-
 const typeDefs = gql`
   extend type Query {
     eventDetails(id: ID, include: [String]): EventDetails!
-    eventList(${linkedEventsBaseArgs}): EventListResponse!
     eventsByIds(ids: [ID!]!, include: [String]): [EventDetails!]!
+    eventList(
+      eventType: EventTypeId = General
+      localOngoingAnd: [String]
+      localOngoingOr: [String]
+      localOngoingOrSet1: [String]
+      localOngoingOrSet2: [String]
+      localOngoingOrSet3: [String]
+      internetOngoingAnd: [String]
+      internetOngoingOr: [String]
+      allOngoing: Boolean
+      allOngoingAnd: [String]
+      allOngoingOr: [String]
+      combinedText: [String]
+      division: [String]
+      end: String
+      endsAfter: String
+      endsBefore: String
+      ids: [String]
+      inLanguage: String
+      include: [String]
+      isFree: Boolean
+      keywordAnd: [String]
+      keywordOrSet1: [String]
+      keywordOrSet2: [String]
+      keywordOrSet3: [String]
+      keywordNot: [String]
+      keyword: [String]
+      language: String
+      location: [String]
+      page: Int
+      pageSize: Int
+      publisher: ID
+      sort: String
+      start: String
+      startsAfter: String
+      startsBefore: String
+      superEvent: ID
+      superEventType: [String]
+      text: String
+      translation: String
+      audienceMinAgeLt: String
+      audienceMinAgeGt: String
+      audienceMaxAgeLt: String
+      audienceMaxAgeGt: String
+    ): EventListResponse!
   }
 
   type EventListResponse {
