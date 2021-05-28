@@ -138,6 +138,11 @@ export type EventDetails = {
   internalId?: Maybe<Scalars['String']>,
   internalContext?: Maybe<Scalars['String']>,
   internalType?: Maybe<Scalars['String']>,
+  enrolmentStartTime?: Maybe<Scalars['String']>,
+  enrolmentEndTime?: Maybe<Scalars['String']>,
+  maximumAttendeeCapacity?: Maybe<Scalars['Int']>,
+  minimumAttendeeCapacity?: Maybe<Scalars['Int']>,
+  remainingAttendeeCapacity?: Maybe<Scalars['Int']>,
 };
 
 export type EventListResponse = {
@@ -380,8 +385,8 @@ export type Query = {
   collectionDetails: CollectionDetails,
   collectionList: CollectionListResponse,
   eventDetails: EventDetails,
-  eventList: EventListResponse,
   eventsByIds: Array<EventDetails>,
+  eventList: EventListResponse,
   keywordDetails: Keyword,
   keywordList: KeywordListResponse,
   landingPage: LandingPage,
@@ -406,6 +411,12 @@ export type QueryCollectionListArgs = {
 
 export type QueryEventDetailsArgs = {
   id?: Maybe<Scalars['ID']>,
+  include?: Maybe<Array<Maybe<Scalars['String']>>>
+};
+
+
+export type QueryEventsByIdsArgs = {
+  ids: Array<Scalars['ID']>,
   include?: Maybe<Array<Maybe<Scalars['String']>>>
 };
 
@@ -454,12 +465,6 @@ export type QueryEventListArgs = {
   audienceMinAgeGt?: Maybe<Scalars['String']>,
   audienceMaxAgeLt?: Maybe<Scalars['String']>,
   audienceMaxAgeGt?: Maybe<Scalars['String']>
-};
-
-
-export type QueryEventsByIdsArgs = {
-  ids: Array<Scalars['ID']>,
-  include?: Maybe<Array<Maybe<Scalars['String']>>>
 };
 
 
@@ -836,6 +841,11 @@ export type EventDetailsResolvers<ContextType = any, ParentType extends Resolver
   internalId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   internalContext?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   internalType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  enrolmentStartTime?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  enrolmentEndTime?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  maximumAttendeeCapacity?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  minimumAttendeeCapacity?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  remainingAttendeeCapacity?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1072,8 +1082,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   collectionDetails?: Resolver<ResolversTypes['CollectionDetails'], ParentType, ContextType, RequireFields<QueryCollectionDetailsArgs, never>>;
   collectionList?: Resolver<ResolversTypes['CollectionListResponse'], ParentType, ContextType, RequireFields<QueryCollectionListArgs, never>>;
   eventDetails?: Resolver<ResolversTypes['EventDetails'], ParentType, ContextType, RequireFields<QueryEventDetailsArgs, never>>;
-  eventList?: Resolver<ResolversTypes['EventListResponse'], ParentType, ContextType, RequireFields<QueryEventListArgs, 'eventType'>>;
   eventsByIds?: Resolver<Array<ResolversTypes['EventDetails']>, ParentType, ContextType, RequireFields<QueryEventsByIdsArgs, 'ids'>>;
+  eventList?: Resolver<ResolversTypes['EventListResponse'], ParentType, ContextType, RequireFields<QueryEventListArgs, 'eventType'>>;
   keywordDetails?: Resolver<ResolversTypes['Keyword'], ParentType, ContextType, RequireFields<QueryKeywordDetailsArgs, 'id'>>;
   keywordList?: Resolver<ResolversTypes['KeywordListResponse'], ParentType, ContextType, RequireFields<QueryKeywordListArgs, never>>;
   landingPage?: Resolver<ResolversTypes['LandingPage'], ParentType, ContextType, RequireFields<QueryLandingPageArgs, 'id'>>;
