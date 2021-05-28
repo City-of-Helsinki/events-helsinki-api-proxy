@@ -4,6 +4,7 @@ import queryBuilder from '../../utils/queryBuilder';
 
 export const buildEventListQuery = (params: QueryEventListArgs) => {
   return queryBuilder([
+    { key: 'event_type', value: params.eventType },
     { key: 'combined_text', value: params.combinedText },
     { key: 'local_ongoing_AND', value: params.localOngoingAnd },
     { key: 'local_ongoing_OR', value: params.localOngoingOr },
@@ -25,6 +26,8 @@ export const buildEventListQuery = (params: QueryEventListArgs) => {
     { key: 'keyword', value: params.keyword },
     { key: 'keyword_AND', value: params.keywordAnd },
     { key: 'keyword_OR_set1', value: params.keywordOrSet1 },
+    { key: 'keyword_OR_set2', value: params.keywordOrSet2 },
+    { key: 'keyword_OR_set3', value: params.keywordOrSet3 },
     { key: 'keyword!', value: params.keywordNot },
     { key: 'language', value: params.language },
     { key: 'location', value: params.location },

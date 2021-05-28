@@ -12,7 +12,6 @@ import depthLimit from 'graphql-depth-limit';
 import AboutPageAPI from './datasources/aboutPage';
 import AccessibilityPageAPI from './datasources/accessibilityPage';
 import CollectionAPI from './datasources/collection';
-import CourseAPI from './datasources/course';
 import EventAPI from './datasources/event';
 import KeywordAPI from './datasources/keyword';
 import LandingPageAPI from './datasources/landingPage';
@@ -20,6 +19,7 @@ import NeighborhoodAPI from './datasources/neighborhood';
 import OrganizationAPI from './datasources/organization';
 import PlaceAPI from './datasources/place';
 import schema from './schema';
+import { DataSources } from './types';
 import apolloLoggingPlugin from './utils/apolloLoggingPlugin';
 
 const OK = 'OK';
@@ -66,12 +66,11 @@ const apolloServerSentryPlugin = {
   },
 } as ApolloServerPlugin;
 
-const dataSources = () => ({
+const dataSources = (): DataSources => ({
   aboutPageAPI: new AboutPageAPI(),
   accessibilityPageAPI: new AccessibilityPageAPI(),
   collectionAPI: new CollectionAPI(),
   eventAPI: new EventAPI(),
-  courseAPI: new CourseAPI(),
   keywordAPI: new KeywordAPI(),
   landingPageAPI: new LandingPageAPI(),
   neighborhoodAPI: new NeighborhoodAPI(),

@@ -2,7 +2,7 @@ import { gql } from 'apollo-server';
 
 export const typeDefs = gql`
   extend type Query {
-    keywordDetails(id: ID!, source: LinkedEventsSource = LINKEDEVENTS): Keyword!
+    keywordDetails(id: ID!): Keyword!
     keywordList(
       dataSource: String
       hasUpcomingEvents: Boolean
@@ -11,7 +11,6 @@ export const typeDefs = gql`
       showAllKeywords: Boolean
       sort: String
       text: String
-      source: LinkedEventsSource
     ): KeywordListResponse!
   }
 

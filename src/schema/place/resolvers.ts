@@ -1,6 +1,46 @@
-import { QueryResolvers } from '../../types/types';
+import { QueryResolvers } from '../../types';
 import composeQuery from '../../utils/composeQuery';
 import normalizeKeys from '../../utils/normalizeKeys';
+
+const Query: QueryResolvers = {
+  placeDetails: async (_, { id }, { dataSources }) => {
+    const data = await dataSources.placeAPI.getPlaceDetails(id);
+    return normalizeKeys(data);
+  },
+  placeList: async (
+    _,
+    {
+      dataSource,
+      divisions,
+      hasUpcomingEvents,
+      page,
+      pageSize,
+      showAllPlaces,
+      sort,
+      text,
+    },
+    { dataSources }
+  ) => {
+    const query = placeListQueryBuilder({
+      dataSource,
+      divisions,
+      hasUpcomingEvents,
+      page,
+      pageSize,
+      showAllPlaces,
+      sort,
+      text,
+    });
+    const data = await dataSources.placeAPI.getPlaceList(query);
+
+    return {
+      data: data.data.map((place) => {
+        return normalizeKeys(place);
+      }),
+      meta: data.meta,
+    };
+  },
+};
 
 const placeListQueryBuilder = ({
   dataSource,
@@ -65,47 +105,6 @@ const placeListQueryBuilder = ({
   }
 
   return query;
-};
-
-const Query: QueryResolvers = {
-  placeDetails: async (_, { id, source }, { dataSources }) => {
-    const data = await dataSources.placeAPI.getPlaceDetails(id, source);
-    return normalizeKeys(data);
-  },
-  placeList: async (
-    _,
-    {
-      dataSource,
-      divisions,
-      hasUpcomingEvents,
-      page,
-      pageSize,
-      showAllPlaces,
-      sort,
-      text,
-      source,
-    },
-    { dataSources }
-  ) => {
-    const query = placeListQueryBuilder({
-      dataSource,
-      divisions,
-      hasUpcomingEvents,
-      page,
-      pageSize,
-      showAllPlaces,
-      sort,
-      text,
-    });
-    const data = await dataSources.placeAPI.getPlaceList(query, source);
-
-    return {
-      data: data.data.map((place) => {
-        return normalizeKeys(place);
-      }),
-      meta: data.meta,
-    };
-  },
 };
 
 export default { Query };

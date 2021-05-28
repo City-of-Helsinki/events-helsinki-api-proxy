@@ -1,4 +1,5 @@
-import { QueryKeywordListArgs, QueryResolvers } from '../../types/types';
+import { QueryResolvers } from '../../types';
+import { QueryKeywordListArgs } from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import normalizeKeys from '../../utils/normalizeKeys';
 
@@ -54,16 +55,13 @@ const keywordListQueryBuilder = ({
 };
 
 const Query: QueryResolvers = {
-  keywordDetails: async (_, { id, source }, { dataSources }) => {
-    const data = await dataSources.keywordAPI.getKeywordDetails(id, source);
+  keywordDetails: async (_, { id }, { dataSources }) => {
+    const data = await dataSources.keywordAPI.getKeywordDetails(id);
     return normalizeKeys(data);
   },
   keywordList: async (_, params, { dataSources }) => {
     const query = keywordListQueryBuilder(params);
-    const data = await dataSources.keywordAPI.getKeywordList(
-      query,
-      params.source
-    );
+    const data = await dataSources.keywordAPI.getKeywordList(query);
 
     return {
       data: data.data.map((keyword) => {
