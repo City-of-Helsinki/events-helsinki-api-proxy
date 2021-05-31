@@ -8,11 +8,11 @@ describe('normalizeKeys function', () => {
         event_price: {
           is_free: false,
         },
-        event_type: 'foo',
+        event_type: ['foo', 'bar'],
       })
     ).toEqual({
       eventPrice: { isFree: false },
-      eventType: 'foo',
+      eventType: ['foo', 'bar'],
       internalId: '123',
     });
   });

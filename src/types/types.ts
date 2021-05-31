@@ -422,7 +422,7 @@ export type QueryEventsByIdsArgs = {
 
 
 export type QueryEventListArgs = {
-  eventType?: Maybe<EventTypeId>,
+  eventType?: Maybe<Array<Maybe<EventTypeId>>>,
   localOngoingAnd?: Maybe<Array<Maybe<Scalars['String']>>>,
   localOngoingOr?: Maybe<Array<Maybe<Scalars['String']>>>,
   localOngoingOrSet1?: Maybe<Array<Maybe<Scalars['String']>>>,

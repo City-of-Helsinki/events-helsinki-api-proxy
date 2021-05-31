@@ -8,7 +8,7 @@ describe('normalizeLocalizedObject function', () => {
           eventPrice: {
             isFree: false,
           },
-          eventType: 'foo',
+          eventType: ['foo'],
           nameEn: 'title en',
           nameFi: 'title fi',
           nameSv: 'title sv',
@@ -17,7 +17,7 @@ describe('normalizeLocalizedObject function', () => {
       )
     ).toEqual({
       eventPrice: { isFree: false },
-      eventType: 'foo',
+      eventType: ['foo'],
       name: {
         en: 'title en',
         fi: 'title fi',
@@ -30,7 +30,7 @@ describe('normalizeLocalizedObject function', () => {
           eventPrice: {
             isFree: false,
           },
-          eventType: 'foo',
+          eventType: ['foo'],
           imageEn: {
             name: 'title en',
             url: 'www.test.en',
@@ -48,7 +48,7 @@ describe('normalizeLocalizedObject function', () => {
       )
     ).toEqual({
       eventPrice: { isFree: false },
-      eventType: 'foo',
+      eventType: ['foo'],
       image: {
         en: {
           name: 'title en',
