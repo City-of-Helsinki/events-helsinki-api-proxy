@@ -58,6 +58,7 @@ const typeDefs = gql`
 
   type EventDetails {
     id: ID!
+    typeId: EventTypeId
     location: Place
     keywords: [Keyword!]!
     superEvent: InternalIdObject

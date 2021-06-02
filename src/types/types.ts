@@ -107,6 +107,7 @@ export type Division = {
 export type EventDetails = {
    __typename?: 'EventDetails',
   id: Scalars['ID'],
+  typeId?: Maybe<EventTypeId>,
   location?: Maybe<Place>,
   keywords: Array<Keyword>,
   superEvent?: Maybe<InternalIdObject>,
@@ -645,6 +646,7 @@ export type ResolversTypes = {
   CmsImage: ResolverTypeWrapper<CmsImage>;
   CollectionListResponse: ResolverTypeWrapper<CollectionListResponse>;
   EventDetails: ResolverTypeWrapper<EventDetails>;
+  EventTypeId: EventTypeId;
   Place: ResolverTypeWrapper<Place>;
   Division: ResolverTypeWrapper<Division>;
   Image: ResolverTypeWrapper<Image>;
@@ -656,7 +658,6 @@ export type ResolversTypes = {
   Offer: ResolverTypeWrapper<Offer>;
   InLanguage: ResolverTypeWrapper<InLanguage>;
   Audience: ResolverTypeWrapper<Audience>;
-  EventTypeId: EventTypeId;
   EventListResponse: ResolverTypeWrapper<EventListResponse>;
   Meta: ResolverTypeWrapper<Meta>;
   KeywordListResponse: ResolverTypeWrapper<KeywordListResponse>;
@@ -810,6 +811,7 @@ export type DivisionResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type EventDetailsResolvers<ContextType = any, ParentType extends ResolversParentTypes['EventDetails'] = ResolversParentTypes['EventDetails']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  typeId?: Resolver<Maybe<ResolversTypes['EventTypeId']>, ParentType, ContextType>;
   location?: Resolver<Maybe<ResolversTypes['Place']>, ParentType, ContextType>;
   keywords?: Resolver<Array<ResolversTypes['Keyword']>, ParentType, ContextType>;
   superEvent?: Resolver<Maybe<ResolversTypes['InternalIdObject']>, ParentType, ContextType>;
