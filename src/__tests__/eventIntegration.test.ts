@@ -124,7 +124,7 @@ describe('sends REST requests correctly', () => {
     await apolloTestServer.query({
       query: EVENTS_QUERY,
       variables: {
-        eventType: EventTypeId.Course,
+        eventType: [EventTypeId.Course],
       } as QueryEventListArgs,
     });
 
@@ -137,7 +137,7 @@ describe('sends REST requests correctly', () => {
 
     await apolloTestServer.query({
       query: EVENTS_QUERY,
-      variables: { eventType: EventTypeId.Course } as QueryEventListArgs,
+      variables: { eventType: [EventTypeId.Course] } as QueryEventListArgs,
     });
 
     expect(getMock).toHaveBeenCalledWith('event?event_type=Course');
@@ -151,7 +151,7 @@ it('sends REST request correctly with query params', async () => {
   await apolloTestServer.query({
     query: EVENTS_QUERY,
     variables: {
-      eventType: EventTypeId.Course,
+      eventType: [EventTypeId.Course],
       ids: ['1', '2'],
       allOngoing: true,
       allOngoingAnd: ['asd'],
@@ -207,7 +207,7 @@ const EVENTS_BY_IDS_QUERY = gql`
 
 const EVENTS_QUERY = gql`
   query EventList(
-    $eventType: EventTypeId
+    $eventType: [EventTypeId]
     $allOngoing: Boolean
     $allOngoingAnd: [String]
     $division: [String]
