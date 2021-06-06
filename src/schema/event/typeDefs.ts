@@ -6,6 +6,7 @@ const typeDefs = gql`
     eventsByIds(ids: [ID!]!, include: [String]): [EventDetails!]!
     eventList(
       eventType: EventTypeId = General
+      internetBased: Boolean
       localOngoingAnd: [String]
       localOngoingOr: [String]
       localOngoingOrSet1: [String]
