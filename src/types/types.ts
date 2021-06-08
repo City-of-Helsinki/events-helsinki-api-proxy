@@ -111,6 +111,7 @@ export type EventDetails = {
   location?: Maybe<Place>,
   keywords: Array<Keyword>,
   superEvent?: Maybe<InternalIdObject>,
+  superEventObject?: Maybe<Scalars['String']>,
   eventStatus?: Maybe<Scalars['String']>,
   externalLinks: Array<ExternalLink>,
   offers: Array<Offer>,
@@ -412,13 +413,13 @@ export type QueryCollectionListArgs = {
 
 export type QueryEventDetailsArgs = {
   id?: Maybe<Scalars['ID']>,
-  include?: Maybe<Array<Maybe<Scalars['String']>>>
+  include?: Maybe<Array<Scalars['String']>>
 };
 
 
 export type QueryEventsByIdsArgs = {
   ids: Array<Scalars['ID']>,
-  include?: Maybe<Array<Maybe<Scalars['String']>>>
+  include?: Maybe<Array<Scalars['String']>>
 };
 
 
@@ -441,7 +442,7 @@ export type QueryEventListArgs = {
   endsBefore?: Maybe<Scalars['String']>,
   ids?: Maybe<Array<Maybe<Scalars['String']>>>,
   inLanguage?: Maybe<Scalars['String']>,
-  include?: Maybe<Array<Maybe<Scalars['String']>>>,
+  include?: Maybe<Array<Scalars['String']>>,
   isFree?: Maybe<Scalars['Boolean']>,
   keywordAnd?: Maybe<Array<Maybe<Scalars['String']>>>,
   keywordOrSet1?: Maybe<Array<Maybe<Scalars['String']>>>,
@@ -815,6 +816,7 @@ export type EventDetailsResolvers<ContextType = any, ParentType extends Resolver
   location?: Resolver<Maybe<ResolversTypes['Place']>, ParentType, ContextType>;
   keywords?: Resolver<Array<ResolversTypes['Keyword']>, ParentType, ContextType>;
   superEvent?: Resolver<Maybe<ResolversTypes['InternalIdObject']>, ParentType, ContextType>;
+  superEventObject?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   eventStatus?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   externalLinks?: Resolver<Array<ResolversTypes['ExternalLink']>, ParentType, ContextType>;
   offers?: Resolver<Array<ResolversTypes['Offer']>, ParentType, ContextType>;

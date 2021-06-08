@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/node';
 
-import { QueryResolvers } from '../../types';
+import { EventDetailsResolvers, QueryResolvers } from '../../types';
+import { EventDetails } from '../../types/types';
 import normalizeKeys from '../../utils/normalizeKeys';
 import { buildEventDetailsQuery, buildEventListQuery } from './utils';
 
@@ -35,4 +36,14 @@ const Query: QueryResolvers = {
   },
 };
 
-export default { Query };
+const EventDetails: EventDetailsResolvers = {
+  superEventObject: async (event: EventDetails, _, { dataSources }) => {
+    console.log(dataSources);
+    return event.superEvent?.internalId;
+  },
+};
+
+export default {
+  Query,
+  EventDetails,
+};

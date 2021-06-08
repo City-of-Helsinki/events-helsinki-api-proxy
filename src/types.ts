@@ -7,7 +7,10 @@ import LandingPageAPI from './datasources/landingPage';
 import NeighborhoodAPI from './datasources/neighborhood';
 import OrganizationAPI from './datasources/organization';
 import PlaceAPI from './datasources/place';
-import { QueryResolvers as GeneratedQueryResolvers } from './types/types';
+import {
+  EventDetailsResolvers as GeneratedEventDetailsResolvers,
+  QueryResolvers as GeneratedQueryResolvers,
+} from './types/types';
 
 export type DataSources = {
   aboutPageAPI: AboutPageAPI;
@@ -21,6 +24,9 @@ export type DataSources = {
   placeAPI: PlaceAPI;
 };
 
-export type QueryResolvers = GeneratedQueryResolvers<{
+type Context = {
   dataSources: DataSources;
-}>;
+};
+
+export type QueryResolvers = GeneratedQueryResolvers<Context>;
+export type EventDetailsResolvers = GeneratedEventDetailsResolvers<Context>;

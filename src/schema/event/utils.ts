@@ -1,4 +1,4 @@
-import { QueryEventListArgs } from '../../types/types';
+import { Maybe, QueryEventListArgs } from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import queryBuilder from '../../utils/queryBuilder';
 
@@ -50,7 +50,7 @@ export const buildEventListQuery = (params: QueryEventListArgs) => {
   ]);
 };
 
-export const buildEventDetailsQuery = (include?: string[]) => {
+export const buildEventDetailsQuery = (include?: Maybe<string[]>) => {
   let query = '';
 
   if (include && include.length) {
