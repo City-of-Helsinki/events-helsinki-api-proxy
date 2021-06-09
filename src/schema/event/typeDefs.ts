@@ -8,6 +8,7 @@ const typeDefs = gql`
       include: [String]
       sort: String
       pageSize: Int
+      page: Int
     ): EventListResponse!
     eventList(
       eventType: [EventTypeId] = [General]

@@ -205,12 +205,14 @@ const EVENTS_BY_IDS_QUERY = gql`
     $include: [String]
     $sort: String
     $pageSize: Int
+    $page: Int
   ) {
     eventsByIds(
       ids: $ids
       include: $include
       sort: $sort
       pageSize: $pageSize
+      page: $page
     ) {
       data {
         id

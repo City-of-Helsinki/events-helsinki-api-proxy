@@ -421,6 +421,7 @@ export type QueryEventsByIdsArgs = {
   include?: Maybe<Array<Maybe<Scalars['String']>>>,
   sort?: Maybe<Scalars['String']>,
   pageSize?: Maybe<Scalars['Int']>
+  page?: Maybe<Scalars['Int']>
 };
 
 
