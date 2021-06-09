@@ -65,17 +65,21 @@ it('resolves eventDetails correctly', async () => {
 });
 
 it('resolves eventsByIds correctly', async () => {
-  const mockData = [
-    {
-      id: eventId,
-      publisher: publisherId,
-    },
-    {
-      id: eventId,
-      publisher: publisherId,
-    },
-  ] as EventDetails[];
-  (eventAPI as any).get = jest.fn().mockResolvedValue({ data: mockData });
+  const mockData = {
+    data: [
+      {
+        id: eventId,
+        publisher: publisherId,
+      },
+      {
+        id: eventId,
+        publisher: publisherId,
+      },
+    ],
+    meta: { count: 2 },
+  } as EventListResponse;
+
+  (eventAPI as any).get = jest.fn().mockResolvedValue({ ...mockData });
 
   const res = await apolloTestServer.query({
     query: EVENTS_BY_IDS_QUERY,
@@ -83,7 +87,6 @@ it('resolves eventsByIds correctly', async () => {
   });
 
   if (res.errors) console.log(res.errors);
-
   expect(res.data.eventsByIds).toEqual(mockData);
 });
 
@@ -209,8 +212,13 @@ const EVENTS_BY_IDS_QUERY = gql`
       sort: $sort
       pageSize: $pageSize
     ) {
-      id
-      publisher
+      data {
+        id
+        publisher
+      }
+      meta {
+        count
+      }
     }
   }
 `;

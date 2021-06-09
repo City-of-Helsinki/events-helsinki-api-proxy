@@ -8,7 +8,7 @@ const typeDefs = gql`
       include: [String]
       sort: String
       pageSize: Int
-    ): [EventDetails!]!
+    ): EventListResponse!
     eventList(
       eventType: [EventTypeId] = [General]
       localOngoingAnd: [String]

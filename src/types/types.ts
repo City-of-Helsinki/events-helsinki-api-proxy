@@ -386,7 +386,7 @@ export type Query = {
   collectionDetails: CollectionDetails,
   collectionList: CollectionListResponse,
   eventDetails: EventDetails,
-  eventsByIds: Array<EventDetails>,
+  eventsByIds: EventListResponse,
   eventList: EventListResponse,
   keywordDetails: Keyword,
   keywordList: KeywordListResponse,
@@ -1086,7 +1086,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   collectionDetails?: Resolver<ResolversTypes['CollectionDetails'], ParentType, ContextType, RequireFields<QueryCollectionDetailsArgs, never>>;
   collectionList?: Resolver<ResolversTypes['CollectionListResponse'], ParentType, ContextType, RequireFields<QueryCollectionListArgs, never>>;
   eventDetails?: Resolver<ResolversTypes['EventDetails'], ParentType, ContextType, RequireFields<QueryEventDetailsArgs, never>>;
-  eventsByIds?: Resolver<Array<ResolversTypes['EventDetails']>, ParentType, ContextType, RequireFields<QueryEventsByIdsArgs, 'ids'>>;
+  eventsByIds?: Resolver<ResolversTypes['EventListResponse'], ParentType, ContextType, RequireFields<QueryEventsByIdsArgs, 'ids'>>;
   eventList?: Resolver<ResolversTypes['EventListResponse'], ParentType, ContextType, RequireFields<QueryEventListArgs, 'eventType'>>;
   keywordDetails?: Resolver<ResolversTypes['Keyword'], ParentType, ContextType, RequireFields<QueryKeywordDetailsArgs, 'id'>>;
   keywordList?: Resolver<ResolversTypes['KeywordListResponse'], ParentType, ContextType, RequireFields<QueryKeywordListArgs, never>>;
