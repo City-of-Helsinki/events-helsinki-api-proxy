@@ -3,7 +3,12 @@ import { gql } from 'apollo-server';
 const typeDefs = gql`
   extend type Query {
     eventDetails(id: ID, include: [String]): EventDetails!
-    eventsByIds(ids: [ID!]!, include: [String]): [EventDetails!]!
+    eventsByIds(
+      ids: [ID!]!
+      include: [String]
+      sort: String
+      pageSize: Int
+    ): [EventDetails!]!
     eventList(
       eventType: [EventTypeId] = [General]
       localOngoingAnd: [String]

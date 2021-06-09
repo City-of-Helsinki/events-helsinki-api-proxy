@@ -197,8 +197,18 @@ it('sends REST request correctly with query params', async () => {
 });
 
 const EVENTS_BY_IDS_QUERY = gql`
-  query EventsByIds($ids: [ID!]!, $include: [String]) {
-    eventsByIds(ids: $ids, include: $include) {
+  query EventsByIds(
+    $ids: [ID!]!
+    $include: [String]
+    $sort: String
+    $pageSize: Int
+  ) {
+    eventsByIds(
+      ids: $ids
+      include: $include
+      sort: $sort
+      pageSize: $pageSize
+    ) {
       id
       publisher
     }

@@ -418,7 +418,9 @@ export type QueryEventDetailsArgs = {
 
 export type QueryEventsByIdsArgs = {
   ids: Array<Scalars['ID']>,
-  include?: Maybe<Array<Maybe<Scalars['String']>>>
+  include?: Maybe<Array<Maybe<Scalars['String']>>>,
+  sort?: Maybe<Scalars['String']>,
+  pageSize?: Maybe<Scalars['Int']>
 };
 
 

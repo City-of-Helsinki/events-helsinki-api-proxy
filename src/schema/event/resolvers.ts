@@ -22,8 +22,8 @@ const Query: QueryResolvers = {
       meta: data.meta,
     };
   },
-  eventsByIds: async (_, { ids, include }, { dataSources }) => {
-    const query = buildEventListQuery({ ids, include });
+  eventsByIds: async (_, { ids, include, sort, pageSize }, { dataSources }) => {
+    const query = buildEventListQuery({ ids, include, sort, pageSize });
 
     try {
       const { data } = await dataSources.eventAPI.getEventList(query);
