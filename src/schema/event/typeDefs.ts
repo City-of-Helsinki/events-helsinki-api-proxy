@@ -5,7 +5,7 @@ const typeDefs = gql`
     eventDetails(id: ID, include: [String]): EventDetails!
     eventsByIds(ids: [ID!]!, include: [String]): [EventDetails!]!
     eventList(
-      eventType: EventTypeId = General
+      eventType: [EventTypeId] = [General]
       internetBased: Boolean
       localOngoingAnd: [String]
       localOngoingOr: [String]
@@ -59,6 +59,7 @@ const typeDefs = gql`
 
   type EventDetails {
     id: ID!
+    typeId: EventTypeId
     location: Place
     keywords: [Keyword!]!
     superEvent: InternalIdObject
