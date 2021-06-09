@@ -29,8 +29,8 @@ const Query: QueryResolvers = {
     const query = buildEventListQuery(params);
     return getEventList(dataSources, query);
   },
-  eventsByIds: async (_, { ids, include, sort, pageSize }, { dataSources }) => {
-    const query = buildEventListQuery({ ids, include, sort, pageSize });
+  eventsByIds: async (_, params, { dataSources }) => {
+    const query = buildEventListQuery(params);
     return getEventList(dataSources, query);
   },
 };
