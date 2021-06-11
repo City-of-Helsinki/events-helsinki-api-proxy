@@ -1,14 +1,14 @@
-const path = require("path");
-const webpack = require("webpack");
-const nodeExternals = require("webpack-node-externals");
+const path = require('path');
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
 
-const getGraphqlProxyEnvironment = require("./env");
-const paths = require("./paths");
+const getGraphqlProxyEnvironment = require('./env');
+const paths = require('./paths');
 
 // Get environment variables to inject into our app.
 const env = getGraphqlProxyEnvironment();
 
-module.exports = function() {
+module.exports = function () {
   return {
     entry: paths.appIndexJs,
     externals: [nodeExternals()],
@@ -19,27 +19,27 @@ module.exports = function() {
           test: /\.(ts|tsx)$/,
           use: [
             {
-              loader: "ts-loader",
+              loader: 'ts-loader',
               options: {
-                transpileOnly: true
-              }
-            }
-          ]
-        }
-      ]
+                transpileOnly: true,
+              },
+            },
+          ],
+        },
+      ],
     },
     plugins: [new webpack.DefinePlugin(env.stringified)],
     node: {
-      __dirname: false
+      __dirname: false,
     },
     output: {
-      filename: "index.js",
-      path: path.resolve(__dirname, paths.appBuild)
+      filename: 'index.js',
+      path: path.resolve(__dirname, paths.appBuild),
     },
     resolve: {
-      extensions: [".js", ".ts", ".tsx"],
-      modules: [path.resolve(__dirname, "src"), "node_modules"]
+      extensions: ['.js', '.ts', '.tsx'],
+      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     },
-    target: "node"
+    target: 'node',
   };
 };
