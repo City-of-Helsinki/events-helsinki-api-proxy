@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console */
 import * as Sentry from '@sentry/node';
 import { gql } from 'apollo-server';
