@@ -65,17 +65,21 @@ it('resolves eventDetails correctly', async () => {
 });
 
 it('resolves eventsByIds correctly', async () => {
-  const mockData = [
-    {
-      id: eventId,
-      publisher: publisherId,
-    },
-    {
-      id: eventId,
-      publisher: publisherId,
-    },
-  ] as EventDetails[];
-  (eventAPI as any).get = jest.fn().mockResolvedValue({ data: mockData });
+  const mockData = {
+    data: [
+      {
+        id: eventId,
+        publisher: publisherId,
+      },
+      {
+        id: eventId,
+        publisher: publisherId,
+      },
+    ],
+    meta: { count: 2 },
+  } as EventListResponse;
+
+  (eventAPI as any).get = jest.fn().mockResolvedValue({ ...mockData });
 
   const res = await apolloTestServer.query({
     query: EVENTS_BY_IDS_QUERY,
@@ -83,7 +87,6 @@ it('resolves eventsByIds correctly', async () => {
   });
 
   if (res.errors) console.log(res.errors);
-
   expect(res.data.eventsByIds).toEqual(mockData);
 });
 
@@ -198,10 +201,27 @@ it('sends REST request correctly with query params (course)', async () => {
 });
 
 const EVENTS_BY_IDS_QUERY = gql`
-  query EventsByIds($ids: [ID!]!, $include: [String]) {
-    eventsByIds(ids: $ids, include: $include) {
-      id
-      publisher
+  query EventsByIds(
+    $ids: [ID!]!
+    $include: [String]
+    $sort: String
+    $pageSize: Int
+    $page: Int
+  ) {
+    eventsByIds(
+      ids: $ids
+      include: $include
+      sort: $sort
+      pageSize: $pageSize
+      page: $page
+    ) {
+      data {
+        id
+        publisher
+      }
+      meta {
+        count
+      }
     }
   }
 `;
