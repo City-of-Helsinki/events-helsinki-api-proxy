@@ -4,6 +4,7 @@ const typeDefs = gql`
   extend type Query {
     eventDetails(id: ID, include: [String]): EventDetails!
     eventsByIds(
+      eventType: [EventTypeId] = [General]
       ids: [ID!]!
       include: [String]
       sort: String
