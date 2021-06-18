@@ -47,6 +47,7 @@ export const buildEventListQuery = (params: QueryEventListArgs) => {
     { key: 'audience_min_age_gt', value: params.audienceMinAgeGt },
     { key: 'audience_max_age_lt', value: params.audienceMaxAgeLt },
     { key: 'audience_max_age_gt', value: params.audienceMaxAgeGt },
+    { key: 'suitable_for', value: params.suitableFor },
     { key: 'ids', value: params.ids },
   ]);
 };

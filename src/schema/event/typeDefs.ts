@@ -56,6 +56,7 @@ const typeDefs = gql`
       audienceMinAgeGt: String
       audienceMaxAgeLt: String
       audienceMaxAgeGt: String
+      suitableFor: [Int]
     ): EventListResponse!
   }
 
