@@ -52,10 +52,6 @@ const typeDefs = gql`
       superEventType: [String]
       text: String
       translation: String
-      audienceMinAgeLt: String
-      audienceMinAgeGt: String
-      audienceMaxAgeLt: String
-      audienceMaxAgeGt: String
       suitableFor: [Int]
     ): EventListResponse!
   }
