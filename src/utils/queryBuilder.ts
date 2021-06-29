@@ -4,7 +4,7 @@ import composeQuery from './composeQuery';
 
 interface VariableToKeyItem {
   key: string;
-  value: string[] | string | number | boolean;
+  value: string[] | string | number[] | number | boolean;
 }
 
 const queryBuilder = (items: VariableToKeyItem[]): string => {
