@@ -13,7 +13,8 @@
     "ci": "CI=true jest --verbose --coverage",
     "codegen": "gql-gen",
     "lint": "eslint --ext js,ts,tsx src",
-    "format-code": "eslint --ext js,ts,tsx src --fix"
+    "format-code": "eslint --ext js,ts,tsx src --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@sentry/integrations": "^6.6.0",
