@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server';
+import { gql } from 'graphql-tag';
 
 export const typeDefs = gql`
   extend type Query {
@@ -19,7 +19,7 @@ export const typeDefs = gql`
     data: [Keyword!]!
   }
 
-  type Keyword {
+  type Keyword @shareable {
     id: ID
     altLabels: [String]
     createdTime: String

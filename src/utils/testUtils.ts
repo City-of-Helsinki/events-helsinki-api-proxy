@@ -11,6 +11,9 @@ export const getApolloTestServer = (
   config?: Partial<ApolloServerExpressConfig>
 ): ApolloServerTestClient => {
   return createTestClient(
+    // FIXME: the current createTestClient is not supporting the latest ApolloServer
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     new ApolloServer({
       schema,
       context: () => ({ token: '123' }),

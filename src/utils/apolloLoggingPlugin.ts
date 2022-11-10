@@ -1,11 +1,10 @@
-import { ApolloServerPlugin } from 'apollo-server-plugin-base';
 import { v4 as uuidv4 } from 'uuid';
 
 import { X_REQUEST_ID } from '../constants';
 import logger from './logger';
 
 export default {
-  requestDidStart({ request, context }) {
+  async requestDidStart({ request, context }) {
     const profiler = logger.startTimer();
     const requestId = request.http.headers.get(X_REQUEST_ID) || uuidv4();
 
@@ -20,7 +19,7 @@ export default {
     });
 
     return {
-      didEncounterErrors({ request, errors }) {
+      async didEncounterErrors({ request, errors }) {
         logger.error({
           message: 'Apollo encountered errors:',
           requestId: requestId,
@@ -29,7 +28,7 @@ export default {
           errors: errors,
         });
       },
-      willSendResponse({ request }) {
+      async willSendResponse({ request }) {
         profiler.done({
           message: 'Sending response',
           requestId: requestId,
@@ -38,4 +37,4 @@ export default {
       },
     };
   },
-} as ApolloServerPlugin;
+};

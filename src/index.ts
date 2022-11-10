@@ -4,7 +4,6 @@ require('dotenv').config();
 import { RewriteFrames } from '@sentry/integrations';
 import * as Sentry from '@sentry/node';
 import { ApolloServer } from 'apollo-server-express';
-import { ApolloServerPlugin } from 'apollo-server-plugin-base';
 import cors from 'cors';
 import express from 'express';
 import depthLimit from 'graphql-depth-limit';
@@ -40,9 +39,9 @@ Sentry.init({
 
 const apolloServerSentryPlugin = {
   // For plugin definition see the docs: https://www.apollographql.com/docs/apollo-server/integrations/plugins/
-  requestDidStart() {
+  async requestDidStart() {
     return {
-      didEncounterErrors(rc) {
+      async didEncounterErrors(rc) {
         Sentry.withScope((scope) => {
           scope.setTags({
             graphql: rc.operation?.operation || 'parse_err',
@@ -64,7 +63,7 @@ const apolloServerSentryPlugin = {
       },
     };
   },
-} as ApolloServerPlugin;
+};
 
 const dataSources = (): DataSources => ({
   aboutPageAPI: new AboutPageAPI(),
@@ -122,7 +121,7 @@ const dataSources = (): DataSources => ({
   app.get('/readiness', (request, response) => {
     checkIsServerReady(response);
   });
-
+  await server.start();
   server.applyMiddleware({ app, path: '/proxy/graphql' });
 
   const port = process.env.GRAPHQL_PROXY_PORT || 4000;
@@ -131,7 +130,7 @@ const dataSources = (): DataSources => ({
     signalReady();
 
     // eslint-disable-next-line no-console
-    console.log(
+    console.info(
       `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`
     );
   });

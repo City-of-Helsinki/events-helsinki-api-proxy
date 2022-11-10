@@ -1,6 +1,11 @@
-import { gql } from 'apollo-server';
+import { gql } from 'graphql-tag';
 
 export const Query = gql`
+  extend schema
+    @link(
+      url: "https://specs.apollo.dev/federation/v2.0"
+      import: ["@key", "@shareable"]
+    )
   type Query {
     _empty: String
   }
@@ -24,7 +29,7 @@ export const InternalIdObject = gql`
 `;
 
 export const LocalizedObject = gql`
-  type LocalizedObject {
+  type LocalizedObject @shareable {
     fi: String
     sv: String
     en: String
