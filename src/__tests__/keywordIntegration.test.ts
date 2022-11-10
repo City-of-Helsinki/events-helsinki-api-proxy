@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { gql } from 'apollo-server';
+import { gql } from 'graphql-tag';
 
 import KeywordAPI from '../datasources/keyword';
 import { getApolloTestServer } from '../utils/testUtils';

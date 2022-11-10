@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console */
 import * as Sentry from '@sentry/node';
-import { gql } from 'apollo-server';
+import { gql } from 'graphql-tag';
 
 import EventAPI from '../datasources/event';
 import {
