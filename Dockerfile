@@ -1,5 +1,5 @@
 # Our First stage, that builds the application
-FROM helsinkitest/node:12-slim AS graphql-builder
+FROM helsinkitest/node:16-slim AS graphql-builder
 
 # Use non-root user
 USER appuser
@@ -44,7 +44,7 @@ RUN yarn build
 
 
 # Our Second stage, that creates an image for production
-FROM helsinkitest/node:12-slim AS graphql-prod
+FROM helsinkitest/node:16-slim AS graphql-prod
 
 # Use non-root user
 USER appuser
