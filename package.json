@@ -20,7 +20,7 @@
     "@apollo/subgraph": "^2.1.4",
     "@sentry/integrations": "^6.6.0",
     "@sentry/node": "^6.6.0",
-    "@types/node": "^18.11.9",
+    "@types/node": "^18.18.7",
     "apollo-datasource-rest": "^0.14.0",
     "apollo-server": "^3.11.1",
     "apollo-server-express": "^3.11.1",
